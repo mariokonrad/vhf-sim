@@ -1,0 +1,23 @@
+BasedOnStyle: Webkit
+
+# language
+Language: Cpp
+Standard: Cpp11
+Cpp11BracedListStyle: true
+
+# braces and indentation
+BreakBeforeBraces: Linux
+UseTab: Always
+TabWidth: 4
+IndentWidth: 4
+IndentCaseLabels: true
+NamespaceIndentation: None
+
+# pointer alignment
+DerivePointerAlignment: false
+PointerAlignment: Middle
+
+# misc
+ColumnLimit: 96
+MaxEmptyLinesToKeep: 1
+AlignEscapedNewlinesLeft: true
