@@ -1,4 +1,15 @@
+#include <QApplication>
+#include "MainWindow.hpp"
+#include "version.hpp"
+
 int main(int argc, char ** argv)
 {
-	return 0;
+	QApplication app(argc, argv);
+	app.setApplicationName("Radio-Sim");
+	app.setApplicationVersion(radiosim::version);
+
+	radiosim::MainWindow win;
+	win.show();
+
+	return app.exec();
 }

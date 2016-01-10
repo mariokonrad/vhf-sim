@@ -1,0 +1,12 @@
+#ifndef __RADIO_SIM__VERISION__HPP__
+#define __RADIO_SIM__VERISION__HPP__
+
+namespace radiosim
+{
+constexpr auto version = "@PROJECT_VERSION@";
+constexpr auto version_major = "@PROJECT_VERSION_MAJOR@";
+constexpr auto version_minor = "@PROJECT_VERSION_MINOR@";
+constexpr auto version_patch = "@PROJECT_VERSION_PATCH@";
+}
+
+#endif

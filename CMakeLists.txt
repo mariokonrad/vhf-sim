@@ -1,11 +1,18 @@
 cmake_minimum_required(VERSION 3.1)
 
-message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}")
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-message(STATUS "CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
 include(GitInformation)
 
 project(radio-sim VERSION 0.0.0 LANGUAGES CXX)
+
+### compiler check
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+	message(STATUS "Compiler: GNU")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+	message(STATUS "Compiler: Clang")
+else()
+	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
+endif()
 
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
