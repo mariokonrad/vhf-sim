@@ -30,5 +30,7 @@ set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
+find_package(Qt5Script REQUIRED)
 
 add_subdirectory(src)

@@ -14,6 +14,8 @@ target_include_directories(radio-sim
 target_link_libraries(radio-sim
 	Qt5::Core
 	Qt5::Widgets
+	Qt5::Network
+	Qt5::Script
 	)
 
 install(
