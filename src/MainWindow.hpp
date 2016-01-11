@@ -25,6 +25,7 @@ private:
 	QAction * action_about;
 	QAction * action_about_qt;
 	QAction * action_exit_application;
+	QAction * action_toggle_fullscreen;
 };
 }
 

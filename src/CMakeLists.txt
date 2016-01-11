@@ -11,6 +11,7 @@ add_executable(radio-sim
 	action/About.cpp
 	action/AboutQt.cpp
 	action/ExitApplication.cpp
+	action/Fullscreen.cpp
 	)
 
 target_compile_options(radio-sim
@@ -42,3 +43,19 @@ install(
 	COMPONENT applications
 	)
 
+### windows deployment
+if(WIN32)
+	find_program(WINDEPLOYQT windeployqt
+		PATHS
+			$ENV{QTHOME}
+		PATH_SUFFIXES
+			bin
+		)
+	if(NOT WINDEPLOYQT)
+		message(FATAL_ERROR "NOT FOUND: windeployqt")
+	endif()
+	message(STATUS "Found: ${WINDEPLOYQT}")
+	add_custom_command(TARGET radio-sim POST_BUILD
+		COMMAND ${WINDEPLOYQT} --release $<TARGET_FILE:radio-sim>
+		)
+endif()

@@ -23,12 +23,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-if(WIN32)
-	if(NOT $ENV{QTHOME})
+if(NOT $ENV{QTHOME})
+	if(WIN32)
 		set(ENV{QTHOME} "c:\\Qt\\5.5\\mingw492_32")
-	endif()
-else()
-	if(NOT $ENV{QTHOME})
+	else()
 		set(ENV{QTHOME} "$ENV{HOME}/local/Qt/5.5/gcc_64")
 	endif()
 endif()
@@ -41,3 +39,28 @@ find_package(Qt5Network REQUIRED)
 find_package(Qt5Script REQUIRED)
 
 add_subdirectory(src)
+
+### Testing
+
+# TODO: testing
+
+### packaging
+
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_PACKAGE_NAME "radio-sim")
+set(CPACK_PACKAGE_VENDOR "Mario Konrad")
+set(CPACK_PACKAGE_CONTACT "Mario Konrad <mario.konrad@gmx.net>")
+set(CPACK_PACAKGE_DESCRIPTION "Radio Simulator")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Radio Simulator for Practicing")
+set(CPACK_MONOLITHIC_INSTALL 1)
+set(CPACK_PACKAGE_EXECUTABLES "radio-sim" "radio-sim")
+set(CPACK_STRIP_FILES true)
+
+# TODO: winddows packaging
+
+# TODO: debian packaging
+
+include(CPack)
