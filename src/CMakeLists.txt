@@ -5,6 +5,8 @@ configure_file(
 	${CMAKE_CURRENT_BINARY_DIR}/version.hpp
 	)
 
+qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
+
 add_executable(radio-sim
 	radio.cpp
 	MainWindow.cpp
@@ -12,6 +14,11 @@ add_executable(radio-sim
 	action/AboutQt.cpp
 	action/ExitApplication.cpp
 	action/Fullscreen.cpp
+	${QM_FILES}
+	)
+
+add_custom_command(TARGET radio-sim POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy ${QM_FILES} ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/lang/
 	)
 
 target_compile_options(radio-sim
@@ -41,6 +48,11 @@ install(
 	ARCHIVE DESTINATION lib
 	RUNTIME DESTINATION bin
 	COMPONENT applications
+	)
+
+install(
+	FILES ${QM_FILES}
+	DESTINATION share/${PROJECT_NAME}/lang
 	)
 
 ### windows deployment
