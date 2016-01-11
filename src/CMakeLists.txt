@@ -6,7 +6,7 @@ configure_file(
 	)
 
 add_executable(radio-sim
-	main.cpp
+	radio.cpp
 	MainWindow.cpp
 	action/About.cpp
 	action/AboutQt.cpp
