@@ -2,13 +2,8 @@ cmake_minimum_required(VERSION 3.1)
 
 ### module and prefix path
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-if(NOT $ENV{QTHOME})
-	# TODO: in the future, not having ENV{QTHOME} must cause a fatal error
-	if(WIN32)
-		set(ENV{QTHOME} "c:\\Qt\\5.5\\mingw492_32")
-	else()
-		set(ENV{QTHOME} "$ENV{HOME}/local/Qt/5.5/gcc_64")
-	endif()
+if(NOT DEFINED ENV{QTHOME})
+	message(FATAL_ERROR "Environment variable QTHOME not set")
 endif()
 message(STATUS "QTHOME: $ENV{QTHOME}")
 set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
