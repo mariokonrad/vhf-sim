@@ -2,92 +2,67 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
-    <name>radiosim::About</name>
+    <name>simradrd68::MainWindow</name>
     <message>
-        <location filename="../src/action/About.cpp" line="8"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="15"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../src/action/About.cpp" line="9"/>
-        <source>Radio-Sim</source>
-        <translation>Radio-Sim</translation>
-    </message>
-</context>
-<context>
-    <name>radiosim::AboutQt</name>
-    <message>
-        <location filename="../src/action/AboutQt.cpp" line="8"/>
-        <source>AboutQt</source>
+        <location filename="../src/vhf/MainWindow.cpp" line="19"/>
+        <source>About Qt</source>
         <translation>Über Qt</translation>
     </message>
     <message>
-        <location filename="../src/action/AboutQt.cpp" line="9"/>
-        <source>Shows the AboutQt dialog</source>
+        <location filename="../src/vhf/MainWindow.cpp" line="20"/>
+        <source>Shows information about Qt</source>
         <translation>Zeigt Informationen über Qt</translation>
     </message>
-</context>
-<context>
-    <name>radiosim::ExitApplication</name>
     <message>
-        <location filename="../src/action/ExitApplication.cpp" line="8"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="23"/>
         <source>E&amp;xit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../src/action/ExitApplication.cpp" line="9"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="24"/>
         <source>Closes the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Beendet das Programm</translation>
     </message>
-</context>
-<context>
-    <name>radiosim::Fullscreen</name>
     <message>
-        <location filename="../src/action/Fullscreen.cpp" line="10"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="27"/>
         <source>Fullscreen</source>
         <translation>Vollbild</translation>
     </message>
     <message>
-        <location filename="../src/action/Fullscreen.cpp" line="11"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="28"/>
         <source>Shows the window in fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaltet das Programm in den Vollbildmodus</translation>
     </message>
-</context>
-<context>
-    <name>radiosim::MainWindow</name>
     <message>
-        <location filename="../src/MainWindow.cpp" line="39"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="38"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="42"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="41"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzeige</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="45"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="44"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../src/MainWindow.cpp" line="53"/>
-        <source>Radio-Sim</source>
-        <translation type="unfinished">Radio-Sim</translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="53"/>
-        <source>
+        <location filename="../src/vhf/MainWindow.cpp" line="61"/>
+        <source>%1
 
-Version: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/MainWindow.cpp" line="54"/>
-        <source>
+Version: %2
 
 License: GPL</source>
-        <translation>
+        <translation>%1
+
+Version: %2
 
 Lizenz: GPL</translation>
     </message>

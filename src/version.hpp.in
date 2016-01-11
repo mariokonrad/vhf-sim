@@ -1,7 +1,7 @@
 #ifndef __RADIO_SIM__VERISION__HPP__
 #define __RADIO_SIM__VERISION__HPP__
 
-namespace radiosim
+namespace simradrd68
 {
 constexpr auto project_name = "@PROJECT_NAME@";
 constexpr auto project_version = "@PROJECT_VERSION@";

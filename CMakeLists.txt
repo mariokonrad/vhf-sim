@@ -10,7 +10,7 @@ set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 
 ### information about repository and project
 include(GitInformation)
-project(radio-sim VERSION 0.0.0 LANGUAGES CXX)
+project(simrad-rd68 VERSION 0.0.0 LANGUAGES CXX)
 
 ### compiler check
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -34,6 +34,7 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/lang)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Gui REQUIRED)
 find_package(Qt5Network REQUIRED)
 find_package(Qt5Script REQUIRED)
 find_package(Qt5LinguistTools REQUIRED)
@@ -46,7 +47,7 @@ set(TRANSLATION_FILES
 add_custom_target(language-update)
 foreach(filename ${TRANSLATION_FILES})
 	add_custom_command(TARGET language-update PRE_BUILD
-		COMMAND ${Qt5_LUPDATE_EXECUTABLE} -recursive ${CMAKE_CURRENT_SOURCE_DIR}/src -ts ${filename}
+		COMMAND ${Qt5_LUPDATE_EXECUTABLE} -no-obsolete -recursive ${CMAKE_CURRENT_SOURCE_DIR}/src -ts ${filename}
 		)
 endforeach()
 
@@ -68,7 +69,7 @@ set(CPACK_PACKAGE_CONTACT "Mario Konrad <mario.konrad@gmx.net>")
 set(CPACK_PACAKGE_DESCRIPTION "Radio Simulator")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Radio Simulator for Practicing")
 set(CPACK_MONOLITHIC_INSTALL 1)
-set(CPACK_PACKAGE_EXECUTABLES "radio-sim" "radio-sim")
+set(CPACK_PACKAGE_EXECUTABLES "simrad-rd68" "simrad-rd68")
 set(CPACK_STRIP_FILES true)
 
 # TODO: winddows packaging
