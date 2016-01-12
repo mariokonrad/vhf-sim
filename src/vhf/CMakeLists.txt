@@ -5,6 +5,8 @@ qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 add_executable(vhf
 	main.cpp
 	MainWindow.cpp
+	Widget.cpp
+	System.cpp
 	${QM_FILES}
 	)
 
@@ -24,6 +26,7 @@ target_include_directories(vhf
 	PRIVATE
 		${CMAKE_CURRENT_BINARY_DIR}
 		${CMAKE_CURRENT_BINARY_DIR}/..
+		${CMAKE_CURRENT_SOURCE_DIR}/..
 		${Qt5Core_INCLUDE_DIRS}
 	)
 

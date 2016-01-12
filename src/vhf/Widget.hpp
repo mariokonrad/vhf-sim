@@ -1,0 +1,103 @@
+#ifndef __SIMRADRD68__WIDGET__HPP__
+#define __SIMRADRD68__WIDGET__HPP__
+
+#include <QWidget>
+#include "util/Button.hpp"
+#include "engine/View.hpp"
+#include "engine/Model.hpp"
+#include "engine/Controller.hpp"
+#include "engine/ErrorWriter.hpp"
+
+namespace simradrd68
+{
+namespace engine
+{
+class Engine;
+}
+
+class Widget : public QWidget,
+			   virtual public engine::View,
+			   virtual public engine::Model,
+			   virtual public engine::Controller,
+			   virtual public engine::ErrorWriter
+{
+	Q_OBJECT
+
+public:
+	Widget(QWidget * parent);
+
+public: // error writer
+	virtual void engine_error(const std::string &) override;
+
+public: // controller
+	virtual void bind_button_circle(int, int, int, int, int, int) override;
+	virtual void bind_button_rect(int, int, int, int, int, int, int) override;
+	virtual void bind_key(int, int, int) override;
+	virtual void timer_create(int) override;
+	virtual void timer_delete(int) override;
+	virtual void timer_start(int, int, bool) override;
+	virtual void timer_stop(int) override;
+	virtual int msg_recv(engine::msg_t &) override;
+	virtual int msg_send(const engine::msg_t &) override;
+	virtual void process(const engine::msg_t &) override;
+	virtual void bind_msg(int) override;
+	virtual void gps_process(const std::string &) override;
+	virtual void bind_gps(int) override;
+	virtual void set_exam_mode(bool) override;
+
+public: // view: graphics
+	virtual void update_view() override;
+	virtual void set_background(int, int, int) override;
+	virtual void set_brush(int, int, int) override;
+	virtual void set_pen(int, int, int) override;
+	virtual void set_text_background(int, int, int) override;
+	virtual void set_text_foreground(int, int, int) override;
+	virtual void clear() override;
+	virtual void draw_rectangle(int, int, int, int) override;
+	virtual void draw_circle(int, int, int) override;
+	virtual void draw_text(int, int, const std::string &,
+		engine::View::TextAlign = engine::View::TEXT_ALIGN_LEFT) override;
+	virtual void draw_ch(int, int, const std::string &) override;
+	virtual void set_clipping_region(int, int, int, int) override;
+	virtual void clear_clipping_region() override;
+	virtual void register_font(int, int) override;
+	virtual void set_font(int) override;
+	virtual void img_load(int, const std::string &) override;
+	virtual void img_size(int, int &, int &) override;
+	virtual void draw_img(int, int, int) override;
+	virtual void bitmap_register(const std::string &, int, int, char, const char *) override;
+	virtual void bitmap_unregister(const std::string &) override;
+	virtual void draw_bitmap(const std::string &, int, int, int, int) override;
+
+public: // view: sound
+	virtual int snd_init(int) override;
+	virtual void snd_destroy() override;
+	virtual void snd_load_wav(int, const std::string &) override;
+	virtual void snd_play(int, bool) override;
+	virtual void snd_stop(int) override;
+	virtual void snd_gain(int, float) override;
+	virtual void snd_pitch(int, float) override;
+
+public: // model
+	virtual bool vhf_lat_set() override;
+	virtual bool vhf_lon_set() override;
+	virtual bool vhf_time_set() override;
+	virtual void vhf_clear_pos_time() override;
+	virtual engine::MMSI mmsi() override;
+	virtual void mmsi(const engine::MMSI &) override;
+	virtual engine::MMSI group() override;
+	virtual void group(const engine::MMSI &) override;
+	virtual void lat(const engine::Latitude &) override;
+	virtual engine::Latitude lat() override;
+	virtual void lon(const engine::Longitude &) override;
+	virtual engine::Longitude lon() override;
+	virtual void time(const engine::Date &) override;
+	virtual engine::Date time() override;
+
+public: // directory
+	virtual void dir_set(const engine::Directory &) override;
+	virtual engine::Directory dir_get() override;
+};
+}
+
+#endif

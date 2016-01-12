@@ -23,6 +23,7 @@ public:
 		, mmsi("")
 	{
 	}
+
 	DirEntry(const std::string & name, const std::string & mmsi)
 		: name(name)
 		, mmsi(mmsi)
