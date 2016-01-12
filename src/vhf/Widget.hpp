@@ -1,8 +1,13 @@
 #ifndef __SIMRADRD68__WIDGET__HPP__
 #define __SIMRADRD68__WIDGET__HPP__
 
+#include <memory>
+#include <map>
 #include <QWidget>
+#include <QImage>
+#include <QSound>
 #include "util/Button.hpp"
+#include "engine/Engine.hpp"
 #include "engine/View.hpp"
 #include "engine/Model.hpp"
 #include "engine/Controller.hpp"
@@ -10,11 +15,6 @@
 
 namespace simradrd68
 {
-namespace engine
-{
-class Engine;
-}
-
 class Widget : public QWidget,
 			   virtual public engine::View,
 			   virtual public engine::Model,
@@ -97,6 +97,37 @@ public: // model
 public: // directory
 	virtual void dir_set(const engine::Directory &) override;
 	virtual engine::Directory dir_get() override;
+
+private:
+	using image_map = std::map<int, QImage>;
+	using event_entry = std::pair<int, int>;
+	using key_map = std::map<int, event_entry>;
+	using mouse_entry = std::pair<std::shared_ptr<Button>, int>;
+	using button_map = std::map<mouse_entry, event_entry>;
+
+	struct sound_entry {
+		QSound * sound;
+		float gain;
+		float pitch;
+	};
+	using sound_map = std::map<int, sound_entry>;
+
+	struct Bitmap {
+		int width;
+		int height;
+		char c;
+		std::string data;
+	};
+	using bitmap_map = std::map<std::string, Bitmap>;
+
+	std::unique_ptr<engine::Engine> engine;
+	image_map images;
+	key_map keys;
+	button_map buttons;
+	sound_map sounds;
+	bitmap_map bitmaps;
+
+	void insert_bind_button(std::shared_ptr<Button>, int, int, int);
 };
 }
 

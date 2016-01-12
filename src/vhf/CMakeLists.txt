@@ -14,12 +14,19 @@ add_custom_command(TARGET vhf POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy ${QM_FILES} ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/lang/
 	)
 
+add_custom_command(TARGET vhf POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/simrad-rd68 ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68
+	)
+
 target_compile_options(vhf
 	PUBLIC
 		-Wall
 		-Wextra
 		-std=c++11
+		${Qt5Core_EXECUTABLE_COMPILE_FLAGS}
+		${Qt5Gui_EXECUTABLE_COMPILE_FLAGS}
 		${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}
+		${Qt5Multimedia_EXECUTABLE_COMPILE_FLAGS}
 	)
 
 target_include_directories(vhf
@@ -28,6 +35,9 @@ target_include_directories(vhf
 		${CMAKE_CURRENT_BINARY_DIR}/..
 		${CMAKE_CURRENT_SOURCE_DIR}/..
 		${Qt5Core_INCLUDE_DIRS}
+		${Qt5Gui_INCLUDE_DIRS}
+		${Qt5Widgets_INCLUDE_DIRS}
+		${Qt5Multimedia_INCLUDE_DIRS}
 	)
 
 target_link_libraries(vhf
@@ -38,6 +48,7 @@ target_link_libraries(vhf
 	Qt5::Core
 	Qt5::Widgets
 	Qt5::Gui
+	Qt5::Multimedia
 	Qt5::Network
 	Qt5::Script
 	)

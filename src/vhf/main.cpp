@@ -30,5 +30,9 @@ int main(int argc, char ** argv)
 	// run the application
 	simradrd68::MainWindow win;
 	win.show();
-	return app.exec();
+	auto rc = app.exec();
+
+	// cleanup
+	simradrd68::System::save();
+	return rc;
 }
