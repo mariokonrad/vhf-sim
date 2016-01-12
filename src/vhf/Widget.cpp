@@ -1,8 +1,10 @@
 #include "Widget.hpp"
 #include <fstream>
+#include <cassert>
 #include <QApplication>
 #include <QMessageBox>
 #include <QDir>
+#include <QPainter>
 #include <QDebug>
 #include "util/Circle.hpp"
 #include "util/Rectangle.hpp"
@@ -23,6 +25,7 @@ static QDir device_path(const std::string & filename)
 
 Widget::Widget(QWidget * parent)
 	: QWidget(parent)
+	, must_show_buttons(false)
 {
 	try {
 		// initialize engine
@@ -47,9 +50,47 @@ Widget::Widget(QWidget * parent)
 			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
 		throw e;
 	}
+	update_view();
+
+	setMaximumSize(engine->get_width(), engine->get_height());
+	setMinimumSize(engine->get_width(), engine->get_height());
+	parentWidget()->setFixedSize(engine->get_width(), engine->get_height());
 }
 
-void Widget::engine_error(const std::string &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::paintEvent(QPaintEvent *)
+{
+	QPainter p(this);
+
+	// LCD to be drawn and manipulated by the LUA script
+	painter = &p;
+	try {
+		engine->draw();
+	} catch (engine::exception & e) {
+		QMessageBox::critical(
+			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+		throw e;
+	}
+	// draw binded buttons if desired
+	if (must_show_buttons) {
+		painter->setPen(QPen{QColor{255, 0, 0}});
+		painter->setBrush(Qt::NoBrush);
+		for (auto const & button : buttons) {
+			button.first.first->draw(*painter);
+		}
+	}
+	painter = nullptr;
+}
+
+void Widget::show_buttons(bool flag)
+{
+	must_show_buttons = flag;
+	update_view();
+}
+
+void Widget::engine_error(const std::string & s)
+{
+	qDebug() << __PRETTY_FUNCTION__ << s.c_str();
+}
 
 void Widget::insert_bind_button(
 	std::shared_ptr<Button> button, int mouse_button, int event_press, int event_release)
@@ -89,13 +130,43 @@ void Widget::bind_key(int code, int event_press, int event_release)
 	keys.emplace(code, event_entry{event_press, event_release});
 }
 
-void Widget::timer_create(int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::on_timer(int id) { qDebug() << __PRETTY_FUNCTION__ << "id=" << id; }
 
-void Widget::timer_delete(int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::timer_create(int id)
+{
+	timer_delete(id);
+	timers.emplace(id, new QTimer{this});
+}
 
-void Widget::timer_start(int, int, bool) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::timer_delete(int id)
+{
+	auto i = timers.find(id);
+	if (i == timers.end())
+		return;
+	i->second->stop();
+	i->second->disconnect();
+	delete i->second;
+	timers.erase(i);
+}
 
-void Widget::timer_stop(int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::timer_start(int id, int msec, bool one_shot)
+{
+	auto i = timers.find(id);
+	if (i == timers.end())
+		return;
+	i->second->setInterval(msec);
+	i->second->setSingleShot(one_shot);
+	connect(i->second, &QTimer::timeout, [this, id]() { this->on_timer(id); });
+	i->second->start();
+}
+
+void Widget::timer_stop(int id)
+{
+	auto i = timers.find(id);
+	if (i == timers.end())
+		return;
+	i->second->stop();
+}
 
 int Widget::msg_recv(engine::msg_t &)
 {
@@ -119,23 +190,39 @@ void Widget::bind_gps(int) { qDebug() << __PRETTY_FUNCTION__; }
 
 void Widget::set_exam_mode(bool) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::update_view() { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::update_view() { repaint(); }
 
-void Widget::set_background(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::set_background(int r, int g, int b)
+{
+	background = QBrush{QColor{r, g, b}};
+	painter->setBackground(background);
+}
 
-void Widget::set_brush(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::set_brush(int r, int g, int b) { brush = QBrush(QColor(r, g, b)); }
 
-void Widget::set_pen(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::set_pen(int r, int g, int b) { pen = QPen(QColor(r, g, b), 1); }
 
 void Widget::set_text_background(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
 
 void Widget::set_text_foreground(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::clear() { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::clear() { painter->setBackground(background); }
 
-void Widget::draw_rectangle(int, int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::draw_rectangle(int x, int y, int w, int h)
+{
+	painter->setPen(pen);
+	painter->setBrush(brush);
+	painter->setBackground(background);
+	painter->drawRect(x, y, w, h);
+}
 
-void Widget::draw_circle(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::draw_circle(int x, int y, int r)
+{
+	painter->setPen(pen);
+	painter->setBrush(brush);
+	painter->setBackground(background);
+	painter->drawEllipse(x - r, y - r, 2 * r, 2 * r);
+}
 
 void Widget::draw_text(int, int, const std::string &, engine::View::TextAlign)
 {
@@ -144,9 +231,17 @@ void Widget::draw_text(int, int, const std::string &, engine::View::TextAlign)
 
 void Widget::draw_ch(int, int, const std::string &) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::set_clipping_region(int, int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::set_clipping_region(int x, int y, int w, int h)
+{
+	painter->setClipRect(x, y, w, h);
+	painter->setClipping(true);
+}
 
-void Widget::clear_clipping_region() { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::clear_clipping_region()
+{
+	painter->setClipRect(0, 0, engine->get_width(), engine->get_height());
+	painter->setClipping(true);
+}
 
 void Widget::register_font(int, int) { qDebug() << __PRETTY_FUNCTION__; }
 
@@ -168,7 +263,14 @@ void Widget::img_size(int id, int & width, int & height)
 	}
 }
 
-void Widget::draw_img(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::draw_img(int x, int y, int id)
+{
+	assert(painter);
+	auto i = images.find(id);
+	if (i == images.end())
+		return;
+	painter->drawImage(x, y, i->second);
+}
 
 void Widget::bitmap_register(
 	const std::string & id, int width, int height, char c, const char * data)
@@ -182,9 +284,10 @@ void Widget::bitmap_register(
 
 void Widget::bitmap_unregister(const std::string &) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::draw_bitmap(const std::string &, int, int, int, int)
+void Widget::draw_bitmap(
+	const std::string & id, int sx, int sy, int pixel_width, int pixel_height)
 {
-	qDebug() << __PRETTY_FUNCTION__;
+	qDebug() << __PRETTY_FUNCTION__ << id.c_str() << sx << sy << pixel_width << pixel_height;
 }
 
 int Widget::snd_init(int num)
@@ -230,35 +333,35 @@ void Widget::snd_pitch(int id, float pitch)
 	}
 }
 
-bool Widget::vhf_lat_set() { qDebug() << __PRETTY_FUNCTION__; return false; }
+bool Widget::vhf_lat_set() { return System::vhf_lat_set(); }
 
-bool Widget::vhf_lon_set() { qDebug() << __PRETTY_FUNCTION__; return false; }
+bool Widget::vhf_lon_set() { return System::vhf_lon_set(); }
 
-bool Widget::vhf_time_set() { qDebug() << __PRETTY_FUNCTION__; return false; }
+bool Widget::vhf_time_set() { return System::vhf_time_set(); }
 
 void Widget::vhf_clear_pos_time() { System::vhf_clear_pos_time(); }
 
-engine::MMSI Widget::mmsi() { qDebug() << __PRETTY_FUNCTION__; return engine::MMSI{}; }
+engine::MMSI Widget::mmsi() { return System::vhf_mmsi(); }
 
-void Widget::mmsi(const engine::MMSI &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::mmsi(const engine::MMSI & mmsi) { System::vhf_mmsi(mmsi); }
 
-engine::MMSI Widget::group() { qDebug() << __PRETTY_FUNCTION__; return engine::MMSI{}; }
+engine::MMSI Widget::group() { return System::vhf_group(); }
 
-void Widget::group(const engine::MMSI &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::group(const engine::MMSI & mmsi) { System::vhf_group(mmsi); }
 
-void Widget::lat(const engine::Latitude &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::lat(const engine::Latitude & l) { System::vhf_latitude(l); }
 
-engine::Latitude Widget::lat() { qDebug() << __PRETTY_FUNCTION__; return engine::Latitude{}; }
+engine::Latitude Widget::lat() { return System::vhf_latitude(); }
 
-void Widget::lon(const engine::Longitude &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::lon(const engine::Longitude & l) { System::vhf_longitude(l); }
 
-engine::Longitude Widget::lon() { qDebug() << __PRETTY_FUNCTION__; return engine::Longitude{}; }
+engine::Longitude Widget::lon() { return System::vhf_longitude(); }
 
-void Widget::time(const engine::Date &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::time(const engine::Date & t) { System::vhf_time(t); }
 
-engine::Date Widget::time() { qDebug() << __PRETTY_FUNCTION__; return engine::Date{}; }
+engine::Date Widget::time() { return System::vhf_time(); }
 
-void Widget::dir_set(const engine::Directory &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::dir_set(const engine::Directory & dir) { System::dir_set(dir); }
 
-engine::Directory Widget::dir_get() { qDebug() << __PRETTY_FUNCTION__; return engine::Directory{}; }
+engine::Directory Widget::dir_get() { return System::dir_get(); }
 }

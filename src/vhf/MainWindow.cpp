@@ -110,7 +110,7 @@ void MainWindow::on_toggle_fullscreen(bool checked)
 	}
 }
 
-void MainWindow::on_show_buttons(bool checked) { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_show_buttons(bool checked) { widget->show_buttons(checked); }
 
 void MainWindow::on_connection_open() { qDebug() << "NOT IMPLEMENTED"; }
 

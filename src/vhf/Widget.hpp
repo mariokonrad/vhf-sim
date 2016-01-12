@@ -6,6 +6,8 @@
 #include <QWidget>
 #include <QImage>
 #include <QSound>
+#include <QTimer>
+#include <QPen>
 #include "util/Button.hpp"
 #include "engine/Engine.hpp"
 #include "engine/View.hpp"
@@ -25,6 +27,8 @@ class Widget : public QWidget,
 
 public:
 	Widget(QWidget * parent);
+
+	void show_buttons(bool);
 
 public: // error writer
 	virtual void engine_error(const std::string &) override;
@@ -98,6 +102,9 @@ public: // directory
 	virtual void dir_set(const engine::Directory &) override;
 	virtual engine::Directory dir_get() override;
 
+protected:
+	virtual void paintEvent(QPaintEvent * event) override;
+
 private:
 	using image_map = std::map<int, QImage>;
 	using event_entry = std::pair<int, int>;
@@ -120,14 +127,23 @@ private:
 	};
 	using bitmap_map = std::map<std::string, Bitmap>;
 
+	using timer_map = std::map<int, QTimer *>;
+
 	std::unique_ptr<engine::Engine> engine;
+	QPainter * painter;
 	image_map images;
 	key_map keys;
 	button_map buttons;
 	sound_map sounds;
 	bitmap_map bitmaps;
+	timer_map timers;
+	bool must_show_buttons;
+	QBrush background;
+	QPen pen;
+	QBrush brush;
 
 	void insert_bind_button(std::shared_ptr<Button>, int, int, int);
+	void on_timer(int id);
 };
 }
 

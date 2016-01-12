@@ -19,6 +19,9 @@ Circle::~Circle() {}
 
 bool Circle::within(float x, float y) const { return sqr(m_x - x) + sqr(m_y - y) <= sqr(r); }
 
-void Circle::draw(QPainter & painter) const { painter.drawEllipse(m_x, m_y, r, r); }
+void Circle::draw(QPainter & painter) const
+{
+	painter.drawEllipse(m_x - r, m_y - r, 2 * r, 2 * r);
+}
 }
 
