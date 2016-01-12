@@ -55,6 +55,8 @@ Widget::Widget(QWidget * parent)
 	setMaximumSize(engine->get_width(), engine->get_height());
 	setMinimumSize(engine->get_width(), engine->get_height());
 	parentWidget()->setFixedSize(engine->get_width(), engine->get_height());
+
+	setFocus();
 }
 
 void Widget::paintEvent(QPaintEvent *)
@@ -79,6 +81,36 @@ void Widget::paintEvent(QPaintEvent *)
 		}
 	}
 	painter = nullptr;
+}
+
+void Widget::keyPressEvent(QKeyEvent *)
+{
+	qDebug() << __PRETTY_FUNCTION__;
+}
+
+void Widget::keyReleaseEvent(QKeyEvent *)
+{
+	qDebug() << __PRETTY_FUNCTION__;
+}
+
+void Widget::mouseMoveEvent(QMouseEvent *)
+{
+	qDebug() << __PRETTY_FUNCTION__;
+}
+
+void Widget::mousePressEvent(QMouseEvent *)
+{
+	qDebug() << __PRETTY_FUNCTION__;
+}
+
+void Widget::mouseReleaseEvent(QMouseEvent *)
+{
+	qDebug() << __PRETTY_FUNCTION__;
+}
+
+void Widget::wheelEvent(QWheelEvent *)
+{
+	qDebug() << __PRETTY_FUNCTION__;
 }
 
 void Widget::show_buttons(bool flag)
