@@ -22,6 +22,20 @@ static QDir device_path(const std::string & filename)
 	return QDir{app->applicationDirPath() + "/../share/" + simradrd68::project_name + "/"
 		+ System::type().c_str() + "/" + filename.c_str()};
 }
+
+static engine::MouseButton mouse_qt_to_engine(Qt::MouseButton button)
+{
+	switch (button) {
+		case Qt::LeftButton:
+			return engine::MOUSE_LEFT;
+		case Qt::MiddleButton:
+			return engine::MOUSE_MIDDLE;
+		case Qt::RightButton:
+			return engine::MOUSE_RIGHT;
+		default:
+			return engine::MOUSE_NONE;
+	}
+}
 }
 
 Widget::Widget(QWidget * parent)
@@ -30,6 +44,7 @@ Widget::Widget(QWidget * parent)
 	, old_key_code(-1)
 	, event_gps(-1)
 	, event_msg_recv(-1)
+	, origin(0, 0)
 {
 	try {
 		// initialize engine
@@ -54,13 +69,25 @@ Widget::Widget(QWidget * parent)
 			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
 		throw e;
 	}
+	update_origin();
 	update_view();
 
-	setMaximumSize(engine->get_width(), engine->get_height());
 	setMinimumSize(engine->get_width(), engine->get_height());
-	parentWidget()->setFixedSize(engine->get_width(), engine->get_height());
-
 	setFocus();
+}
+
+void Widget::update_origin()
+{
+	// this not computed on paintEvent, because the origin is used somewhere
+	// else, and it should be computed only at one place, not scathered arround.
+	origin.setX((width() - engine->get_width() + 1) / 2);
+	origin.setY((height() - engine->get_height() + 1) / 2);
+}
+
+void Widget::resizeEvent(QResizeEvent *)
+{
+	update_origin();
+	update_view();
 }
 
 void Widget::paintEvent(QPaintEvent *)
@@ -69,6 +96,7 @@ void Widget::paintEvent(QPaintEvent *)
 
 	// LCD to be drawn and manipulated by the LUA script
 	painter = &p;
+	painter->translate(origin);
 	try {
 		engine->draw();
 	} catch (engine::exception & e) {
@@ -111,24 +139,76 @@ void Widget::keyReleaseEvent(QKeyEvent * event)
 		handle_key(i->second.second);
 }
 
-void Widget::mouseMoveEvent(QMouseEvent *)
+int Widget::press(std::shared_ptr<Button> btn, engine::MouseButton mb)
 {
-	qDebug() << __PRETTY_FUNCTION__;
+	if (!btn)
+		return -1;
+
+	try {
+		auto i = buttons.find(mouse_entry{btn, mb});
+		if (i != buttons.end())
+			return engine->event(i->second.first);
+	} catch (const engine::exception & e) {
+		QMessageBox::critical(
+			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+		throw e;
+	}
+	return -1;
 }
 
-void Widget::mousePressEvent(QMouseEvent *)
+int Widget::release(std::shared_ptr<Button> btn, engine::MouseButton mb)
 {
-	qDebug() << __PRETTY_FUNCTION__;
+	if (!btn)
+		return -1;
+
+	try {
+		auto i = buttons.find(mouse_entry{btn, mb});
+		if (i != buttons.end())
+			return engine->event(i->second.second);
+	} catch (const engine::exception & e) {
+		QMessageBox::critical(
+			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+		throw e;
+	}
+	return -1;
 }
 
-void Widget::mouseReleaseEvent(QMouseEvent *)
+int Widget::press(const QPoint & p, engine::MouseButton mb)
 {
-	qDebug() << __PRETTY_FUNCTION__;
+	return press(button_contains(p, mb), mb);
 }
 
-void Widget::wheelEvent(QWheelEvent *)
+int Widget::release(const QPoint & p, engine::MouseButton mb)
 {
-	qDebug() << __PRETTY_FUNCTION__;
+	return release(button_contains(p, mb), mb);
+}
+
+std::shared_ptr<Button> Widget::button_contains(const QPoint & p, engine::MouseButton mb)
+{
+	auto i = std::find_if(
+		buttons.begin(), buttons.end(), [p, mb](const button_map::value_type & v) {
+			const auto & m = v.first;
+			return ((mb == m.second) && (m.first->within(p.x(), p.y())));
+		});
+	if (i == buttons.end())
+		return nullptr;
+	return i->first.first;
+}
+
+void Widget::mousePressEvent(QMouseEvent * event)
+{
+	if ((event->button() == Qt::LeftButton) || (event->button() == Qt::RightButton)) {
+		if (press(event->pos() - origin, mouse_qt_to_engine(event->button())) == 0)
+			update_view();
+	}
+}
+
+void Widget::mouseReleaseEvent(QMouseEvent * event)
+{
+	if ((event->button() == Qt::LeftButton) || (event->button() == Qt::RightButton)) {
+		if (release(event->pos() - origin, mouse_qt_to_engine(event->button())) == 0)
+			update_view();
+	}
 }
 
 void Widget::show_buttons(bool flag)
@@ -140,7 +220,9 @@ void Widget::show_buttons(bool flag)
 void Widget::engine_error(const std::string & s)
 {
 #if !defined(NDEBUG)
-	qDebug() << "engine error:" << s.c_str();
+	qDebug() << "ENGINE ERROR:" << s.c_str();
+#else
+	QMessageBox::critical(this, tr("Script Error"), tr("Lua error:\n%1").arg(s.c_str()));
 #endif
 }
 

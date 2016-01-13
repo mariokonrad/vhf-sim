@@ -106,10 +106,9 @@ protected:
 	virtual void paintEvent(QPaintEvent * event) override;
 	virtual void keyPressEvent(QKeyEvent * event) override;
 	virtual void keyReleaseEvent(QKeyEvent * event) override;
-	virtual void mouseMoveEvent(QMouseEvent * event) override;
 	virtual void mousePressEvent(QMouseEvent * event) override;
 	virtual void mouseReleaseEvent(QMouseEvent * event) override;
-	virtual void wheelEvent(QWheelEvent * event) override;
+	virtual void resizeEvent(QResizeEvent * event) override;
 
 private:
 	using image_map = std::map<int, QImage>;
@@ -150,10 +149,17 @@ private:
 	int old_key_code;
 	int event_gps;
 	int event_msg_recv;
+	QPoint origin;
 
 	void insert_bind_button(std::shared_ptr<Button>, int, int, int);
 	void on_timer(int id);
 	void handle_key(int);
+	void update_origin();
+	int press(std::shared_ptr<Button>, engine::MouseButton);
+	int release(std::shared_ptr<Button>, engine::MouseButton);
+	int press(const QPoint &, engine::MouseButton);
+	int release(const QPoint &, engine::MouseButton);
+	std::shared_ptr<Button> button_contains(const QPoint &, engine::MouseButton);
 };
 }
 
