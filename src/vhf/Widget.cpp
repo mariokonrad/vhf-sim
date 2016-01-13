@@ -463,12 +463,29 @@ void Widget::bitmap_register(
 	bm.data = data;
 }
 
-void Widget::bitmap_unregister(const std::string &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::bitmap_unregister(const std::string & id) { bitmaps.erase(bitmaps.find(id)); }
 
 void Widget::draw_bitmap(
 	const std::string & id, int sx, int sy, int pixel_width, int pixel_height)
 {
-	qDebug() << __PRETTY_FUNCTION__ << id.c_str() << sx << sy << pixel_width << pixel_height;
+	const auto i = bitmaps.find(id);
+	if (i == bitmaps.end())
+		return;
+	const Bitmap & b = i->second;
+
+	painter->setPen(pen);
+	painter->setBrush(brush);
+	painter->setBackground(background);
+
+	for (int y = 0; y < b.height; ++y) {
+		const int index = b.width * y;
+		for (int x = 0; x < b.width; ++x) {
+			if (b.data[index + x] == b.c) {
+				painter->drawRect(sx + (x + 1) * pixel_width, sy + (y + 1) * pixel_height,
+					pixel_width, pixel_height);
+			}
+		}
+	}
 }
 
 int Widget::snd_init(int num)
