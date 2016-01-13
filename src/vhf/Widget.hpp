@@ -147,9 +147,11 @@ private:
 	QBrush background;
 	QPen pen;
 	QBrush brush;
+	int old_key_code;
 
 	void insert_bind_button(std::shared_ptr<Button>, int, int, int);
 	void on_timer(int id);
+	void handle_key(int);
 };
 }
 

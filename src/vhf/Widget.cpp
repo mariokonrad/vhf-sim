@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QPainter>
+#include <QKeyEvent>
 #include <QDebug>
 #include "util/Circle.hpp"
 #include "util/Rectangle.hpp"
@@ -26,6 +27,7 @@ static QDir device_path(const std::string & filename)
 Widget::Widget(QWidget * parent)
 	: QWidget(parent)
 	, must_show_buttons(false)
+	, old_key_code(-1)
 {
 	try {
 		// initialize engine
@@ -83,14 +85,28 @@ void Widget::paintEvent(QPaintEvent *)
 	painter = nullptr;
 }
 
-void Widget::keyPressEvent(QKeyEvent *)
+void Widget::keyPressEvent(QKeyEvent * event)
 {
-	qDebug() << __PRETTY_FUNCTION__;
+	auto const key = event->key();
+	if (old_key_code != -1)
+		return;
+	old_key_code = key;
+
+	auto i = keys.find(key);
+	if (i != keys.end())
+		handle_key(i->second.first);
 }
 
-void Widget::keyReleaseEvent(QKeyEvent *)
+void Widget::keyReleaseEvent(QKeyEvent * event)
 {
-	qDebug() << __PRETTY_FUNCTION__;
+	auto const key = event->key();
+	if (key != old_key_code)
+		return;
+	old_key_code = -1;
+
+	auto i = keys.find(key);
+	if (i != keys.end())
+		handle_key(i->second.second);
 }
 
 void Widget::mouseMoveEvent(QMouseEvent *)
@@ -122,6 +138,18 @@ void Widget::show_buttons(bool flag)
 void Widget::engine_error(const std::string & s)
 {
 	qDebug() << __PRETTY_FUNCTION__ << s.c_str();
+}
+
+void Widget::handle_key(int code)
+{
+	try {
+		if (engine->event(code) == 0)
+			update_view();
+	} catch (const engine::exception & e) {
+		QMessageBox::critical(
+			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+		throw e;
+	}
 }
 
 void Widget::insert_bind_button(
@@ -157,9 +185,32 @@ void Widget::bind_button_rect(
 		std::make_shared<Rectangle>(x0, y0, x1, y1), mouse_button, id_press, id_release);
 }
 
-void Widget::bind_key(int code, int event_press, int event_release)
+void Widget::bind_key(int key, int event_press, int event_release)
 {
-	keys.emplace(code, event_entry{event_press, event_release});
+	struct entry {
+		engine::KeyEvent key;
+		int native_code;
+	};
+	static const std::vector<entry> entries = {
+		{engine::EVT_KEY_0, Qt::Key_0}, {engine::EVT_KEY_1, Qt::Key_1},
+		{engine::EVT_KEY_2, Qt::Key_2}, {engine::EVT_KEY_3, Qt::Key_3},
+		{engine::EVT_KEY_4, Qt::Key_4}, {engine::EVT_KEY_5, Qt::Key_5},
+		{engine::EVT_KEY_6, Qt::Key_6}, {engine::EVT_KEY_7, Qt::Key_7},
+		{engine::EVT_KEY_8, Qt::Key_8}, {engine::EVT_KEY_9, Qt::Key_9},
+		{engine::EVT_KEY_ENTER, Qt::Key_Enter}, {engine::EVT_KEY_ESC, Qt::Key_Escape},
+		{engine::EVT_KEY_F1, Qt::Key_F1}, {engine::EVT_KEY_F2, Qt::Key_F2},
+		{engine::EVT_KEY_F3, Qt::Key_F3}, {engine::EVT_KEY_F4, Qt::Key_F4},
+		{engine::EVT_KEY_F5, Qt::Key_F5}, {engine::EVT_KEY_F6, Qt::Key_F6},
+		{engine::EVT_KEY_F7, Qt::Key_F7}, {engine::EVT_KEY_F8, Qt::Key_F8},
+		{engine::EVT_KEY_F9, Qt::Key_F9}, {engine::EVT_KEY_F10, Qt::Key_F10},
+		{engine::EVT_KEY_F11, Qt::Key_F11}, {engine::EVT_KEY_F12, Qt::Key_F12},
+	};
+
+	auto i = std::find_if(
+		entries.begin(), entries.end(), [key](const entry & e) { return key == e.key; });
+	if (i != entries.end()) {
+		keys.emplace(i->native_code, event_entry{event_press, event_release});
+	}
 }
 
 void Widget::on_timer(int id) { qDebug() << __PRETTY_FUNCTION__ << "id=" << id; }
