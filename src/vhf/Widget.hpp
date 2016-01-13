@@ -5,7 +5,7 @@
 #include <map>
 #include <QWidget>
 #include <QImage>
-#include <QSound>
+#include <QSoundEffect>
 #include <QTimer>
 #include <QPen>
 #include "util/Button.hpp"
@@ -118,7 +118,8 @@ private:
 	using button_map = std::map<mouse_entry, event_entry>;
 
 	struct sound_entry {
-		QSound * sound;
+		QSoundEffect * sound;
+		QString source;
 		float gain;
 		float pitch;
 	};

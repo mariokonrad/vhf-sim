@@ -299,7 +299,16 @@ void Widget::bind_key(int key, int event_press, int event_release)
 	}
 }
 
-void Widget::on_timer(int id) { qDebug() << __PRETTY_FUNCTION__ << "id=" << id; }
+void Widget::on_timer(int id)
+{
+	try {
+		engine->event(id);
+	} catch (engine::exception & e) {
+		QMessageBox::critical(
+			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+		throw e;
+	}
+}
 
 void Widget::timer_create(int id)
 {
@@ -500,7 +509,12 @@ int Widget::snd_init(int num)
 	return 0;
 }
 
-void Widget::snd_destroy() { sounds.clear(); }
+void Widget::snd_destroy()
+{
+	for (auto & entry : sounds)
+		delete entry.second.sound;
+	sounds.clear();
+}
 
 void Widget::snd_load_wav(int id, const std::string & filename)
 {
@@ -508,12 +522,30 @@ void Widget::snd_load_wav(int id, const std::string & filename)
 	if (i != sounds.end()) {
 		delete i->second.sound;
 	}
-	sounds[id] = {new QSound{device_path(filename).absolutePath(), this}, 1.0f, 1.0f};
+	sounds[id] = {new QSoundEffect{this}, device_path(filename).absolutePath(), 1.0f, 1.0f};
 }
 
-void Widget::snd_play(int, bool) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::snd_play(int id, bool loop)
+{
+	if (System::sound_disabled())
+		return;
+	auto i = sounds.find(id);
+	if (i == sounds.end())
+		return;
+	auto sound = i->second.sound;
+	sound->setSource(QUrl::fromLocalFile(i->second.source));
+	sound->setLoopCount(loop ? QSoundEffect::Infinite : 1);
+	sound->setVolume(i->second.gain);
+	sound->play();
+}
 
-void Widget::snd_stop(int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::snd_stop(int id)
+{
+	auto i = sounds.find(id);
+	if (i == sounds.end())
+		return;
+	i->second.sound->stop();
+}
 
 void Widget::snd_gain(int id, float gain)
 {
