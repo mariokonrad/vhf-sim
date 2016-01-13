@@ -137,7 +137,9 @@ void Widget::show_buttons(bool flag)
 
 void Widget::engine_error(const std::string & s)
 {
-	qDebug() << __PRETTY_FUNCTION__ << s.c_str();
+#if !defined(NDEBUG)
+	qDebug() << "engine error:" << s.c_str();
+#endif
 }
 
 void Widget::handle_key(int code)
@@ -145,7 +147,7 @@ void Widget::handle_key(int code)
 	try {
 		if (engine->event(code) == 0)
 			update_view();
-	} catch (const engine::exception & e) {
+	} catch (engine::exception & e) {
 		QMessageBox::critical(
 			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
 		throw e;
@@ -197,7 +199,7 @@ void Widget::bind_key(int key, int event_press, int event_release)
 		{engine::EVT_KEY_4, Qt::Key_4}, {engine::EVT_KEY_5, Qt::Key_5},
 		{engine::EVT_KEY_6, Qt::Key_6}, {engine::EVT_KEY_7, Qt::Key_7},
 		{engine::EVT_KEY_8, Qt::Key_8}, {engine::EVT_KEY_9, Qt::Key_9},
-		{engine::EVT_KEY_ENTER, Qt::Key_Enter}, {engine::EVT_KEY_ESC, Qt::Key_Escape},
+		{engine::EVT_KEY_ENTER, Qt::Key_Return}, {engine::EVT_KEY_ESC, Qt::Key_Escape},
 		{engine::EVT_KEY_F1, Qt::Key_F1}, {engine::EVT_KEY_F2, Qt::Key_F2},
 		{engine::EVT_KEY_F3, Qt::Key_F3}, {engine::EVT_KEY_F4, Qt::Key_F4},
 		{engine::EVT_KEY_F5, Qt::Key_F5}, {engine::EVT_KEY_F6, Qt::Key_F6},
@@ -271,7 +273,16 @@ void Widget::gps_process(const std::string &) { qDebug() << __PRETTY_FUNCTION__;
 
 void Widget::bind_gps(int) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::set_exam_mode(bool) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::set_exam_mode(bool flag)
+{
+	try {
+		engine->set_exam_mode(flag);
+	} catch (engine::exception & e) {
+		QMessageBox::critical(
+			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+		throw e;
+	}
+}
 
 void Widget::update_view() { repaint(); }
 
