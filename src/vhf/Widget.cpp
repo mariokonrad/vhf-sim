@@ -300,7 +300,12 @@ void Widget::set_text_background(int, int, int) { qDebug() << __PRETTY_FUNCTION_
 
 void Widget::set_text_foreground(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::clear() { painter->setBackground(background); }
+void Widget::clear()
+{
+	painter->setBackgroundMode(Qt::OpaqueMode);
+	painter->setBackground(background);
+	painter->eraseRect(0, 0, engine->get_width(), engine->get_height());
+}
 
 void Widget::draw_rectangle(int x, int y, int w, int h)
 {
@@ -328,13 +333,11 @@ void Widget::draw_ch(int, int, const std::string &) { qDebug() << __PRETTY_FUNCT
 void Widget::set_clipping_region(int x, int y, int w, int h)
 {
 	painter->setClipRect(x, y, w, h);
-	painter->setClipping(true);
 }
 
 void Widget::clear_clipping_region()
 {
 	painter->setClipRect(0, 0, engine->get_width(), engine->get_height());
-	painter->setClipping(true);
 }
 
 void Widget::register_font(int, int) { qDebug() << __PRETTY_FUNCTION__; }
