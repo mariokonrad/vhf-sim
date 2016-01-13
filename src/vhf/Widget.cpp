@@ -28,6 +28,8 @@ Widget::Widget(QWidget * parent)
 	: QWidget(parent)
 	, must_show_buttons(false)
 	, old_key_code(-1)
+	, event_gps(-1)
+	, event_msg_recv(-1)
 {
 	try {
 		// initialize engine
@@ -267,11 +269,11 @@ int Widget::msg_send(const engine::msg_t &)
 
 void Widget::process(const engine::msg_t &) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::bind_msg(int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::bind_msg(int event) { event_msg_recv = event; }
 
 void Widget::gps_process(const std::string &) { qDebug() << __PRETTY_FUNCTION__; }
 
-void Widget::bind_gps(int) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::bind_gps(int event) { event_gps = event; }
 
 void Widget::set_exam_mode(bool flag)
 {

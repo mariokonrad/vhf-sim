@@ -148,6 +148,8 @@ private:
 	QPen pen;
 	QBrush brush;
 	int old_key_code;
+	int event_gps;
+	int event_msg_recv;
 
 	void insert_bind_button(std::shared_ptr<Button>, int, int, int);
 	void on_timer(int id);
