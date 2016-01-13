@@ -5,12 +5,13 @@
 #include <QDebug>
 #include "version.hpp"
 #include "Widget.hpp"
+#include "System.hpp"
 
 namespace simradrd68
 {
 MainWindow::MainWindow()
 {
-	setWindowTitle(QCoreApplication::instance()->applicationName());
+	set_title();
 
 	// main widget
 
@@ -72,7 +73,7 @@ MainWindow::MainWindow()
 
 	auto action_exam_mode = new QAction(tr("Exam Mode"), this);
 	action_exam_mode->setCheckable(true);
-	action_exam_mode->setChecked(false);
+	action_exam_mode->setChecked(System::exam_mode());
 	connect(action_exam_mode, &QAction::toggled, this, &MainWindow::on_exam_mode);
 
 	// menubar
@@ -101,6 +102,18 @@ MainWindow::MainWindow()
 	menu_help->addAction(action_about_qt);
 }
 
+void MainWindow::set_title()
+{
+	QString title = QCoreApplication::instance()->applicationName();
+
+	if (System::exam_mode())
+		title += tr(" (Exam Mode)");
+	if (System::sound_disabled())
+		title += tr(" (Audio Off)");
+
+	setWindowTitle(title);
+}
+
 void MainWindow::on_toggle_fullscreen(bool checked)
 {
 	if (checked) {
@@ -112,19 +125,24 @@ void MainWindow::on_toggle_fullscreen(bool checked)
 
 void MainWindow::on_show_buttons(bool checked) { widget->show_buttons(checked); }
 
-void MainWindow::on_connection_open() { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_connection_open() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_connection_close() { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_connection_close() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_controlcenter() { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_controlcenter() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_show_gps() { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_show_gps() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_vhf_preferences() { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_vhf_preferences() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_connection_preferences() { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_connection_preferences() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_exam_mode(bool checked) { qDebug() << "NOT IMPLEMENTED"; }
+void MainWindow::on_exam_mode(bool checked)
+{
+	System::exam_mode(checked);
+	widget->set_exam_mode(checked);
+	set_title();
+}
 
 void MainWindow::on_about()
 {

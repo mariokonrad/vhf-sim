@@ -36,6 +36,7 @@ private slots:
 private:
 	Widget * widget;
 
+	void set_title();
 };
 }
 

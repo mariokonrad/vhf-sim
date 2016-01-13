@@ -118,6 +118,7 @@ bool System::save()
 		sys.dir.emplace_back(name, mmsi);
 	}
 	config->endArray();
+	config->sync();
 	sys.mod = false;
 	return true;
 }
