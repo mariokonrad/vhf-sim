@@ -1,7 +1,7 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#include "VHFPreferences.hpp"
+#include "vhfpreferences.hpp"
 #include "System.hpp"
 #include <QDebug>
 

@@ -9,7 +9,7 @@
 #include "version.hpp"
 #include "Widget.hpp"
 #include "System.hpp"
-#include "VHFPreferences.hpp"
+#include "vhfpreferences.hpp"
 
 namespace simradrd68
 {

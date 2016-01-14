@@ -2,17 +2,13 @@ cmake_minimum_required(VERSION 3.1)
 
 qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
-qt5_wrap_ui(UI_HEADERS
-	vhfpreferences.ui
-	)
-
 add_executable(vhf
 	main.cpp
 	MainWindow.cpp
 	Widget.cpp
 	System.cpp
 	MsgSenderSocket.cpp
-	VHFPreferences.cpp
+	vhfpreferences.cpp
 	${UI_HEADERS}
 	${QM_FILES}
 	)
