@@ -10,6 +10,7 @@ add_executable(vhf
 	MsgSenderSocket.cpp
 	vhfpreferences.cpp
 	connectionpreferences.cpp
+	gpswindow.cpp
 	${UI_HEADERS}
 	${QM_FILES}
 	)

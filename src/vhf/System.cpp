@@ -26,12 +26,9 @@ System::System()
 	com.host = "localhost";
 	com.port = 9540;
 
-	gps.on_top = false;
-
 	cc.mmsi = engine::MMSI("111111111");
 	cc.group = engine::MMSI("033333333");
 	cc.all_msg = false;
-	cc.on_top = false;
 }
 
 System & System::inst()
@@ -57,7 +54,6 @@ bool System::load()
 	engine::Latitude::parse(sys.gps.lat, config->value("gps/lat").toString().toStdString());
 	engine::Longitude::parse(sys.gps.lon, config->value("gps/lon").toString().toStdString());
 	engine::Date::parse(sys.gps.time, config->value("gps/time").toString().toStdString());
-	sys.gps.on_top = config->value("gps/on_top").toBool();
 	sys.vhf.mmsi = engine::MMSI{config->value("vhf/mmsi").toString().toStdString()};
 	sys.vhf.group = engine::MMSI{config->value("vhf/group").toString().toStdString()};
 	engine::Date::parse(sys.vhf.time, config->value("vhf/time").toString().toStdString());
@@ -69,7 +65,6 @@ bool System::load()
 	engine::Longitude::parse(sys.cc.lon, config->value("cc/lon").toString().toStdString());
 	engine::Date::parse(sys.cc.time, config->value("cc/time").toString().toStdString());
 	sys.cc.all_msg = config->value("cc/all_msg").toBool();
-	sys.cc.on_top = config->value("cc/on_top").toBool();
 	auto dir_entries = config->beginReadArray("dir");
 	for (auto i = 0; i < dir_entries; ++i) {
 		config->setArrayIndex(i);
@@ -101,7 +96,6 @@ bool System::save()
 	config->setValue("gps/lat", sys.gps.lat.str().c_str());
 	config->setValue("gps/lon", sys.gps.lon.str().c_str());
 	config->setValue("gps/time", sys.gps.time.str().c_str());
-	config->setValue("gps/on_top", sys.gps.on_top);
 	config->setValue("vhf/mmsi", sys.vhf.mmsi.str().c_str());
 	config->setValue("vhf/group", sys.vhf.group.str().c_str());
 	config->setValue("vhf/time", sys.vhf.time.str().c_str());
@@ -113,7 +107,6 @@ bool System::save()
 	config->setValue("cc/lon", sys.cc.lon.str().c_str());
 	config->setValue("cc/time", sys.cc.time.str().c_str());
 	config->setValue("cc/all_msg", sys.cc.all_msg);
-	config->setValue("cc/on_top", sys.cc.on_top);
 	config->beginWriteArray("dir");
 	for (auto i = 0u; i < sys.dir.size(); ++i) {
 		config->setArrayIndex(i);
@@ -220,16 +213,6 @@ void System::gps_time(const engine::Date & t)
 }
 
 engine::Date System::gps_time() { return inst().gps.time; }
-
-void System::gps_on_top(bool f)
-{
-	System & sys = inst();
-	if (sys.gps.on_top != f)
-		sys.mod = true;
-	sys.gps.on_top = f;
-}
-
-bool System::gps_on_top() { return inst().gps.on_top; }
 
 void System::dir_set(const engine::Directory & dir)
 {
@@ -352,14 +335,4 @@ void System::cc_all_msg(bool flag)
 }
 
 bool System::cc_all_msg() { return inst().cc.all_msg; }
-
-void System::cc_on_top(bool f)
-{
-	System & sys = inst();
-	if (sys.cc.on_top != f)
-		sys.mod = true;
-	sys.cc.on_top = f;
-}
-
-bool System::cc_on_top() { return inst().cc.on_top; }
 }

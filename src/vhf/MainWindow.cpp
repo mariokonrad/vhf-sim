@@ -5,12 +5,14 @@
 #include <QMenuBar>
 #include <QCoreApplication>
 #include <QMessageBox>
+#include <QCloseEvent>
 #include <QDebug>
 #include "version.hpp"
 #include "Widget.hpp"
 #include "System.hpp"
 #include "vhfpreferences.hpp"
 #include "connectionpreferences.hpp"
+#include "gpswindow.hpp"
 
 namespace simradrd68
 {
@@ -22,6 +24,10 @@ MainWindow::MainWindow()
 
 	widget = new Widget(this);
 	setCentralWidget(widget);
+
+	// GPS frame
+
+	gps = new GPSWindow(this);
 
 	// actions
 
@@ -107,6 +113,14 @@ MainWindow::MainWindow()
 	menu_help->addAction(action_about_qt);
 }
 
+MainWindow::~MainWindow() {}
+
+void MainWindow::closeEvent(QCloseEvent * event)
+{
+	gps->hide();
+	event->accept();
+}
+
 void MainWindow::set_title()
 {
 	QString title = QCoreApplication::instance()->applicationName();
@@ -136,7 +150,7 @@ void MainWindow::on_connection_close() { qDebug() << __PRETTY_FUNCTION__ << "NOT
 
 void MainWindow::on_controlcenter() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_show_gps() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
+void MainWindow::on_show_gps() { gps->show(); }
 
 void MainWindow::on_vhf_preferences()
 {
@@ -156,8 +170,6 @@ void MainWindow::on_vhf_preferences()
 		if (current == languages[i].second)
 			dialog.language->setCurrentIndex(i);
 	}
-	dialog.cc_on_top->setChecked(System::cc_on_top());
-	dialog.gps_on_top->setChecked(System::gps_on_top());
 	if (dialog.exec() == QDialog::Accepted) {
 		engine::Latitude lat;
 		if (engine::Latitude::parse(lat, dialog.latitude->text().toStdString()))
@@ -171,8 +183,6 @@ void MainWindow::on_vhf_preferences()
 		System::vhf_mmsi(dialog.mmsi->text().toLong());
 		System::vhf_group(dialog.group->text().toLong());
 		System::lang(dialog.language->currentData().toString().toStdString());
-		System::cc_on_top(dialog.cc_on_top->checkState() == Qt::Checked);
-		System::gps_on_top(dialog.gps_on_top->checkState() == Qt::Checked);
 		System::save();
 	}
 }

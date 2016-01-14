@@ -6,6 +6,7 @@
 namespace simradrd68
 {
 class Widget;
+class GPSWindow;
 
 class MainWindow : public QMainWindow
 {
@@ -13,6 +14,10 @@ class MainWindow : public QMainWindow
 
 public:
 	MainWindow();
+	virtual ~MainWindow();
+
+protected:
+	void closeEvent(QCloseEvent * event);
 
 private slots:
 	void on_about();
@@ -26,15 +31,10 @@ private slots:
 	void on_controlcenter();
 	void on_show_gps();
 	void on_exam_mode(bool checked);
-//	void on_recv_vhf_msg(VHFMsgEvent);
-//	void on_recv_gps(GPSEvent);
-//	void on_socket();
-//	void on_key_down();
-//	void on_key_up();
-//	void on_key();
 
 private:
 	Widget * widget;
+	GPSWindow * gps;
 
 	void set_title();
 };

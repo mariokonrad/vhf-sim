@@ -46,7 +46,6 @@ private:
 		engine::Date time;
 		engine::Latitude lat;
 		engine::Longitude lon;
-		bool on_top;
 	} gps;
 	struct {
 		engine::MMSI mmsi;
@@ -62,7 +61,6 @@ private:
 		engine::Latitude lat;
 		engine::Longitude lon;
 		bool all_msg;
-		bool on_top;
 	} cc;
 	engine::Directory dir;
 	QSettings * config;
@@ -116,9 +114,6 @@ public:
 	static void gps_time(const engine::Date & t);
 	static engine::Date gps_time();
 
-	static void gps_on_top(bool f);
-	static bool gps_on_top();
-
 	// dir --------------------------------------------
 	static void dir_set(const engine::Directory & dir);
 	static engine::Directory dir_get();
@@ -157,9 +152,6 @@ public:
 
 	static void cc_all_msg(bool flag);
 	static bool cc_all_msg();
-
-	static void cc_on_top(bool f);
-	static bool cc_on_top();
 };
 }
 
