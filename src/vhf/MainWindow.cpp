@@ -1,3 +1,6 @@
+// Copyright (c) 2016 Mario Konrad
+// All Rights reserved.
+
 #include "MainWindow.hpp"
 #include <QMenuBar>
 #include <QCoreApplication>
@@ -6,6 +9,7 @@
 #include "version.hpp"
 #include "Widget.hpp"
 #include "System.hpp"
+#include "VHFPreferences.hpp"
 
 namespace simradrd68
 {
@@ -133,7 +137,11 @@ void MainWindow::on_controlcenter() { qDebug() << __PRETTY_FUNCTION__ << "NOT IM
 
 void MainWindow::on_show_gps() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_vhf_preferences() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
+void MainWindow::on_vhf_preferences()
+{
+	VHFPreferences dialog(this);
+	dialog.exec();
+}
 
 void MainWindow::on_connection_preferences() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
