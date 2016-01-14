@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>ConnectionPreferences</name>
+    <message>
+        <location filename="../src/vhf/connectionpreferences.ui" line="17"/>
+        <source>Connection Preferences</source>
+        <translation>Verbindungseigenschaften</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/connectionpreferences.ui" line="51"/>
+        <source>Host:</source>
+        <translation>Host:</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/connectionpreferences.ui" line="65"/>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
+</context>
+<context>
     <name>VHFPreferences</name>
     <message>
         <location filename="../src/vhf/vhfpreferences.ui" line="17"/>
@@ -52,117 +70,117 @@
 <context>
     <name>simradrd68::MainWindow</name>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="27"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="28"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="31"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="32"/>
         <source>About Qt</source>
         <translation>Über Qt</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="32"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="33"/>
         <source>Shows information about Qt</source>
         <translation>Zeigt Informationen über Qt</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="35"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="36"/>
         <source>E&amp;xit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="36"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="37"/>
         <source>Closes the application</source>
         <translation>Beendet das Programm</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="40"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="41"/>
         <source>Fullscreen</source>
         <translation>Vollbild</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="41"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="42"/>
         <source>Shows the window in fullscreen</source>
         <translation>Schaltet das Programm in den Vollbildmodus</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="48"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="49"/>
         <source>Show Buttons</source>
         <translation>Zeige Schaltflächen</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="53"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="54"/>
         <source>Open Connection...</source>
         <translation>Öffne Verbindung...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="57"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="58"/>
         <source>Close Connection</source>
         <translation>Verbindung schliessen</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="61"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="62"/>
         <source>Control Center...</source>
         <translation>Kontrolzentrum...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="65"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="66"/>
         <source>GPS...</source>
         <translation>GPS...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="69"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="70"/>
         <source>VHF Preferences...</source>
         <translation>VHF Einstellungen...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="73"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="74"/>
         <source>Connection Preferences...</source>
         <translation>Verbindungseinstellungen...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="78"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="79"/>
         <source>Exam Mode</source>
         <translation>Prüfungsmodus</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="87"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="88"/>
         <source>&amp;File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="100"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="101"/>
         <source>&amp;View</source>
         <translation>Anzeige</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="104"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="105"/>
         <source>&amp;Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="114"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="115"/>
         <source> (Exam Mode)</source>
         <translation> (Prüfungmodus)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="116"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="117"/>
         <source> (Audio Off)</source>
         <translation> (Audio Aus)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="143"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="144"/>
         <source>English</source>
         <translation>Englisch</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="143"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="144"/>
         <source>German</source>
         <translation>Deutsch</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="191"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="202"/>
         <source>%1
 
 Version: %2

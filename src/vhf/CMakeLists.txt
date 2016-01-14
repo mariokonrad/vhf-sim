@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.2)
 
 qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
@@ -9,6 +9,7 @@ add_executable(vhf
 	System.cpp
 	MsgSenderSocket.cpp
 	vhfpreferences.cpp
+	connectionpreferences.cpp
 	${UI_HEADERS}
 	${QM_FILES}
 	)

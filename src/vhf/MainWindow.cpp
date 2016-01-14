@@ -10,6 +10,7 @@
 #include "Widget.hpp"
 #include "System.hpp"
 #include "vhfpreferences.hpp"
+#include "connectionpreferences.hpp"
 
 namespace simradrd68
 {
@@ -176,7 +177,17 @@ void MainWindow::on_vhf_preferences()
 	}
 }
 
-void MainWindow::on_connection_preferences() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
+void MainWindow::on_connection_preferences()
+{
+	ConnectionPreferences dialog(this);
+	dialog.host->setText(System::com_host().c_str());
+	dialog.port->setText(QString::number(System::com_port()));
+	if (dialog.exec() == QDialog::Accepted) {
+		System::com_host(dialog.host->text().toStdString());
+		System::com_port(dialog.port->text().toLong());
+		System::save();
+	}
+}
 
 void MainWindow::on_exam_mode(bool checked)
 {
