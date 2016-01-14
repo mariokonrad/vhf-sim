@@ -139,8 +139,41 @@ void MainWindow::on_show_gps() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEME
 
 void MainWindow::on_vhf_preferences()
 {
+	static const std::vector<std::pair<QString, std::string>> languages = {
+		{tr("English"), "en_US"}, {tr("German"), "de_DE"},
+	};
+
 	VHFPreferences dialog(this);
-	dialog.exec();
+	dialog.latitude->setText(System::vhf_latitude().str().c_str());
+	dialog.longitude->setText(System::vhf_longitude().str().c_str());
+	dialog.datetime_utc->setText(System::vhf_time().str().c_str());
+	dialog.mmsi->setText(System::vhf_mmsi().str().c_str());
+	dialog.group->setText(System::vhf_group().str().c_str());
+	const std::string current = System::lang();
+	for (auto i = 0u; i < languages.size(); ++i) {
+		dialog.language->addItem(languages[i].first, languages[i].second.c_str());
+		if (current == languages[i].second)
+			dialog.language->setCurrentIndex(i);
+	}
+	dialog.cc_on_top->setChecked(System::cc_on_top());
+	dialog.gps_on_top->setChecked(System::gps_on_top());
+	if (dialog.exec() == QDialog::Accepted) {
+		engine::Latitude lat;
+		if (engine::Latitude::parse(lat, dialog.latitude->text().toStdString()))
+			System::vhf_latitude(lat);
+		engine::Longitude lon;
+		if (engine::Longitude::parse(lon, dialog.longitude->text().toStdString()))
+			System::vhf_longitude(lon);
+		engine::Date utc;
+		if (engine::Date::parse(utc, dialog.datetime_utc->text().toStdString()))
+			System::vhf_time(utc);
+		System::vhf_mmsi(dialog.mmsi->text().toLong());
+		System::vhf_group(dialog.group->text().toLong());
+		System::lang(dialog.language->currentData().toString().toStdString());
+		System::cc_on_top(dialog.cc_on_top->checkState() == Qt::Checked);
+		System::gps_on_top(dialog.gps_on_top->checkState() == Qt::Checked);
+		System::save();
+	}
 }
 
 void MainWindow::on_connection_preferences() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }

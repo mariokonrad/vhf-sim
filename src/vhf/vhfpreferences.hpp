@@ -8,15 +8,12 @@
 
 namespace simradrd68
 {
-class VHFPreferences : public QDialog, Ui::VHFPreferences
+class VHFPreferences : public QDialog, public Ui::VHFPreferences
 {
 	Q_OBJECT
 
 public:
 	VHFPreferences(QWidget * parent);
-
-private slots:
-	void check(int result);
 };
 }
 
