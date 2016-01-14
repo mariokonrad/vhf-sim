@@ -7,6 +7,7 @@ add_executable(vhf
 	MainWindow.cpp
 	Widget.cpp
 	System.cpp
+	MsgSenderSocket.cpp
 	${QM_FILES}
 	)
 
