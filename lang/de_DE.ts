@@ -22,37 +22,37 @@
 <context>
     <name>GPSWindow</name>
     <message>
-        <location filename="../src/vhf/gpswindow.ui" line="14"/>
+        <location filename="../src/vhf/gpswindow.ui" line="20"/>
         <source>GPS</source>
         <translation>GPS</translation>
     </message>
     <message>
-        <location filename="../src/vhf/gpswindow.ui" line="37"/>
+        <location filename="../src/vhf/gpswindow.ui" line="43"/>
         <source>On</source>
         <translation>Ein</translation>
     </message>
     <message>
-        <location filename="../src/vhf/gpswindow.ui" line="62"/>
+        <location filename="../src/vhf/gpswindow.ui" line="68"/>
         <source>Simulation</source>
         <translation>Simulation</translation>
     </message>
     <message>
-        <location filename="../src/vhf/gpswindow.ui" line="71"/>
+        <location filename="../src/vhf/gpswindow.ui" line="77"/>
         <source>Latitude:</source>
         <translation>Breitengrad:</translation>
     </message>
     <message>
-        <location filename="../src/vhf/gpswindow.ui" line="85"/>
+        <location filename="../src/vhf/gpswindow.ui" line="94"/>
         <source>Longitude:</source>
         <translation>Längengrad:</translation>
     </message>
     <message>
-        <location filename="../src/vhf/gpswindow.ui" line="99"/>
+        <location filename="../src/vhf/gpswindow.ui" line="111"/>
         <source>Date/Time (UTC):</source>
         <translation>Zeit/Datum (UTC):</translation>
     </message>
     <message>
-        <location filename="../src/vhf/gpswindow.ui" line="134"/>
+        <location filename="../src/vhf/gpswindow.ui" line="146"/>
         <source>Close</source>
         <translation>Schliessen</translation>
     </message>
@@ -93,6 +93,23 @@
         <location filename="../src/vhf/vhfpreferences.ui" line="110"/>
         <source>Language:</source>
         <translation>Sprache:</translation>
+    </message>
+</context>
+<context>
+    <name>simradrd68::GPSWindow</name>
+    <message>
+        <location filename="../src/vhf/gpswindow.cpp" line="39"/>
+        <location filename="../src/vhf/gpswindow.cpp" line="52"/>
+        <location filename="../src/vhf/gpswindow.cpp" line="65"/>
+        <source>Field Error</source>
+        <translation>Fehler in Feld</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/gpswindow.cpp" line="40"/>
+        <location filename="../src/vhf/gpswindow.cpp" line="53"/>
+        <location filename="../src/vhf/gpswindow.cpp" line="66"/>
+        <source>The field &apos;%1&apos; has a invalid format.</source>
+        <translation>Das Feld &apos;%1&apos; hat ein falsches Format.</translation>
     </message>
 </context>
 <context>
