@@ -29,6 +29,10 @@ MainWindow::MainWindow()
 
 	gps = new GPSWindow(this);
 
+	// this connection has to be a lambda, because gps_process is not a slot
+	connect(gps, &GPSWindow::sentence,
+		[this](const std::string & s) { this->widget->gps_process(s); });
+
 	// actions
 
 	auto action_about = new QAction(tr("About"), this);

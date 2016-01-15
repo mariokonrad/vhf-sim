@@ -9,6 +9,7 @@
 #include <QDebug>
 #include "util/Circle.hpp"
 #include "util/Rectangle.hpp"
+#include "nmea/nmea_sentence.hpp"
 #include "System.hpp"
 #include "version.hpp"
 
@@ -362,7 +363,45 @@ void Widget::process(const engine::msg_t &) { qDebug() << __PRETTY_FUNCTION__; }
 
 void Widget::bind_msg(int event) { event_msg_recv = event; }
 
-void Widget::gps_process(const std::string &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::gps_process(const std::string & s)
+{
+	if (!nmea::check(s))
+		return; // ignore faulty GPS data
+
+	// parse fields from string
+	nmea::Fields f;
+	nmea::parse(f, s);
+
+	// ignore all other sentences than RMC
+	if (nmea::type(f) != nmea::TYPE_RMC)
+		return;
+
+	nmea::RMC rmc;
+	if (!rmc.set(f)) {
+		// it seems to be a malformed sencence, just ignore it
+		return;
+	}
+
+	engine::Latitude la;
+	engine::Longitude lo;
+	engine::Date t;
+
+	if (rmc.get(la) && rmc.get(lo) && rmc.get(t)) {
+		// set pos / date within model
+		lat(la);
+		lon(lo);
+		time(t);
+
+		// tell engine about GPS activities
+		try {
+			engine->event(event_gps);
+		} catch (engine::exception & e) {
+			QMessageBox::critical(
+				this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+			throw e;
+		}
+	}
+}
 
 void Widget::bind_gps(int event) { event_gps = event; }
 

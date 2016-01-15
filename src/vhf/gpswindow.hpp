@@ -25,9 +25,12 @@ private slots:
 	void longitude_edit_finished();
 	void datetime_edit_finished();
 	void timeout();
+	void toggle_active();
 
 private:
 	QTimer * timer;
+
+	void handle_timer(bool is_on);
 };
 }
 

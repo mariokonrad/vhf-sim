@@ -40,7 +40,7 @@
        <item>
         <widget class="QPushButton" name="button_toggle">
          <property name="text">
-          <string>On</string>
+          <string>OFF</string>
          </property>
          <property name="checkable">
           <bool>false</bool>

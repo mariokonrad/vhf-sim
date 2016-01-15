@@ -21,7 +21,11 @@ GPSWindow::GPSWindow(QWidget * parent)
 
 	timer = new QTimer(this);
 	timer->setSingleShot(false);
+	timer->stop();
 
+	handle_timer(true);
+
+	connect(button_toggle, &QPushButton::clicked, this, &GPSWindow::toggle_active);
 	connect(button_close, &QPushButton::clicked, this, &QWidget::hide);
 	connect(latitude, &QLineEdit::editingFinished, this, &GPSWindow::latitude_edit_finished);
 	connect(longitude, &QLineEdit::editingFinished, this, &GPSWindow::longitude_edit_finished);
@@ -69,10 +73,21 @@ void GPSWindow::datetime_edit_finished()
 	}
 }
 
+void GPSWindow::toggle_active() { handle_timer(timer->isActive()); }
+
+void GPSWindow::handle_timer(bool turn_off)
+{
+	if (turn_off) {
+		timer->stop();
+		button_toggle->setText(tr("OFF"));
+	} else {
+		timer->start(1000);
+		button_toggle->setText(tr("ON"));
+	}
+}
+
 void GPSWindow::timeout()
 {
-	qDebug() << __PRETTY_FUNCTION__;
-
 	engine::Latitude lat;
 	if (!engine::Latitude::parse(lat, latitude->text().toStdString()))
 		return;
