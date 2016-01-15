@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <map>
+#include <queue>
 #include <QWidget>
 #include <QImage>
 #include <QSoundEffect>
@@ -134,6 +135,7 @@ private:
 	using bitmap_map = std::map<std::string, Bitmap>;
 
 	using timer_map = std::map<int, QTimer *>;
+	using message_queue = std::queue<engine::msg_t>;
 
 	std::unique_ptr<engine::Engine> engine;
 	QPainter * painter;
@@ -151,6 +153,7 @@ private:
 	int event_gps;
 	int event_msg_recv;
 	QPoint origin;
+	message_queue mque;
 
 	void insert_bind_button(std::shared_ptr<Button>, int, int, int);
 	void on_timer(int id);

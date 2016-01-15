@@ -7,6 +7,7 @@ namespace simradrd68
 {
 class Widget;
 class GPSWindow;
+class ControlCenter;
 
 class MainWindow : public QMainWindow
 {
@@ -35,6 +36,7 @@ private slots:
 private:
 	Widget * widget;
 	GPSWindow * gps;
+	ControlCenter * controlcenter;
 
 	void set_title();
 };

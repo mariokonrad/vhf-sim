@@ -11,6 +11,7 @@ add_executable(vhf
 	vhfpreferences.cpp
 	connectionpreferences.cpp
 	gpswindow.cpp
+	controlcenter.cpp
 	${UI_HEADERS}
 	${QM_FILES}
 	)

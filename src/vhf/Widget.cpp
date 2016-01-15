@@ -347,10 +347,13 @@ void Widget::timer_stop(int id)
 	i->second->stop();
 }
 
-int Widget::msg_recv(engine::msg_t &)
+int Widget::msg_recv(engine::msg_t & m)
 {
-	qDebug() << __PRETTY_FUNCTION__;
-	return -1;
+	if (mque.empty())
+		return -1;
+	m = mque.front();
+	mque.pop();
+	return 0;
 }
 
 int Widget::msg_send(const engine::msg_t &)
@@ -359,7 +362,17 @@ int Widget::msg_send(const engine::msg_t &)
 	return -1;
 }
 
-void Widget::process(const engine::msg_t &) { qDebug() << __PRETTY_FUNCTION__; }
+void Widget::process(const engine::msg_t & m)
+{
+	try {
+		mque.push(m);
+		engine->event(event_msg_recv);
+	} catch (engine::exception & e) {
+		QMessageBox::critical(
+			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
+		throw e;
+	}
+}
 
 void Widget::bind_msg(int event) { event_msg_recv = event; }
 

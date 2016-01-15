@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__GPSDIALOG__HPP__
-#define __SIMRADRD68__GPSDIALOG__HPP__
+#ifndef __SIMRADRD68__GPSWINDOW__HPP__
+#define __SIMRADRD68__GPSWINDOW__HPP__
 
 #include "ui_gpswindow.h"
 

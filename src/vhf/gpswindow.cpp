@@ -6,7 +6,6 @@
 #include "nmea/nmea_sentence.hpp"
 #include <QMessageBox>
 #include <QTimer>
-#include <QDebug>
 
 namespace simradrd68
 {

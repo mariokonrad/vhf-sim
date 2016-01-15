@@ -1,6 +1,5 @@
 #include <QApplication>
 #include <QTranslator>
-#include <QDebug>
 #include <QSettings>
 #include <QStandardPaths>
 #include "MainWindow.hpp"

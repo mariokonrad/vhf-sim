@@ -13,6 +13,7 @@
 #include "vhfpreferences.hpp"
 #include "connectionpreferences.hpp"
 #include "gpswindow.hpp"
+#include "controlcenter.hpp"
 
 namespace simradrd68
 {
@@ -32,6 +33,12 @@ MainWindow::MainWindow()
 	// this connection has to be a lambda, because gps_process is not a slot
 	connect(gps, &GPSWindow::sentence,
 		[this](const std::string & s) { this->widget->gps_process(s); });
+
+	// controlcenter
+
+	controlcenter = new ControlCenter(this);
+	connect(controlcenter, &ControlCenter::send,
+		[this](const engine::msg_t & m) { this->widget->process(m); });
 
 	// actions
 
@@ -152,7 +159,7 @@ void MainWindow::on_connection_open() { qDebug() << __PRETTY_FUNCTION__ << "NOT 
 
 void MainWindow::on_connection_close() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
 
-void MainWindow::on_controlcenter() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
+void MainWindow::on_controlcenter() { controlcenter->show(); }
 
 void MainWindow::on_show_gps() { gps->show(); }
 
