@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+class QTcpSocket;
+class QAction;
+
 namespace simradrd68
 {
 class Widget;
@@ -37,8 +40,15 @@ private:
 	Widget * widget;
 	GPSWindow * gps;
 	ControlCenter * controlcenter;
+	QTcpSocket * socket;
+	QAction * action_open_connection;
+	QAction * action_close_connection;
+	QAction * action_control_center;
 
 	void set_title();
+	void connect_to_controlcenter();
+	void socket_close();
+	void handle_menu_entries();
 };
 }
 

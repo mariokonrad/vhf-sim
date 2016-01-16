@@ -6,6 +6,8 @@
 #include <QCoreApplication>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QTcpSocket>
+#include <QProgressDialog>
 #include <QDebug>
 #include "version.hpp"
 #include "Widget.hpp"
@@ -14,10 +16,16 @@
 #include "connectionpreferences.hpp"
 #include "gpswindow.hpp"
 #include "controlcenter.hpp"
+#include "MsgSenderControlCenter.hpp"
+#include "MsgSenderSocket.hpp"
 
 namespace simradrd68
 {
 MainWindow::MainWindow()
+	: socket(nullptr)
+	, action_open_connection(nullptr)
+	, action_close_connection(nullptr)
+	, action_control_center(nullptr)
 {
 	set_title();
 
@@ -68,15 +76,15 @@ MainWindow::MainWindow()
 	action_show_buttons->setChecked(false);
 	connect(action_show_buttons, &QAction::toggled, this, &MainWindow::on_show_buttons);
 
-	auto action_open_connection = new QAction(tr("Open Connection..."), this);
+	action_open_connection = new QAction(tr("Open Connection..."), this);
 	action_open_connection->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_T));
 	connect(action_open_connection, &QAction::triggered, this, &MainWindow::on_connection_open);
 
-	auto action_close_connection = new QAction(tr("Close Connection"), this);
+	action_close_connection = new QAction(tr("Close Connection"), this);
 	connect(
 		action_close_connection, &QAction::triggered, this, &MainWindow::on_connection_close);
 
-	auto action_control_center = new QAction(tr("Control Center..."), this);
+	action_control_center = new QAction(tr("Control Center..."), this);
 	action_control_center->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
 	connect(action_control_center, &QAction::triggered, this, &MainWindow::on_controlcenter);
 
@@ -122,6 +130,10 @@ MainWindow::MainWindow()
 	auto menu_help = menubar->addMenu(tr("&Help"));
 	menu_help->addAction(action_about);
 	menu_help->addAction(action_about_qt);
+
+	// misc
+	connect_to_controlcenter();
+	handle_menu_entries();
 }
 
 MainWindow::~MainWindow() {}
@@ -155,9 +167,76 @@ void MainWindow::on_toggle_fullscreen(bool checked)
 
 void MainWindow::on_show_buttons(bool checked) { widget->show_buttons(checked); }
 
-void MainWindow::on_connection_open() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
+void MainWindow::on_connection_open()
+{
+	qDebug() << __PRETTY_FUNCTION__;
 
-void MainWindow::on_connection_close() { qDebug() << __PRETTY_FUNCTION__ << "NOT IMPLEMENTED"; }
+	// close open socket (this should not happen, but it does not hurt)
+	socket_close();
+	socket = new QTcpSocket(this);
+
+	const QString host = System::com_host().c_str();
+	const int port = System::com_port();
+
+	constexpr int max_tries = 15;
+
+	bool is_connected = false;
+	socket->connectToHost(host, port);
+	QProgressDialog progress(this);
+	progress.setMinimumDuration(100);
+	progress.setRange(0, max_tries);
+	for (int i = 0; !is_connected && (i < max_tries); ++i) {
+		is_connected= socket->waitForConnected(1000);
+		progress.setValue(i);
+	}
+
+	if (is_connected) {
+		// set socket as the current connection, discard the control center
+		widget->set_msg_sender(
+			std::unique_ptr<MsgSender>(new MsgSenderSocket(socket)));
+
+		controlcenter->hide();
+	} else {
+		QMessageBox::critical(this, tr("Connection Error"),
+			tr("Unable to connecto to %1:%2").arg(host).arg(port));
+		socket_close();
+	}
+
+	handle_menu_entries();
+}
+
+void MainWindow::on_connection_close()
+{
+	// restore connection to controlcenter, this is the default
+	socket_close();
+	connect_to_controlcenter();
+	handle_menu_entries();
+}
+
+void MainWindow::socket_close()
+{
+	delete socket;
+	socket = nullptr;
+}
+
+void MainWindow::handle_menu_entries()
+{
+	if (socket) {
+		action_open_connection->setEnabled(false);
+		action_close_connection->setEnabled(true);
+		action_control_center->setEnabled(false);
+	} else {
+		action_open_connection->setEnabled(true);
+		action_close_connection->setEnabled(false);
+		action_control_center->setEnabled(true);
+	}
+}
+
+void MainWindow::connect_to_controlcenter()
+{
+	widget->set_msg_sender(
+		std::unique_ptr<MsgSender>(new MsgSenderControlCenter(controlcenter)));
+}
 
 void MainWindow::on_controlcenter() { controlcenter->show(); }
 

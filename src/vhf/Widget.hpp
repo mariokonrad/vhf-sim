@@ -15,6 +15,7 @@
 #include "engine/Model.hpp"
 #include "engine/Controller.hpp"
 #include "engine/ErrorWriter.hpp"
+#include "MsgSender.hpp"
 
 namespace simradrd68
 {
@@ -30,6 +31,7 @@ public:
 	Widget(QWidget * parent);
 
 	void show_buttons(bool);
+	void set_msg_sender(std::unique_ptr<MsgSender> sender);
 
 public: // error writer
 	virtual void engine_error(const std::string &) override;
@@ -158,6 +160,7 @@ private:
 	int event_msg_recv;
 	QPoint origin;
 	message_queue mque;
+	std::unique_ptr<MsgSender> msg_sender;
 
 	void insert_bind_button(std::shared_ptr<Button>, int, int, int);
 	void on_timer(int id);

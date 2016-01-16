@@ -356,10 +356,26 @@ int Widget::msg_recv(engine::msg_t & m)
 	return 0;
 }
 
-int Widget::msg_send(const engine::msg_t &)
+void Widget::set_msg_sender(std::unique_ptr<MsgSender> sender)
 {
-	qDebug() << __PRETTY_FUNCTION__;
-	return -1;
+	msg_sender = std::move(sender);
+	if (msg_sender) {
+		using namespace engine;
+
+		// send pulse with information to login
+		msg_t msg;
+		msg_init(msg);
+		msg.type = MSG_PULSE;
+		mmsi().str(msg.mmsi);
+		group().str(msg.group);
+		msg_send(msg);
+	}
+}
+
+int Widget::msg_send(const engine::msg_t & m)
+{
+	assert(msg_sender);
+	return msg_sender->send(m);
 }
 
 void Widget::process(const engine::msg_t & m)

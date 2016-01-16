@@ -8,6 +8,7 @@ add_executable(vhf
 	Widget.cpp
 	System.cpp
 	MsgSenderSocket.cpp
+	MsgSenderControlCenter.cpp
 	vhfpreferences.cpp
 	connectionpreferences.cpp
 	gpswindow.cpp
