@@ -55,24 +55,28 @@ public: // view: graphics
 	virtual void set_background(int, int, int) override;
 	virtual void set_brush(int, int, int) override;
 	virtual void set_pen(int, int, int) override;
-	virtual void set_text_background(int, int, int) override;
-	virtual void set_text_foreground(int, int, int) override;
 	virtual void clear() override;
 	virtual void draw_rectangle(int, int, int, int) override;
 	virtual void draw_circle(int, int, int) override;
-	virtual void draw_text(int, int, const std::string &,
-		engine::View::TextAlign = engine::View::TEXT_ALIGN_LEFT) override;
-	virtual void draw_ch(int, int, const std::string &) override;
 	virtual void set_clipping_region(int, int, int, int) override;
 	virtual void clear_clipping_region() override;
-	virtual void register_font(int, int) override;
-	virtual void set_font(int) override;
 	virtual void img_load(int, const std::string &) override;
 	virtual void img_size(int, int &, int &) override;
 	virtual void draw_img(int, int, int) override;
 	virtual void bitmap_register(const std::string &, int, int, char, const char *) override;
 	virtual void bitmap_unregister(const std::string &) override;
 	virtual void draw_bitmap(const std::string &, int, int, int, int) override;
+
+public: // view: graphics font : NOT SUPPORTED
+	virtual void register_font(int, int) override {}
+	virtual void set_font(int) override {}
+	virtual void set_text_background(int, int, int) override {}
+	virtual void set_text_foreground(int, int, int) override {}
+	virtual void draw_text(int, int, const std::string &,
+		engine::View::TextAlign = engine::View::TEXT_ALIGN_LEFT) override
+	{
+	}
+	virtual void draw_ch(int, int, const std::string &) override {}
 
 public: // view: sound
 	virtual int snd_init(int) override;

@@ -1088,14 +1088,11 @@ static int lua_register_functions(lua_State * lua)
 	lua_register(lua, "view_update", lua__view_update);
 
 	// view manipulation: drawing
-	lua_register(lua, "draw_ch", lua__draw_ch);
-	lua_register(lua, "draw_text", lua__draw_text);
 	lua_register(lua, "draw_clear", lua__draw_clear);
 	lua_register(lua, "draw_img", lua__draw_img);
 	lua_register(lua, "draw_set_pen", lua__draw_set_pen);
 	lua_register(lua, "draw_set_brush", lua__draw_set_brush);
 	lua_register(lua, "draw_set_bg", lua__draw_set_bg);
-	lua_register(lua, "draw_reg_font", lua__draw_reg_font);
 	lua_register(lua, "draw_rect", lua__draw_rect);
 	lua_register(lua, "draw_circ", lua__draw_circ);
 	lua_register(lua, "draw_bitmap", lua__draw_bitmap);
@@ -1103,6 +1100,11 @@ static int lua_register_functions(lua_State * lua)
 	lua_register(lua, "img_get_size", lua__img_get_size);
 	lua_register(lua, "bitmap_register", lua__bitmap_register);
 	lua_register(lua, "bitmap_unregister", lua__bitmap_unregister);
+
+	// view manipulation: font
+	lua_register(lua, "draw_ch", lua__draw_ch);
+	lua_register(lua, "draw_text", lua__draw_text);
+	lua_register(lua, "draw_reg_font", lua__draw_reg_font);
 
 	// model manipulation: read access
 	lua_register(lua, "gen_vhf_lat_set", lua__gen_vhf_lat_set);

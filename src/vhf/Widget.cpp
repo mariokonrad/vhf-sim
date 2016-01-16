@@ -441,10 +441,6 @@ void Widget::set_brush(int r, int g, int b) { brush = QBrush(QColor(r, g, b)); }
 
 void Widget::set_pen(int r, int g, int b) { pen = QPen(QColor(r, g, b), 1); }
 
-void Widget::set_text_background(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
-
-void Widget::set_text_foreground(int, int, int) { qDebug() << __PRETTY_FUNCTION__; }
-
 void Widget::clear()
 {
 	painter->setBackgroundMode(Qt::OpaqueMode);
@@ -468,13 +464,6 @@ void Widget::draw_circle(int x, int y, int r)
 	painter->drawEllipse(x - r, y - r, 2 * r, 2 * r);
 }
 
-void Widget::draw_text(int, int, const std::string &, engine::View::TextAlign)
-{
-	qDebug() << __PRETTY_FUNCTION__;
-}
-
-void Widget::draw_ch(int, int, const std::string &) { qDebug() << __PRETTY_FUNCTION__; }
-
 void Widget::set_clipping_region(int x, int y, int w, int h)
 {
 	painter->setClipRect(x, y, w, h);
@@ -484,10 +473,6 @@ void Widget::clear_clipping_region()
 {
 	painter->setClipRect(0, 0, engine->get_width(), engine->get_height());
 }
-
-void Widget::register_font(int, int) { qDebug() << __PRETTY_FUNCTION__; }
-
-void Widget::set_font(int) { qDebug() << __PRETTY_FUNCTION__; }
 
 void Widget::img_load(int id, const std::string & filename)
 {
