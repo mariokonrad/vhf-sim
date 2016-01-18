@@ -24,7 +24,7 @@ static QDir device_path(const std::string & filename)
 {
 	auto app = QCoreApplication::instance();
 	return QDir{app->applicationDirPath() + "/../share/" + simradrd68::project_name + "/"
-		+ System::type().c_str() + "/" + filename.c_str()};
+		+ System::type() + "/" + filename.c_str()};
 }
 
 static engine::MouseButton mouse_qt_to_engine(Qt::MouseButton button)

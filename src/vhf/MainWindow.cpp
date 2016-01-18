@@ -175,7 +175,7 @@ void MainWindow::on_connection_open()
 	socket_close();
 	socket = new QTcpSocket(this);
 
-	const QString host = System::com_host().c_str();
+	const QString host = System::com_host();
 	const int port = System::com_port();
 
 	constexpr int max_tries = 15;
@@ -244,7 +244,7 @@ void MainWindow::on_show_gps() { gps->show(); }
 
 void MainWindow::on_vhf_preferences()
 {
-	static const std::vector<std::pair<QString, std::string>> languages = {
+	static const std::vector<std::pair<QString, QString>> languages = {
 		{tr("English"), "en_US"}, {tr("German"), "de_DE"},
 	};
 
@@ -254,9 +254,9 @@ void MainWindow::on_vhf_preferences()
 	dialog.datetime_utc->setText(System::vhf_time().str().c_str());
 	dialog.mmsi->setText(System::vhf_mmsi().str().c_str());
 	dialog.group->setText(System::vhf_group().str().c_str());
-	const std::string current = System::lang();
+	const QString current = System::lang();
 	for (auto i = 0u; i < languages.size(); ++i) {
-		dialog.language->addItem(languages[i].first, languages[i].second.c_str());
+		dialog.language->addItem(languages[i].first, languages[i].second);
 		if (current == languages[i].second)
 			dialog.language->setCurrentIndex(i);
 	}
@@ -272,7 +272,7 @@ void MainWindow::on_vhf_preferences()
 			System::vhf_time(utc);
 		System::vhf_mmsi(dialog.mmsi->text().toLong());
 		System::vhf_group(dialog.group->text().toLong());
-		System::lang(dialog.language->currentData().toString().toStdString());
+		System::lang(dialog.language->currentData().toString());
 		System::save();
 	}
 }
@@ -280,10 +280,10 @@ void MainWindow::on_vhf_preferences()
 void MainWindow::on_connection_preferences()
 {
 	ConnectionPreferences dialog(this);
-	dialog.host->setText(System::com_host().c_str());
+	dialog.host->setText(System::com_host());
 	dialog.port->setText(QString::number(System::com_port()));
 	if (dialog.exec() == QDialog::Accepted) {
-		System::com_host(dialog.host->text().toStdString());
+		System::com_host(dialog.host->text());
 		System::com_port(dialog.port->text().toLong());
 		System::save();
 	}

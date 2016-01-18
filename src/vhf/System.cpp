@@ -46,10 +46,10 @@ bool System::load()
 	if (!config)
 		return false;
 
-	sys.global.type = config->value("global/type").toString().toStdString();
-	sys.global.lang = config->value("global/lang").toString().toStdString();
+	sys.global.type = config->value("global/type").toString();
+	sys.global.lang = config->value("global/lang").toString();
 	sys.global.exam_mode = config->value("global/exam_mode").toBool();
-	sys.com.host = config->value("com/host").toString().toStdString();
+	sys.com.host = config->value("com/host").toString();
 	sys.com.port = config->value("com/port").toInt();
 	engine::Latitude::parse(sys.gps.lat, config->value("gps/lat").toString().toStdString());
 	engine::Longitude::parse(sys.gps.lon, config->value("gps/lon").toString().toStdString());
@@ -88,10 +88,10 @@ bool System::save()
 		return false;
 	config->sync();
 
-	config->setValue("global/type", sys.global.type.c_str());
-	config->setValue("global/lang", sys.global.lang.c_str());
+	config->setValue("global/type", sys.global.type);
+	config->setValue("global/lang", sys.global.lang);
 	config->setValue("global/exam_mode", sys.global.exam_mode);
-	config->setValue("com/host", sys.com.host.c_str());
+	config->setValue("com/host", sys.com.host);
 	config->setValue("com/port", sys.com.port);
 	config->setValue("gps/lat", sys.gps.lat.str().c_str());
 	config->setValue("gps/lon", sys.gps.lon.str().c_str());
@@ -141,7 +141,7 @@ bool System::sound_enabled() { return inst().sound_status; }
 
 bool System::sound_disabled() { return !inst().sound_status; }
 
-void System::lang(const std::string & lang)
+void System::lang(const QString & lang)
 {
 	System & sys = inst();
 	if (sys.global.lang != lang) {
@@ -150,7 +150,7 @@ void System::lang(const std::string & lang)
 	}
 }
 
-std::string System::lang() { return inst().global.lang; }
+QString System::lang() { return inst().global.lang; }
 
 void System::exam_mode(bool f)
 {
@@ -162,9 +162,9 @@ void System::exam_mode(bool f)
 
 bool System::exam_mode() { return inst().global.exam_mode; }
 
-std::string System::type() { return inst().global.type; }
+QString System::type() { return inst().global.type; }
 
-void System::com_host(const std::string & s)
+void System::com_host(const QString & s)
 {
 	System & sys = inst();
 	if (sys.com.host != s)
@@ -172,7 +172,7 @@ void System::com_host(const std::string & s)
 	sys.com.host = s;
 }
 
-std::string System::com_host() { return inst().com.host; }
+QString System::com_host() { return inst().com.host; }
 
 void System::com_port(short p)
 {

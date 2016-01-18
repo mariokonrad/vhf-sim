@@ -6,6 +6,7 @@
 
 #include <string>
 #include <memory>
+#include <QString>
 #include "engine/MMSI.hpp"
 #include "engine/Latitude.hpp"
 #include "engine/Longitude.hpp"
@@ -34,12 +35,12 @@ private:
 	bool _lon;
 	bool _time;
 	struct {
-		std::string type;
-		std::string lang;
+		QString type;
+		QString lang;
 		bool exam_mode;
 	} global;
 	struct {
-		std::string host;
+		QString host;
 		short port;
 	} com;
 	struct {
@@ -89,17 +90,17 @@ public:
 	// channels ---------------------------------------
 
 	// global -----------------------------------------
-	static void lang(const std::string & lang);
-	static std::string lang();
+	static void lang(const QString & lang);
+	static QString lang();
 
 	static void exam_mode(bool f);
 	static bool exam_mode();
 
-	static std::string type();
+	static QString type();
 
 	// communication ----------------------------------
-	static void com_host(const std::string & s);
-	static std::string com_host();
+	static void com_host(const QString & s);
+	static QString com_host();
 
 	static void com_port(short p);
 	static short com_port();

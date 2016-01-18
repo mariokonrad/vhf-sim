@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
 
 	// internationalization
 	QTranslator translator;
-	translator.load(simradrd68::System::lang().c_str(),
+	translator.load(simradrd68::System::lang(),
 		app.applicationDirPath() + "/../share/" + simradrd68::project_name + "/lang");
 	app.installTranslator(&translator);
 
