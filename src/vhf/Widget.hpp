@@ -1,3 +1,6 @@
+// Copyright (c) 2016 Mario Konrad
+// All Rights reserved.
+
 #ifndef __SIMRADRD68__WIDGET__HPP__
 #define __SIMRADRD68__WIDGET__HPP__
 

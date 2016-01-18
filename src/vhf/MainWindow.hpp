@@ -1,3 +1,6 @@
+// Copyright (c) 2016 Mario Konrad
+// All Rights reserved.
+
 #ifndef __RADIO_SIM__MAINWINDOW__HPP__
 #define __RADIO_SIM__MAINWINDOW__HPP__
 

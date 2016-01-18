@@ -1,3 +1,6 @@
+// Copyright (c) 2016 Mario Konrad
+// All Rights reserved.
+
 #include "Widget.hpp"
 #include <fstream>
 #include <cassert>
