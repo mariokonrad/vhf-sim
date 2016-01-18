@@ -206,7 +206,6 @@ static int lua__msg_recv(lua_State * lua)
 	Controller * controller = get_controller(lua);
 	assert(controller);
 	msg_t * m = new msg_t;
-	msg_init(*m);
 	if (controller->msg_recv(*m) < 0) {
 		delete m;
 		lua_pushboolean(lua, false);

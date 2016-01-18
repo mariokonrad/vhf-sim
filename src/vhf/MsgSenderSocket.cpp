@@ -4,7 +4,6 @@
 #include "MsgSenderSocket.hpp"
 #include <cassert>
 #include <QTcpSocket>
-#include <QDebug>
 
 namespace simradrd68
 {
@@ -18,11 +17,12 @@ MsgSenderSocket::~MsgSenderSocket() {}
 
 int MsgSenderSocket::send(const engine::msg_t & m)
 {
+	using namespace engine;
+
 	assert(sock);
 
 	engine::msg_t data = hton(m);
 	auto rc = sock->write(reinterpret_cast<const char *>(&data), sizeof(data));
-	qDebug() << __PRETTY_FUNCTION__ << "rc=" << rc << "sizeof=" << sizeof(data);
 	return rc == -1 ? -1 : 0;
 }
 }

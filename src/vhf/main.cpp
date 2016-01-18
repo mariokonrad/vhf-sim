@@ -5,9 +5,11 @@
 #include <QTranslator>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QCommandLineParser>
 #include "MainWindow.hpp"
 #include "System.hpp"
 #include "version.hpp"
+#include "engine/MMSI.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -16,12 +18,24 @@ int main(int argc, char ** argv)
 	app.setApplicationName(simradrd68::project_name);
 	app.setApplicationVersion(simradrd68::project_version);
 
+	// command line arguments
+
+	QCommandLineParser parser;
+	parser.addHelpOption();
+	parser.addVersionOption();
+	parser.addOption({"mmsi", "Specifies a non-modifable MMSI for the VHF", "mmsi"});
+	parser.process(app);
+
 	// configuration
 	QSettings config(
 		QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/vhf.conf",
 		QSettings::IniFormat);
 	simradrd68::System::init(&config);
-	simradrd68::System::load();
+
+	if (parser.isSet("mmsi")) {
+		using namespace simradrd68;
+		System::fix_vhf_mmsi(engine::MMSI{parser.value("mmsi").toStdString()});
+	}
 
 	// internationalization
 	QTranslator translator;

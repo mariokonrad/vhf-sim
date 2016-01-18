@@ -52,6 +52,7 @@ private:
 	void connect_to_controlcenter();
 	void socket_close();
 	void handle_menu_entries();
+	void data_ready();
 };
 }
 

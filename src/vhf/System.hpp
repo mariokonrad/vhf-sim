@@ -49,6 +49,10 @@ private:
 		engine::Longitude lon;
 	} gps;
 	struct {
+		bool mmsi_readonly;
+		engine::MMSI mmsi;
+	} vhf_fix;
+	struct {
 		engine::MMSI mmsi;
 		engine::MMSI group;
 		engine::Date time;
@@ -69,13 +73,12 @@ private:
 
 private:
 	static System & inst();
+	void load();
 
 public:
-	static void init(QSettings * config) { inst().config = config; }
-	static bool load();
+	static void init(QSettings * config);
 	static bool save();
 
-	static bool modified();
 	static bool vhf_lat_set();
 	static bool vhf_lon_set();
 	static bool vhf_time_set();
@@ -122,6 +125,8 @@ public:
 	// vhf --------------------------------------------
 	static void vhf_mmsi(const engine::MMSI & mmsi);
 	static engine::MMSI vhf_mmsi();
+	static void fix_vhf_mmsi(const engine::MMSI & mmsi);
+	static bool is_vhf_mmsi_fix();
 
 	static void vhf_group(const engine::MMSI & mmsi);
 	static engine::MMSI vhf_group();

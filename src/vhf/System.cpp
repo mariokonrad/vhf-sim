@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <QSettings>
+#include <QDebug>
 #include "System.hpp"
 
 namespace simradrd68
@@ -23,6 +24,8 @@ System::System()
 	global.lang = "en_US";
 	global.exam_mode = false;
 
+	vhf_fix.mmsi_readonly = false;
+
 	com.host = "localhost";
 	com.port = 9540;
 
@@ -39,43 +42,46 @@ System & System::inst()
 	return *instance;
 }
 
-bool System::load()
+void System::init(QSettings * config)
 {
-	System & sys = inst();
-	QSettings * config = sys.config;
-	if (!config)
-		return false;
+	inst().config = config;
+	inst().load();
+}
 
-	sys.global.type = config->value("global/type").toString();
-	sys.global.lang = config->value("global/lang").toString();
-	sys.global.exam_mode = config->value("global/exam_mode").toBool();
-	sys.com.host = config->value("com/host").toString();
-	sys.com.port = config->value("com/port").toInt();
-	engine::Latitude::parse(sys.gps.lat, config->value("gps/lat").toString().toStdString());
-	engine::Longitude::parse(sys.gps.lon, config->value("gps/lon").toString().toStdString());
-	engine::Date::parse(sys.gps.time, config->value("gps/time").toString().toStdString());
-	sys.vhf.mmsi = engine::MMSI{config->value("vhf/mmsi").toString().toStdString()};
-	sys.vhf.group = engine::MMSI{config->value("vhf/group").toString().toStdString()};
-	engine::Date::parse(sys.vhf.time, config->value("vhf/time").toString().toStdString());
-	engine::Latitude::parse(sys.vhf.lat, config->value("vhf/lat").toString().toStdString());
-	engine::Longitude::parse(sys.vhf.lon, config->value("vhf/lon").toString().toStdString());
-	sys.cc.mmsi = engine::MMSI{config->value("cc/mmsi").toString().toStdString()};
-	sys.cc.group = engine::MMSI{config->value("cc/group").toString().toStdString()};
-	engine::Latitude::parse(sys.cc.lat, config->value("cc/lat").toString().toStdString());
-	engine::Longitude::parse(sys.cc.lon, config->value("cc/lon").toString().toStdString());
-	engine::Date::parse(sys.cc.time, config->value("cc/time").toString().toStdString());
-	sys.cc.all_msg = config->value("cc/all_msg").toBool();
+void System::load()
+{
+	if (!config)
+		return;
+
+	global.type = config->value("global/type").toString();
+	global.lang = config->value("global/lang").toString();
+	global.exam_mode = config->value("global/exam_mode").toBool();
+	com.host = config->value("com/host").toString();
+	com.port = config->value("com/port").toInt();
+	engine::Latitude::parse(gps.lat, config->value("gps/lat").toString().toStdString());
+	engine::Longitude::parse(gps.lon, config->value("gps/lon").toString().toStdString());
+	engine::Date::parse(gps.time, config->value("gps/time").toString().toStdString());
+	vhf.mmsi = engine::MMSI{config->value("vhf/mmsi").toString().toStdString()};
+	vhf.group = engine::MMSI{config->value("vhf/group").toString().toStdString()};
+	engine::Date::parse(vhf.time, config->value("vhf/time").toString().toStdString());
+	engine::Latitude::parse(vhf.lat, config->value("vhf/lat").toString().toStdString());
+	engine::Longitude::parse(vhf.lon, config->value("vhf/lon").toString().toStdString());
+	cc.mmsi = engine::MMSI{config->value("cc/mmsi").toString().toStdString()};
+	cc.group = engine::MMSI{config->value("cc/group").toString().toStdString()};
+	engine::Latitude::parse(cc.lat, config->value("cc/lat").toString().toStdString());
+	engine::Longitude::parse(cc.lon, config->value("cc/lon").toString().toStdString());
+	engine::Date::parse(cc.time, config->value("cc/time").toString().toStdString());
+	cc.all_msg = config->value("cc/all_msg").toBool();
 	auto dir_entries = config->beginReadArray("dir");
 	for (auto i = 0; i < dir_entries; ++i) {
 		config->setArrayIndex(i);
 		std::string name = config->value("name").toString().toStdString();
 		std::string mmsi = config->value("mmsi").toString().toStdString();
-		sys.dir.emplace_back(name, mmsi);
+		dir.emplace_back(name, mmsi);
 	}
 	config->endArray();
 
 	config->sync();
-	return true;
 }
 
 bool System::save()
@@ -118,8 +124,6 @@ bool System::save()
 	sys.mod = false;
 	return true;
 }
-
-bool System::modified() { return inst().mod; }
 
 bool System::vhf_lat_set() { return inst()._lat; }
 
@@ -226,12 +230,31 @@ engine::Directory System::dir_get() { return inst().dir; }
 void System::vhf_mmsi(const engine::MMSI & mmsi)
 {
 	System & sys = inst();
+	if (sys.vhf_fix.mmsi_readonly)
+		return;
 	if (sys.vhf.mmsi != mmsi)
 		sys.mod = true;
 	sys.vhf.mmsi = mmsi;
 }
 
-engine::MMSI System::vhf_mmsi() { return inst().vhf.mmsi; }
+engine::MMSI System::vhf_mmsi()
+{
+	System & sys = inst();
+	if (sys.vhf_fix.mmsi_readonly) {
+		return sys.vhf_fix.mmsi;
+	} else {
+		return sys.vhf.mmsi;
+	}
+}
+
+void System::fix_vhf_mmsi(const engine::MMSI & mmsi)
+{
+	System & sys = inst();
+	sys.vhf_fix.mmsi_readonly = true;
+	sys.vhf_fix.mmsi = mmsi;
+}
+
+bool System::is_vhf_mmsi_fix() { return inst().vhf_fix.mmsi_readonly; }
 
 void System::vhf_group(const engine::MMSI & mmsi)
 {

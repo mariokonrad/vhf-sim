@@ -367,7 +367,6 @@ void Widget::set_msg_sender(std::unique_ptr<MsgSender> sender)
 
 		// send pulse with information to login
 		msg_t msg;
-		msg_init(msg);
 		msg.type = MSG_PULSE;
 		mmsi().str(msg.mmsi);
 		group().str(msg.group);

@@ -34,7 +34,7 @@ private:
 	void disconnected(QTcpSocket * sock);
 	void data_ready(QTcpSocket * sock);
 	void server_close();
-	void process_vhf(const engine::msg_t & msg);
+	void process_vhf(const engine::msg_t & msg, const engine::msg_t & org);
 };
 }
 

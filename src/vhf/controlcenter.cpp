@@ -74,8 +74,6 @@ engine::msg_t ControlCenter::prepare_msg()
 	using namespace engine;
 
 	msg_t m;
-	msg_init(m);
-
 	msg_set_latitude(m, System::cc_latitude().str());
 	msg_set_longitude(m, System::cc_longitude().str());
 	m.valid_time = 1;

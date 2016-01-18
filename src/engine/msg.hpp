@@ -11,10 +11,8 @@ namespace simradrd68
 {
 namespace engine
 {
-
 enum MSG_TYPE {
-	MSG_VHF = 0x0000 // normal message, default
-	,
+	MSG_VHF = 0x0000, // normal message, default
 	MSG_PULSE = 0x0001 // used to trigger 'ether'
 };
 
@@ -49,6 +47,8 @@ enum DSC_DESIGNATION {
 };
 
 struct msg_t {
+	msg_t();
+
 	uint16_t type; // type of the message
 
 	uint16_t valid_lat; // 0=invalid, 1=valid
@@ -75,7 +75,6 @@ struct msg_t {
 
 } __attribute__((packed));
 
-void msg_init(msg_t &);
 void msg_dump(const msg_t &);
 msg_t hton(const msg_t &);
 msg_t ntoh(const msg_t &);

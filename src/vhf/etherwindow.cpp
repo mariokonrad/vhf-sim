@@ -70,15 +70,12 @@ void EtherWindow::disconnected(QTcpSocket * sock)
 	model->erase(sock);
 }
 
-void EtherWindow::process_vhf(const engine::msg_t & msg)
+void EtherWindow::process_vhf(const engine::msg_t & msg, const engine::msg_t & org)
 {
 	for (auto const & peer : *model) {
 		if (peer.mmsi == msg.mmsi)
 			continue;
-		auto rc = peer.socket->write(reinterpret_cast<const char *>(&msg), sizeof(msg));
-		if (rc != sizeof(msg)) {
-			qDebug() << __PRETTY_FUNCTION__ << __LINE__ << "error, rc=" << rc;
-		}
+		peer.socket->write(reinterpret_cast<const char *>(&org), sizeof(org));
 	}
 }
 
@@ -87,21 +84,20 @@ void EtherWindow::data_ready(QTcpSocket * sock)
 	using namespace engine;
 
 	msg_t msg;
-	msg_init(msg);
 	auto rc = sock->read(reinterpret_cast<char *>(&msg), sizeof(msg));
 	if (rc != sizeof(msg)) {
 		delete sock;
 		return;
 	}
 
-	msg = ntoh(msg);
-	switch (msg.type) {
+	auto m = ntoh(msg);
+	switch (m.type) {
 		case MSG_PULSE:
-			model->insert({sock, msg.mmsi, msg.group});
+			model->insert({sock, m.mmsi, m.group});
 			break;
 
 		case MSG_VHF:
-			process_vhf(msg);
+			process_vhf(m, msg);
 			break;
 	}
 }

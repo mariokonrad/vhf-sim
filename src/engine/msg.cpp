@@ -10,8 +10,7 @@ namespace simradrd68
 {
 namespace engine
 {
-
-void msg_init(msg_t & m) { memset(&m, 0, sizeof(msg_t)); }
+msg_t::msg_t() { memset(this, 0, sizeof(msg_t)); }
 
 void msg_dump(const msg_t & m)
 {

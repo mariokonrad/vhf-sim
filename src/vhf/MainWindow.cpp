@@ -169,8 +169,6 @@ void MainWindow::on_show_buttons(bool checked) { widget->show_buttons(checked); 
 
 void MainWindow::on_connection_open()
 {
-	qDebug() << __PRETTY_FUNCTION__;
-
 	// close open socket (this should not happen, but it does not hurt)
 	socket_close();
 	socket = new QTcpSocket(this);
@@ -194,6 +192,7 @@ void MainWindow::on_connection_open()
 		// set socket as the current connection, discard the control center
 		widget->set_msg_sender(
 			std::unique_ptr<MsgSender>(new MsgSenderSocket(socket)));
+		connect(socket, &QTcpSocket::readyRead, [this]() { this->data_ready(); });
 
 		controlcenter->hide();
 	} else {
@@ -203,6 +202,23 @@ void MainWindow::on_connection_open()
 	}
 
 	handle_menu_entries();
+}
+
+void MainWindow::data_ready()
+{
+	using namespace engine;
+
+	msg_t msg;
+	auto rc = socket->read(reinterpret_cast<char *>(&msg), sizeof(msg));
+	if (rc != sizeof(msg)) {
+		return;
+	}
+	msg = ntoh(msg);
+
+	if (msg.type != engine::MSG_VHF) // ignore all uninteresing messages
+		return;
+
+	widget->process(msg);
 }
 
 void MainWindow::on_connection_close()
@@ -253,6 +269,8 @@ void MainWindow::on_vhf_preferences()
 	dialog.longitude->setText(System::vhf_longitude().str().c_str());
 	dialog.datetime_utc->setText(System::vhf_time().str().c_str());
 	dialog.mmsi->setText(System::vhf_mmsi().str().c_str());
+	dialog.mmsi->setReadOnly(System::is_vhf_mmsi_fix());
+	dialog.mmsi->setEnabled(!System::is_vhf_mmsi_fix());
 	dialog.group->setText(System::vhf_group().str().c_str());
 	const QString current = System::lang();
 	for (auto i = 0u; i < languages.size(); ++i) {
