@@ -196,6 +196,7 @@ void ControlCenter::send_confirm()
 	m.dsc.type = DSC_ACK;
 	m.dsc.recv = received_msg->dsc.recv;
 	m.dsc.designation = DSC_DES_UNDEFINED;
+	System::vhf_mmsi().str(m.dsc.mmsi);
 
 	if (MMSI(received_msg->dsc.mmsi).is_coast_station()) {
 		std::default_random_engine random_engine(device());

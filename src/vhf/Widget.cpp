@@ -451,7 +451,7 @@ void Widget::set_exam_mode(bool flag)
 	}
 }
 
-void Widget::update_view() { repaint(); }
+void Widget::update_view() { update(); }
 
 void Widget::set_background(int r, int g, int b)
 {
