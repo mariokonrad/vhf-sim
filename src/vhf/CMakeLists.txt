@@ -13,6 +13,8 @@ add_executable(vhf
 	connectionpreferences.cpp
 	gpswindow.cpp
 	controlcenter.cpp
+	PeerModel.cpp
+	etherwindow.cpp
 	${UI_HEADERS}
 	${QM_FILES}
 	)
@@ -62,51 +64,6 @@ target_link_libraries(vhf
 
 install(
 	TARGETS vhf
-	LIBRARY DESTINATION lib
-	ARCHIVE DESTINATION lib
-	RUNTIME DESTINATION bin
-	COMPONENT applications
-	)
-
-add_executable(ether
-	ether.cpp
-	System.cpp
-	PeerModel.cpp
-	etherwindow.cpp
-	${UI_HEADERS}
-	${QM_FILES}
-	)
-
-target_compile_options(ether
-	PUBLIC
-		-Wall
-		-Wextra
-		-std=c++11
-		${Qt5Core_EXECUTABLE_COMPILE_FLAGS}
-		${Qt5Gui_EXECUTABLE_COMPILE_FLAGS}
-		${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}
-	)
-
-target_include_directories(ether
-	PRIVATE
-		${CMAKE_CURRENT_BINARY_DIR}
-		${CMAKE_CURRENT_BINARY_DIR}/..
-		${CMAKE_CURRENT_SOURCE_DIR}/..
-		${Qt5Core_INCLUDE_DIRS}
-		${Qt5Gui_INCLUDE_DIRS}
-		${Qt5Widgets_INCLUDE_DIRS}
-	)
-
-target_link_libraries(ether
-	engine
-	Qt5::Core
-	Qt5::Widgets
-	Qt5::Gui
-	Qt5::Network
-	)
-
-install(
-	TARGETS ether
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
 	RUNTIME DESTINATION bin

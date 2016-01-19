@@ -18,6 +18,7 @@
 #include "controlcenter.hpp"
 #include "MsgSenderControlCenter.hpp"
 #include "MsgSenderSocket.hpp"
+#include "etherwindow.hpp"
 
 namespace simradrd68
 {
@@ -47,6 +48,10 @@ MainWindow::MainWindow()
 	controlcenter = new ControlCenter(this);
 	connect(controlcenter, &ControlCenter::send,
 		[this](const engine::msg_t & m) { this->widget->process(m); });
+
+	// ether
+
+	ether = new EtherWindow(this);
 
 	// actions
 
@@ -106,22 +111,28 @@ MainWindow::MainWindow()
 	action_exam_mode->setChecked(System::exam_mode());
 	connect(action_exam_mode, &QAction::toggled, this, &MainWindow::on_exam_mode);
 
+	auto action_comm_hub = new QAction(tr("Communication Hub..."), this);
+	connect(action_comm_hub, &QAction::triggered, this, &MainWindow::on_comm_hub);
+
 	// menubar
 
 	auto menubar = menuBar();
 
 	auto menu_file = menubar->addMenu(tr("&File"));
-	menu_file->addAction(action_open_connection);
-	menu_file->addAction(action_close_connection);
-	menu_file->addAction(action_control_center);
 	menu_file->addAction(action_show_gps);
-	menu_file->addSeparator();
 	menu_file->addAction(action_vhf_preferences);
-	menu_file->addAction(action_connection_preferences);
 	menu_file->addSeparator();
 	menu_file->addAction(action_exam_mode);
 	menu_file->addSeparator();
 	menu_file->addAction(action_exit_application);
+
+	auto menu_comm = menubar->addMenu(tr("&Communication"));
+	menu_comm->addAction(action_control_center);
+	menu_comm->addSeparator();
+	menu_comm->addAction(action_connection_preferences);
+	menu_comm->addAction(action_open_connection);
+	menu_comm->addAction(action_close_connection);
+	menu_comm->addAction(action_comm_hub);
 
 	auto menu_view = menubar->addMenu(tr("&View"));
 	menu_view->addAction(action_toggle_fullscreen);
@@ -184,14 +195,13 @@ void MainWindow::on_connection_open()
 	progress.setMinimumDuration(100);
 	progress.setRange(0, max_tries);
 	for (int i = 0; !is_connected && (i < max_tries); ++i) {
-		is_connected= socket->waitForConnected(1000);
+		is_connected = socket->waitForConnected(1000);
 		progress.setValue(i);
 	}
 
 	if (is_connected) {
 		// set socket as the current connection, discard the control center
-		widget->set_msg_sender(
-			std::unique_ptr<MsgSender>(new MsgSenderSocket(socket)));
+		widget->set_msg_sender(std::unique_ptr<MsgSender>(new MsgSenderSocket(socket)));
 		connect(socket, &QTcpSocket::readyRead, [this]() { this->data_ready(); });
 
 		controlcenter->hide();
@@ -306,6 +316,8 @@ void MainWindow::on_connection_preferences()
 		System::save();
 	}
 }
+
+void MainWindow::on_comm_hub() { ether->show(); }
 
 void MainWindow::on_exam_mode(bool checked)
 {

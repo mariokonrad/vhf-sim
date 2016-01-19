@@ -14,6 +14,7 @@ namespace simradrd68
 class Widget;
 class GPSWindow;
 class ControlCenter;
+class EtherWindow;
 
 class MainWindow : public QMainWindow
 {
@@ -38,11 +39,13 @@ private slots:
 	void on_controlcenter();
 	void on_show_gps();
 	void on_exam_mode(bool checked);
+	void on_comm_hub();
 
 private:
 	Widget * widget;
 	GPSWindow * gps;
 	ControlCenter * controlcenter;
+	EtherWindow * ether;
 	QTcpSocket * socket;
 	QAction * action_open_connection;
 	QAction * action_close_connection;
