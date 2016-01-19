@@ -9,7 +9,6 @@
 #include <QDir>
 #include <QPainter>
 #include <QKeyEvent>
-#include <QDebug>
 #include "util/Circle.hpp"
 #include "util/Rectangle.hpp"
 #include "nmea/nmea_sentence.hpp"
@@ -255,11 +254,7 @@ void Widget::show_buttons(bool flag)
 
 void Widget::engine_error(const std::string & s)
 {
-#if !defined(NDEBUG)
-	qDebug() << "ENGINE ERROR:" << s.c_str();
-#else
 	QMessageBox::critical(this, tr("Script Error"), tr("Lua error:\n%1").arg(s.c_str()));
-#endif
 }
 
 void Widget::handle_key(int code)

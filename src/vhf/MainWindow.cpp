@@ -206,8 +206,8 @@ void MainWindow::on_connection_open()
 
 		controlcenter->hide();
 	} else {
-		QMessageBox::critical(this, tr("Connection Error"),
-			tr("Unable to connecto to %1:%2").arg(host).arg(port));
+		QMessageBox::critical(
+			this, tr("Connection Error"), tr("Unable to connect to %1:%2").arg(host).arg(port));
 		socket_close();
 	}
 

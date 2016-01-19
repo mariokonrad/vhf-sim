@@ -91,10 +91,10 @@ set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
 set(CPACK_PACKAGE_VENDOR "Mario Konrad")
 set(CPACK_PACKAGE_CONTACT "Mario Konrad <mario.konrad@gmx.net>")
-set(CPACK_PACAKGE_DESCRIPTION "Radio Simulator")
+set(CPACK_PACAKGE_DESCRIPTION "Radio Simulator - Simrad-RD68")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Radio Simulator for Practicing")
 set(CPACK_MONOLITHIC_INSTALL 1)
-set(CPACK_PACKAGE_EXECUTABLES "simrad-rd68" "simrad-rd68")
+set(CPACK_PACKAGE_EXECUTABLES "vhf" "vhf")
 set(CPACK_STRIP_FILES true)
 
 # TODO: winddows packaging

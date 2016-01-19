@@ -3,7 +3,6 @@
 
 #include <cassert>
 #include <QSettings>
-#include <QDebug>
 #include "System.hpp"
 
 namespace simradrd68
@@ -52,12 +51,14 @@ void System::load()
 {
 	if (!config)
 		return;
+	if (!config->isWritable())
+		return;
 
-	global.type = config->value("global/type").toString();
-	global.lang = config->value("global/lang").toString();
-	global.exam_mode = config->value("global/exam_mode").toBool();
-	com.host = config->value("com/host").toString();
-	com.port = config->value("com/port").toInt();
+	global.type = config->value("global/type", global.type).toString();
+	global.lang = config->value("global/lang", global.lang).toString();
+	global.exam_mode = config->value("global/exam_mode", global.exam_mode).toBool();
+	com.host = config->value("com/host", com.host).toString();
+	com.port = config->value("com/port", com.port).toInt();
 	engine::Latitude::parse(gps.lat, config->value("gps/lat").toString().toStdString());
 	engine::Longitude::parse(gps.lon, config->value("gps/lon").toString().toStdString());
 	engine::Date::parse(gps.time, config->value("gps/time").toString().toStdString());
@@ -66,12 +67,12 @@ void System::load()
 	engine::Date::parse(vhf.time, config->value("vhf/time").toString().toStdString());
 	engine::Latitude::parse(vhf.lat, config->value("vhf/lat").toString().toStdString());
 	engine::Longitude::parse(vhf.lon, config->value("vhf/lon").toString().toStdString());
-	cc.mmsi = engine::MMSI{config->value("cc/mmsi").toString().toStdString()};
-	cc.group = engine::MMSI{config->value("cc/group").toString().toStdString()};
+	cc.mmsi = engine::MMSI{config->value("cc/mmsi", cc.mmsi.str().c_str()).toString().toStdString()};
+	cc.group = engine::MMSI{config->value("cc/group", cc.group.str().c_str()).toString().toStdString()};
 	engine::Latitude::parse(cc.lat, config->value("cc/lat").toString().toStdString());
 	engine::Longitude::parse(cc.lon, config->value("cc/lon").toString().toStdString());
 	engine::Date::parse(cc.time, config->value("cc/time").toString().toStdString());
-	cc.all_msg = config->value("cc/all_msg").toBool();
+	cc.all_msg = config->value("cc/all_msg", cc.all_msg).toBool();
 	auto dir_entries = config->beginReadArray("dir");
 	for (auto i = 0; i < dir_entries; ++i) {
 		config->setArrayIndex(i);
@@ -91,6 +92,8 @@ bool System::save()
 		return true;
 	QSettings * config = sys.config;
 	if (!config)
+		return false;
+	if (!config->isWritable())
 		return false;
 	config->sync();
 
