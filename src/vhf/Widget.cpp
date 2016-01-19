@@ -20,6 +20,34 @@ namespace simradrd68
 {
 namespace
 {
+struct keymap_entry {
+	engine::KeyEvent key;
+	int native_code;
+};
+
+static const std::vector<keymap_entry> keymap_entries = {
+	{engine::EVT_KEY_0, Qt::Key_0}, {engine::EVT_KEY_1, Qt::Key_1},
+	{engine::EVT_KEY_2, Qt::Key_2}, {engine::EVT_KEY_3, Qt::Key_3},
+	{engine::EVT_KEY_4, Qt::Key_4}, {engine::EVT_KEY_5, Qt::Key_5},
+	{engine::EVT_KEY_6, Qt::Key_6}, {engine::EVT_KEY_7, Qt::Key_7},
+	{engine::EVT_KEY_8, Qt::Key_8}, {engine::EVT_KEY_9, Qt::Key_9},
+	{engine::EVT_KEY_ENTER, Qt::Key_Return}, {engine::EVT_KEY_ENTER, Qt::Key_Enter},
+	{engine::EVT_KEY_ESC, Qt::Key_Escape}, {engine::EVT_KEY_F1, Qt::Key_F1},
+	{engine::EVT_KEY_F2, Qt::Key_F2}, {engine::EVT_KEY_F3, Qt::Key_F3},
+	{engine::EVT_KEY_F4, Qt::Key_F4}, {engine::EVT_KEY_F5, Qt::Key_F5},
+	{engine::EVT_KEY_F6, Qt::Key_F6}, {engine::EVT_KEY_F7, Qt::Key_F7},
+	{engine::EVT_KEY_F8, Qt::Key_F8}, {engine::EVT_KEY_F9, Qt::Key_F9},
+	{engine::EVT_KEY_F10, Qt::Key_F10}, {engine::EVT_KEY_F11, Qt::Key_F11},
+	{engine::EVT_KEY_F12, Qt::Key_F12},
+};
+
+static bool valid_key(int key)
+{
+	const auto i = std::find_if(keymap_entries.begin(), keymap_entries.end(),
+		[key](const keymap_entry & entry) { return entry.native_code == key; });
+	return i != keymap_entries.end();
+}
+
 static QDir device_path(const std::string & filename)
 {
 	auto app = QCoreApplication::instance();
@@ -122,6 +150,8 @@ void Widget::paintEvent(QPaintEvent *)
 void Widget::keyPressEvent(QKeyEvent * event)
 {
 	auto const key = event->key();
+	if (!valid_key(key))
+		return;
 	if (old_key_code != -1)
 		return;
 	old_key_code = key;
@@ -134,6 +164,8 @@ void Widget::keyPressEvent(QKeyEvent * event)
 void Widget::keyReleaseEvent(QKeyEvent * event)
 {
 	auto const key = event->key();
+	if (!valid_key(key))
+		return;
 	if (key != old_key_code)
 		return;
 	old_key_code = -1;
@@ -277,30 +309,10 @@ void Widget::bind_button_rect(
 
 void Widget::bind_key(int key, int event_press, int event_release)
 {
-	struct entry {
-		engine::KeyEvent key;
-		int native_code;
-	};
-	static const std::vector<entry> entries = {
-		{engine::EVT_KEY_0, Qt::Key_0}, {engine::EVT_KEY_1, Qt::Key_1},
-		{engine::EVT_KEY_2, Qt::Key_2}, {engine::EVT_KEY_3, Qt::Key_3},
-		{engine::EVT_KEY_4, Qt::Key_4}, {engine::EVT_KEY_5, Qt::Key_5},
-		{engine::EVT_KEY_6, Qt::Key_6}, {engine::EVT_KEY_7, Qt::Key_7},
-		{engine::EVT_KEY_8, Qt::Key_8}, {engine::EVT_KEY_9, Qt::Key_9},
-		{engine::EVT_KEY_ENTER, Qt::Key_Return}, {engine::EVT_KEY_ENTER, Qt::Key_Enter},
-		{engine::EVT_KEY_ESC, Qt::Key_Escape}, {engine::EVT_KEY_F1, Qt::Key_F1},
-		{engine::EVT_KEY_F2, Qt::Key_F2}, {engine::EVT_KEY_F3, Qt::Key_F3},
-		{engine::EVT_KEY_F4, Qt::Key_F4}, {engine::EVT_KEY_F5, Qt::Key_F5},
-		{engine::EVT_KEY_F6, Qt::Key_F6}, {engine::EVT_KEY_F7, Qt::Key_F7},
-		{engine::EVT_KEY_F8, Qt::Key_F8}, {engine::EVT_KEY_F9, Qt::Key_F9},
-		{engine::EVT_KEY_F10, Qt::Key_F10}, {engine::EVT_KEY_F11, Qt::Key_F11},
-		{engine::EVT_KEY_F12, Qt::Key_F12},
-	};
-
 	// for loop needed (without early exit), because the list above
 	// may contain duplicate entries for engine keys
 
-	for (auto const & i : entries) {
+	for (auto const & i : keymap_entries) {
 		if (i.key == key) {
 			keys.emplace(i.native_code, event_entry{event_press, event_release});
 		}
