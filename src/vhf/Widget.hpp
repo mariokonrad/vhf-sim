@@ -121,8 +121,11 @@ protected:
 	virtual void resizeEvent(QResizeEvent * event) override;
 
 private:
+	struct event_entry {
+		int pressed;
+		int released;
+	};
 	using image_map = std::map<int, QImage>;
-	using event_entry = std::pair<int, int>;
 	using key_map = std::map<int, event_entry>;
 	using mouse_entry = std::pair<std::shared_ptr<Button>, int>;
 	using button_map = std::map<mouse_entry, event_entry>;

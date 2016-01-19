@@ -110,7 +110,7 @@ void Widget::paintEvent(QPaintEvent *)
 	}
 	// draw binded buttons if desired
 	if (must_show_buttons) {
-		painter->setPen(QPen{QColor{255, 0, 0}});
+		painter->setPen(QPen{Qt::red});
 		painter->setBrush(Qt::NoBrush);
 		for (auto const & button : buttons) {
 			button.first.first->draw(*painter);
@@ -128,7 +128,7 @@ void Widget::keyPressEvent(QKeyEvent * event)
 
 	auto i = keys.find(key);
 	if (i != keys.end())
-		handle_key(i->second.first);
+		handle_key(i->second.pressed);
 }
 
 void Widget::keyReleaseEvent(QKeyEvent * event)
@@ -140,7 +140,7 @@ void Widget::keyReleaseEvent(QKeyEvent * event)
 
 	auto i = keys.find(key);
 	if (i != keys.end())
-		handle_key(i->second.second);
+		handle_key(i->second.released);
 }
 
 int Widget::press(std::shared_ptr<Button> btn, engine::MouseButton mb)
@@ -151,7 +151,7 @@ int Widget::press(std::shared_ptr<Button> btn, engine::MouseButton mb)
 	try {
 		auto i = buttons.find(mouse_entry{btn, mb});
 		if (i != buttons.end())
-			return engine->event(i->second.first);
+			return engine->event(i->second.pressed);
 	} catch (const engine::exception & e) {
 		QMessageBox::critical(
 			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
@@ -168,7 +168,7 @@ int Widget::release(std::shared_ptr<Button> btn, engine::MouseButton mb)
 	try {
 		auto i = buttons.find(mouse_entry{btn, mb});
 		if (i != buttons.end())
-			return engine->event(i->second.second);
+			return engine->event(i->second.released);
 	} catch (const engine::exception & e) {
 		QMessageBox::critical(
 			this, tr("Script Error"), tr("Lua error:\n%1").arg(e.what().c_str()));
@@ -287,19 +287,23 @@ void Widget::bind_key(int key, int event_press, int event_release)
 		{engine::EVT_KEY_4, Qt::Key_4}, {engine::EVT_KEY_5, Qt::Key_5},
 		{engine::EVT_KEY_6, Qt::Key_6}, {engine::EVT_KEY_7, Qt::Key_7},
 		{engine::EVT_KEY_8, Qt::Key_8}, {engine::EVT_KEY_9, Qt::Key_9},
-		{engine::EVT_KEY_ENTER, Qt::Key_Return}, {engine::EVT_KEY_ESC, Qt::Key_Escape},
-		{engine::EVT_KEY_F1, Qt::Key_F1}, {engine::EVT_KEY_F2, Qt::Key_F2},
-		{engine::EVT_KEY_F3, Qt::Key_F3}, {engine::EVT_KEY_F4, Qt::Key_F4},
-		{engine::EVT_KEY_F5, Qt::Key_F5}, {engine::EVT_KEY_F6, Qt::Key_F6},
-		{engine::EVT_KEY_F7, Qt::Key_F7}, {engine::EVT_KEY_F8, Qt::Key_F8},
-		{engine::EVT_KEY_F9, Qt::Key_F9}, {engine::EVT_KEY_F10, Qt::Key_F10},
-		{engine::EVT_KEY_F11, Qt::Key_F11}, {engine::EVT_KEY_F12, Qt::Key_F12},
+		{engine::EVT_KEY_ENTER, Qt::Key_Return}, {engine::EVT_KEY_ENTER, Qt::Key_Enter},
+		{engine::EVT_KEY_ESC, Qt::Key_Escape}, {engine::EVT_KEY_F1, Qt::Key_F1},
+		{engine::EVT_KEY_F2, Qt::Key_F2}, {engine::EVT_KEY_F3, Qt::Key_F3},
+		{engine::EVT_KEY_F4, Qt::Key_F4}, {engine::EVT_KEY_F5, Qt::Key_F5},
+		{engine::EVT_KEY_F6, Qt::Key_F6}, {engine::EVT_KEY_F7, Qt::Key_F7},
+		{engine::EVT_KEY_F8, Qt::Key_F8}, {engine::EVT_KEY_F9, Qt::Key_F9},
+		{engine::EVT_KEY_F10, Qt::Key_F10}, {engine::EVT_KEY_F11, Qt::Key_F11},
+		{engine::EVT_KEY_F12, Qt::Key_F12},
 	};
 
-	auto i = std::find_if(
-		entries.begin(), entries.end(), [key](const entry & e) { return key == e.key; });
-	if (i != entries.end()) {
-		keys.emplace(i->native_code, event_entry{event_press, event_release});
+	// for loop needed (without early exit), because the list above
+	// may contain duplicate entries for engine keys
+
+	for (auto const & i : entries) {
+		if (i.key == key) {
+			keys.emplace(i.native_code, event_entry{event_press, event_release});
+		}
 	}
 }
 
@@ -545,8 +549,8 @@ void Widget::draw_bitmap(
 		const int index = b.width * y;
 		for (int x = 0; x < b.width; ++x) {
 			if (b.data[index + x] == b.c) {
-				painter->drawRect(sx + (x + 1) * pixel_width, sy + (y + 1) * pixel_height,
-					pixel_width, pixel_height);
+				painter->fillRect(sx + (x + 1) * pixel_width, sy + (y + 1) * pixel_height,
+					pixel_width, pixel_height, brush);
 			}
 		}
 	}
