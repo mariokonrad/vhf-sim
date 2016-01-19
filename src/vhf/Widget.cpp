@@ -562,7 +562,7 @@ void Widget::draw_bitmap(
 		for (int x = 0; x < b.width; ++x) {
 			if (b.data[index + x] == b.c) {
 				painter->fillRect(sx + (x + 1) * pixel_width, sy + (y + 1) * pixel_height,
-					pixel_width, pixel_height, brush);
+					pixel_width, pixel_height, pen.brush());
 			}
 		}
 	}
