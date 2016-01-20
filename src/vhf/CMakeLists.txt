@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
-add_executable(simrad-rd68
+add_executable(simrad-rd68 ${GUI_TYPE}
 	main.cpp
 	MainWindow.cpp
 	Widget.cpp
@@ -18,16 +18,7 @@ add_executable(simrad-rd68
 	${UI_HEADERS}
 	${QM_FILES}
 	resources.qrc
-	)
-
-add_custom_command(TARGET simrad-rd68 POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E echo "Copy language files"
-	COMMAND ${CMAKE_COMMAND} -E copy ${QM_FILES} ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/lang/
-	)
-
-add_custom_command(TARGET simrad-rd68 POST_BUILD
-	COMMAND ${CMAKE_COMMAND} -E echo "Copy Simrad-RD68 files to: ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/"
-	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/simrad-rd68 ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/
+	resources.rc
 	)
 
 target_compile_options(simrad-rd68
@@ -72,9 +63,26 @@ install(
 	COMPONENT applications
 	)
 
+# language files
+add_custom_command(TARGET simrad-rd68 POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E echo "Copy language files"
+	COMMAND ${CMAKE_COMMAND} -E copy ${QM_FILES} ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/lang/
+	)
+
 install(
 	FILES ${QM_FILES}
 	DESTINATION share/${PROJECT_NAME}/lang
+	)
+
+# simrad-rd68 files
+add_custom_command(TARGET simrad-rd68 POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E echo "Copy Simrad-RD68 files to: ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/"
+	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/simrad-rd68 ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/
+	)
+
+install(
+	DIRECTORY "${CMAKE_SOURCE_DIR}/data/simrad-rd68"
+	DESTINATION "share/${PROJECT_NAME}"
 	)
 
 ### windows deployment
@@ -89,7 +97,25 @@ if(WIN32)
 		message(FATAL_ERROR "NOT FOUND: windeployqt")
 	endif()
 	message(STATUS "Found: ${WINDEPLOYQT}")
+
+	# install necessary libraries in binary folder
 	add_custom_command(TARGET simrad-rd68 POST_BUILD
-		COMMAND ${WINDEPLOYQT} --release $<TARGET_FILE:simrad-rd68>
+		COMMAND ${WINDEPLOYQT}
+			--release
+			--no-compiler-runtime
+			--dir ${CMAKE_BINARY_DIR}/bin
+			--verbose 0
+			$<TARGET_FILE:simrad-rd68>
 		)
+
+	# install necessary libraries
+	add_custom_command(TARGET simrad-rd68 POST_BUILD
+		COMMAND ${WINDEPLOYQT}
+			--release
+			--no-compiler-runtime
+			--dir ${CMAKE_BINARY_DIR}/qt
+			--verbose 0
+			$<TARGET_FILE:simrad-rd68>
+		)
+	install(DIRECTORY "${CMAKE_BINARY_DIR}/qt/" DESTINATION bin)
 endif()

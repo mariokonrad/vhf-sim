@@ -330,9 +330,15 @@ void MainWindow::on_exam_mode(bool checked)
 void MainWindow::on_about()
 {
 	auto app = QCoreApplication::instance();
-	QMessageBox::about(this, app->applicationName(), tr("%1\n\nVersion: %2\n\nLicense: GPL")
-														 .arg(app->applicationName())
-														 .arg(app->applicationVersion()));
+	QMessageBox::about(this, app->applicationName(),
+		tr("%1\nVersion: %2\n\n%3\n\nLicense: %4\n\ngit: %5/%6\n\nAuthor: %7")
+			.arg(app->applicationName())
+			.arg(app->applicationVersion())
+			.arg(tr("Simulation of a VHF radio for maritime purposes."))
+			.arg(project_license)
+			.arg(git_branch)
+			.arg(git_commit_hash)
+			.arg("Mario Konrad"));
 }
 
 void MainWindow::on_about_qt()

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.1)
 
 ### module and prefix path
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_CURRENT_SOURCE_DIR};${CMAKE_MODULE_PATH}")
 if(NOT DEFINED ENV{QTHOME})
 	message(FATAL_ERROR "Environment variable QTHOME not set")
 endif()
@@ -10,7 +10,8 @@ set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 
 ### information about repository and project
 include(GitInformation)
-project(simrad-rd68 VERSION 0.0.0 LANGUAGES CXX)
+project(simrad-rd68 VERSION 2.0.0 LANGUAGES CXX)
+set(PROJECT_LICENSE "GPLv3")
 
 ### compiler check
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
@@ -19,6 +20,15 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 	message(STATUS "Compiler: Clang")
 else()
 	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
+endif()
+
+### GUI options
+if(WIN32)
+	set(GUI_TYPE "WIN32")
+elseif(APPLE)
+	set(GUI_TYPE "MACOSX_BUNDLE")
+else()
+	set(GUI_TYPE "")
 endif()
 
 ### package handling
@@ -39,7 +49,6 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Multimedia REQUIRED)
 find_package(Qt5Network REQUIRED)
-find_package(Qt5Script REQUIRED)
 find_package(Qt5LinguistTools REQUIRED)
 
 ### internationalization
@@ -85,21 +94,5 @@ if(CTAGS_PATH AND CSCOPE_PATH)
 endif()
 
 ### packaging
-set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
-set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
-set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
-set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
-set(CPACK_PACKAGE_VENDOR "Mario Konrad")
-set(CPACK_PACKAGE_CONTACT "Mario Konrad <mario.konrad@gmx.net>")
-set(CPACK_PACAKGE_DESCRIPTION "Martitime Radio Simulator - Simrad-RD68")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Martitime Radio Simulator for Practicing")
-set(CPACK_MONOLITHIC_INSTALL 1)
-set(CPACK_PACKAGE_EXECUTABLES "simrad-rd68" "simrad-rd68")
-set(CPACK_STRIP_FILES true)
+include(CPack.local)
 
-# TODO: winddows packaging
-
-# TODO: debian packaging
-
-include(CPack)
