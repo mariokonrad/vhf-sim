@@ -160,8 +160,16 @@ void MainWindow::set_title()
 {
 	QString title = QCoreApplication::instance()->applicationName();
 
+	auto mmsi = System::vhf_mmsi();
+	if (mmsi == engine::MMSI{}) {
+		title += tr(" (MMSI:none)");
+	} else {
+		title += tr(" (MMSI:%1)").arg(mmsi.str().c_str());
+	}
+
 	if (System::exam_mode())
 		title += tr(" (Exam Mode)");
+
 	if (System::sound_disabled())
 		title += tr(" (Audio Off)");
 
@@ -303,6 +311,8 @@ void MainWindow::on_vhf_preferences()
 		System::vhf_group(dialog.group->text().toLong());
 		System::lang(dialog.language->currentData().toString());
 		System::save();
+
+		set_title();
 	}
 }
 
