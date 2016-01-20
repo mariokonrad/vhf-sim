@@ -279,7 +279,12 @@ void MainWindow::on_show_gps() { gps->show(); }
 
 void MainWindow::on_vhf_preferences()
 {
-	static const std::vector<std::pair<QString, QString>> languages = {
+	struct language {
+		QString text;
+		QString locale_name;
+	};
+
+	static const std::vector<language> languages = {
 		{tr("English"), "en_US"}, {tr("German"), "de_DE"},
 	};
 
@@ -293,8 +298,8 @@ void MainWindow::on_vhf_preferences()
 	dialog.group->setText(System::vhf_group().str().c_str());
 	const QString current = System::lang();
 	for (auto i = 0u; i < languages.size(); ++i) {
-		dialog.language->addItem(languages[i].first, languages[i].second);
-		if (current == languages[i].second)
+		dialog.language->addItem(languages[i].text, languages[i].locale_name);
+		if (current == languages[i].locale_name)
 			dialog.language->setCurrentIndex(i);
 	}
 	if (dialog.exec() == QDialog::Accepted) {
