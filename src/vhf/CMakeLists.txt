@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
-add_executable(vhf
+add_executable(simrad-rd68
 	main.cpp
 	MainWindow.cpp
 	Widget.cpp
@@ -19,17 +19,17 @@ add_executable(vhf
 	${QM_FILES}
 	)
 
-add_custom_command(TARGET vhf POST_BUILD
+add_custom_command(TARGET simrad-rd68 POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E echo "Copy language files"
 	COMMAND ${CMAKE_COMMAND} -E copy ${QM_FILES} ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/lang/
 	)
 
-add_custom_command(TARGET vhf POST_BUILD
+add_custom_command(TARGET simrad-rd68 POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E echo "Copy Simrad-RD68 files to: ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/"
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/simrad-rd68 ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/
 	)
 
-target_compile_options(vhf
+target_compile_options(simrad-rd68
 	PUBLIC
 		-Wall
 		-Wextra
@@ -40,7 +40,7 @@ target_compile_options(vhf
 		${Qt5Multimedia_EXECUTABLE_COMPILE_FLAGS}
 	)
 
-target_include_directories(vhf
+target_include_directories(simrad-rd68
 	PRIVATE
 		${CMAKE_CURRENT_BINARY_DIR}
 		${CMAKE_CURRENT_BINARY_DIR}/..
@@ -51,7 +51,7 @@ target_include_directories(vhf
 		${Qt5Multimedia_INCLUDE_DIRS}
 	)
 
-target_link_libraries(vhf
+target_link_libraries(simrad-rd68
 	util
 	nmea
 	engine
@@ -61,11 +61,10 @@ target_link_libraries(vhf
 	Qt5::Gui
 	Qt5::Multimedia
 	Qt5::Network
-	Qt5::Script
 	)
 
 install(
-	TARGETS vhf
+	TARGETS simrad-rd68
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
 	RUNTIME DESTINATION bin
@@ -89,7 +88,7 @@ if(WIN32)
 		message(FATAL_ERROR "NOT FOUND: windeployqt")
 	endif()
 	message(STATUS "Found: ${WINDEPLOYQT}")
-	add_custom_command(TARGET vhf POST_BUILD
-		COMMAND ${WINDEPLOYQT} --release $<TARGET_FILE:vhf>
+	add_custom_command(TARGET simrad-rd68 POST_BUILD
+		COMMAND ${WINDEPLOYQT} --release $<TARGET_FILE:simrad-rd68>
 		)
 endif()
