@@ -28,6 +28,7 @@ MainWindow::MainWindow()
 	, action_close_connection(nullptr)
 	, action_control_center(nullptr)
 {
+	setWindowIcon(QIcon(":icons/vhf-main.xpm"));
 	set_title();
 
 	// main widget

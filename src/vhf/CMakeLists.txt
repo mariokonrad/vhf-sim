@@ -17,6 +17,7 @@ add_executable(simrad-rd68
 	etherwindow.cpp
 	${UI_HEADERS}
 	${QM_FILES}
+	resources.qrc
 	)
 
 add_custom_command(TARGET simrad-rd68 POST_BUILD

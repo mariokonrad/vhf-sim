@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+	<qresource>
+		<file>icons/vhf-main.ico</file>
+		<file>icons/vhf-main.xpm</file>
+	</qresource>
+</RCC>
