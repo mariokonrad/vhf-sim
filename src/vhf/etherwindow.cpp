@@ -19,7 +19,8 @@ EtherWindow::EtherWindow(QWidget * parent)
 	port->setText("9540");
 
 	connect(button_close, &QPushButton::clicked, this, &EtherWindow::close);
-	connect(button_toggle, &QPushButton::clicked, [this](bool) { this->toggle_server(); });
+	connect(
+		button_toggle, &QPushButton::clicked, this, [this](bool) { this->toggle_server(); });
 
 	model = new PeerModel(this);
 	peer_view->setModel(model);
@@ -44,7 +45,7 @@ void EtherWindow::toggle_server()
 		server = new QTcpServer(this);
 		if (server->listen(QHostAddress::Any, port->text().toLong())) {
 			button_toggle->setText(tr("ON"));
-			connect(server, &QTcpServer::newConnection,
+			connect(server, &QTcpServer::newConnection, this,
 				[this]() { this->handle_new_connection(); });
 		} else {
 			QMessageBox::critical(this, tr("Connection Error"), tr("Unable to open server"));
@@ -57,9 +58,9 @@ void EtherWindow::handle_new_connection()
 {
 	while (server->hasPendingConnections()) {
 		auto connection = server->nextPendingConnection();
-		connect(connection, &QTcpSocket::disconnected,
+		connect(connection, &QTcpSocket::disconnected, this,
 			[this, connection]() { this->disconnected(connection); });
-		connect(connection, &QTcpSocket::readyRead,
+		connect(connection, &QTcpSocket::readyRead, this,
 			[this, connection]() { this->data_ready(connection); });
 	}
 }

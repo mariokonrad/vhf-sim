@@ -349,7 +349,7 @@ void Widget::timer_start(int id, int msec, bool one_shot)
 		return;
 	i->second->setInterval(msec);
 	i->second->setSingleShot(one_shot);
-	connect(i->second, &QTimer::timeout, [this, id]() { this->on_timer(id); });
+	connect(i->second, &QTimer::timeout, this, [this, id]() { this->on_timer(id); });
 	i->second->start();
 }
 

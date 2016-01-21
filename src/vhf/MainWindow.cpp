@@ -41,13 +41,13 @@ MainWindow::MainWindow()
 	gps = new GPSWindow(this);
 
 	// this connection has to be a lambda, because gps_process is not a slot
-	connect(gps, &GPSWindow::sentence,
+	connect(gps, &GPSWindow::sentence, this,
 		[this](const std::string & s) { this->widget->gps_process(s); });
 
 	// controlcenter
 
 	controlcenter = new ControlCenter(this);
-	connect(controlcenter, &ControlCenter::send,
+	connect(controlcenter, &ControlCenter::send, this,
 		[this](const engine::msg_t & m) { this->widget->process(m); });
 
 	// ether
@@ -211,7 +211,7 @@ void MainWindow::on_connection_open()
 	if (is_connected) {
 		// set socket as the current connection, discard the control center
 		widget->set_msg_sender(std::unique_ptr<MsgSender>(new MsgSenderSocket(socket)));
-		connect(socket, &QTcpSocket::readyRead, [this]() { this->data_ready(); });
+		connect(socket, &QTcpSocket::readyRead, this, [this]() { this->data_ready(); });
 
 		controlcenter->hide();
 	} else {
