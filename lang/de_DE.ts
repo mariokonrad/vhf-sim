@@ -2,6 +2,29 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="de_DE">
 <context>
+    <name>CommunicationsHubWindow</name>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.ui" line="20"/>
+        <source>Communications Hub</source>
+        <translation>Kommunikationszentrum</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.ui" line="28"/>
+        <source>Port:</source>
+        <translation>Port:</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.ui" line="58"/>
+        <source>OFF</source>
+        <translation>AUS</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.ui" line="89"/>
+        <source>Close</source>
+        <translation>Schliessen</translation>
+    </message>
+</context>
+<context>
     <name>ConnectionPreferences</name>
     <message>
         <location filename="../src/vhf/connectionpreferences.ui" line="17"/>
@@ -118,29 +141,6 @@
     </message>
     <message>
         <location filename="../src/vhf/controlcenter.ui" line="277"/>
-        <source>Close</source>
-        <translation>Schliessen</translation>
-    </message>
-</context>
-<context>
-    <name>EtherWindow</name>
-    <message>
-        <location filename="../src/vhf/etherwindow.ui" line="20"/>
-        <source>Communication Hub</source>
-        <translation>Kommunikationsverteilung</translation>
-    </message>
-    <message>
-        <location filename="../src/vhf/etherwindow.ui" line="28"/>
-        <source>Port:</source>
-        <translation>Port:</translation>
-    </message>
-    <message>
-        <location filename="../src/vhf/etherwindow.ui" line="58"/>
-        <source>OFF</source>
-        <translation>AUS</translation>
-    </message>
-    <message>
-        <location filename="../src/vhf/etherwindow.ui" line="89"/>
         <source>Close</source>
         <translation>Schliessen</translation>
     </message>
@@ -280,6 +280,29 @@
     </message>
 </context>
 <context>
+    <name>simradrd68::CommunicationsHubWindow</name>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.cpp" line="33"/>
+        <source>OFF</source>
+        <translation>AUS</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.cpp" line="47"/>
+        <source>ON</source>
+        <translation>EIN</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.cpp" line="51"/>
+        <source>Connection Error</source>
+        <translation>Verbindungsfehler</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/communicationshubwindow.cpp" line="51"/>
+        <source>Unable to open server</source>
+        <translation>Fehler beim öffnen des Servers</translation>
+    </message>
+</context>
+<context>
     <name>simradrd68::ControlCenter</name>
     <message>
         <location filename="../src/vhf/controlcenter.cpp" line="302"/>
@@ -351,29 +374,6 @@
         <location filename="../src/vhf/controlcenter.cpp" line="402"/>
         <source>The field &apos;%1&apos; has a invalid format.</source>
         <translation>Das Feld &apos;%1&apos; hat ein falsches Format.</translation>
-    </message>
-</context>
-<context>
-    <name>simradrd68::EtherWindow</name>
-    <message>
-        <location filename="../src/vhf/etherwindow.cpp" line="32"/>
-        <source>OFF</source>
-        <translation>AUS</translation>
-    </message>
-    <message>
-        <location filename="../src/vhf/etherwindow.cpp" line="46"/>
-        <source>ON</source>
-        <translation>EIN</translation>
-    </message>
-    <message>
-        <location filename="../src/vhf/etherwindow.cpp" line="50"/>
-        <source>Connection Error</source>
-        <translation>Verbindungsfehler</translation>
-    </message>
-    <message>
-        <location filename="../src/vhf/etherwindow.cpp" line="50"/>
-        <source>Unable to open server</source>
-        <translation>Fehler beim öffnen des Servers</translation>
     </message>
 </context>
 <context>
@@ -482,8 +482,8 @@
     </message>
     <message>
         <location filename="../src/vhf/MainWindow.cpp" line="115"/>
-        <source>Communication Hub...</source>
-        <translation>Kommunikationsverteilung...</translation>
+        <source>Communications Hub...</source>
+        <translation>Kommunikationszentrale...</translation>
     </message>
     <message>
         <location filename="../src/vhf/MainWindow.cpp" line="122"/>
@@ -506,60 +506,74 @@
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="164"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="165"/>
+        <source> (MMSI:none)</source>
+        <translation> (MMSI: keine)</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/MainWindow.cpp" line="167"/>
+        <source> (MMSI:%1)</source>
+        <translation> (MMSI:%1)</translation>
+    </message>
+    <message>
+        <location filename="../src/vhf/MainWindow.cpp" line="171"/>
         <source> (Exam Mode)</source>
         <translation> (Prüfungmodus)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="166"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="174"/>
         <source> (Audio Off)</source>
         <translation> (Audio Aus)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="211"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="219"/>
         <source>Connection Error</source>
         <translation>Verbindungsfehler</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="211"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="219"/>
         <source>Unable to connect to %1:%2</source>
         <translation>Fehler beim Verbinden zu %1:%2</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="275"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="288"/>
         <source>English</source>
         <translation>Englisch</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="275"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="288"/>
         <source>German</source>
         <translation>Deutsch</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="334"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="349"/>
         <source>%1
 Version: %2
 
-%3
+Copyright %3
 
-License: %4
+%4
 
-git: %5/%6
+License: %5
 
-Author: %7</source>
+git: %6/%7
+
+Author: %8</source>
         <translation>%1
 Version: %2
 
-%3
+Copyright %3
 
-Lizenz: %4
+%4
 
-git: %5/%6
+Lizenz: %5
 
-Autor: %7</translation>
+git: %6/%7
+
+Autor: %8</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="337"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="353"/>
         <source>Simulation of a VHF radio for maritime purposes.</source>
         <translation>Simulation eines UKW Funks für den maritimen Einsatz.</translation>
     </message>

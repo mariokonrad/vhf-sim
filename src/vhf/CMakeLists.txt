@@ -14,7 +14,7 @@ add_executable(simrad-rd68 ${GUI_TYPE}
 	gpswindow.cpp
 	controlcenter.cpp
 	PeerModel.cpp
-	etherwindow.cpp
+	communicationshubwindow.cpp
 	${UI_HEADERS}
 	${QM_FILES}
 	resources.qrc

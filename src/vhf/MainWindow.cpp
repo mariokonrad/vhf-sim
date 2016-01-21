@@ -18,7 +18,7 @@
 #include "controlcenter.hpp"
 #include "MsgSenderControlCenter.hpp"
 #include "MsgSenderSocket.hpp"
-#include "etherwindow.hpp"
+#include "communicationshubwindow.hpp"
 
 namespace simradrd68
 {
@@ -50,9 +50,9 @@ MainWindow::MainWindow()
 	connect(controlcenter, &ControlCenter::send, this,
 		[this](const engine::msg_t & m) { this->widget->process(m); });
 
-	// ether
+	// communications hub
 
-	ether = new EtherWindow(this);
+	commhub = new CommunicationsHubWindow(this);
 
 	// actions
 
@@ -112,7 +112,7 @@ MainWindow::MainWindow()
 	action_exam_mode->setChecked(System::exam_mode());
 	connect(action_exam_mode, &QAction::toggled, this, &MainWindow::on_exam_mode);
 
-	auto action_comm_hub = new QAction(tr("Communication Hub..."), this);
+	auto action_comm_hub = new QAction(tr("Communications Hub..."), this);
 	connect(action_comm_hub, &QAction::triggered, this, &MainWindow::on_comm_hub);
 
 	// menubar
@@ -333,7 +333,7 @@ void MainWindow::on_connection_preferences()
 	}
 }
 
-void MainWindow::on_comm_hub() { ether->show(); }
+void MainWindow::on_comm_hub() { commhub->show(); }
 
 void MainWindow::on_exam_mode(bool checked)
 {

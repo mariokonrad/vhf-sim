@@ -1,10 +1,10 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__ETHERWINDOW__HPP__
-#define __SIMRADRD68__ETHERWINDOW__HPP__
+#ifndef __SIMRADRD68__COMMUNICATIONSHUBWINDOW__HPP__
+#define __SIMRADRD68__COMMUNICATIONSHUBWINDOW__HPP__
 
-#include "ui_etherwindow.h"
+#include "ui_communicationshubwindow.h"
 
 class QTcpServer;
 class QTcpSocket;
@@ -13,17 +13,17 @@ namespace simradrd68
 {
 namespace engine
 {
-	struct msg_t;
+struct msg_t;
 }
 
 class PeerModel;
 
-class EtherWindow : public QWidget, public Ui::EtherWindow
+class CommunicationsHubWindow : public QWidget, public Ui::CommunicationsHubWindow
 {
 	Q_OBJECT
 
 public:
-	EtherWindow(QWidget * parent);
+	CommunicationsHubWindow(QWidget * parent);
 
 private:
 	PeerModel * model;

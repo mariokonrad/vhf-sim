@@ -1,7 +1,7 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#include "etherwindow.hpp"
+#include "communicationshubwindow.hpp"
 #include "PeerModel.hpp"
 #include "engine/msg.hpp"
 #include <QTcpServer>
@@ -10,7 +10,7 @@
 
 namespace simradrd68
 {
-EtherWindow::EtherWindow(QWidget * parent)
+CommunicationsHubWindow::CommunicationsHubWindow(QWidget * parent)
 	: QWidget(parent, Qt::Window)
 	, server(nullptr)
 {
@@ -18,7 +18,7 @@ EtherWindow::EtherWindow(QWidget * parent)
 
 	port->setText("9540");
 
-	connect(button_close, &QPushButton::clicked, this, &EtherWindow::close);
+	connect(button_close, &QPushButton::clicked, this, &CommunicationsHubWindow::close);
 	connect(
 		button_toggle, &QPushButton::clicked, this, [this](bool) { this->toggle_server(); });
 
@@ -28,7 +28,7 @@ EtherWindow::EtherWindow(QWidget * parent)
 	server_close();
 }
 
-void EtherWindow::server_close()
+void CommunicationsHubWindow::server_close()
 {
 	button_toggle->setText(tr("OFF"));
 	if (server) {
@@ -37,7 +37,7 @@ void EtherWindow::server_close()
 	}
 }
 
-void EtherWindow::toggle_server()
+void CommunicationsHubWindow::toggle_server()
 {
 	if (server) {
 		server_close();
@@ -54,7 +54,7 @@ void EtherWindow::toggle_server()
 	}
 }
 
-void EtherWindow::handle_new_connection()
+void CommunicationsHubWindow::handle_new_connection()
 {
 	while (server->hasPendingConnections()) {
 		auto connection = server->nextPendingConnection();
@@ -65,13 +65,13 @@ void EtherWindow::handle_new_connection()
 	}
 }
 
-void EtherWindow::disconnected(QTcpSocket * sock)
+void CommunicationsHubWindow::disconnected(QTcpSocket * sock)
 {
 	disconnect(sock);
 	model->erase(sock);
 }
 
-void EtherWindow::process_vhf(const engine::msg_t & msg, const engine::msg_t & org)
+void CommunicationsHubWindow::process_vhf(const engine::msg_t & msg, const engine::msg_t & org)
 {
 	for (auto const & peer : *model) {
 		if (peer.mmsi == msg.mmsi)
@@ -80,7 +80,7 @@ void EtherWindow::process_vhf(const engine::msg_t & msg, const engine::msg_t & o
 	}
 }
 
-void EtherWindow::data_ready(QTcpSocket * sock)
+void CommunicationsHubWindow::data_ready(QTcpSocket * sock)
 {
 	using namespace engine;
 
