@@ -8,7 +8,6 @@
 #include <QCloseEvent>
 #include <QTcpSocket>
 #include <QProgressDialog>
-#include <QDebug>
 #include "version.hpp"
 #include "Widget.hpp"
 #include "System.hpp"
