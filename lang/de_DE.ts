@@ -546,7 +546,7 @@
         <translation>Deutsch</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="349"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="354"/>
         <source>%1
 Version: %2
 
@@ -558,7 +558,7 @@ License: %5
 
 git: %6/%7
 
-Author: %8</source>
+Author(s): %8</source>
         <translation>%1
 Version: %2
 
@@ -570,10 +570,10 @@ Lizenz: %5
 
 git: %6/%7
 
-Autor: %8</translation>
+Autor(en): %8</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="353"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="358"/>
         <source>Simulation of a VHF radio for maritime purposes.</source>
         <translation>Simulation eines UKW Funks für den maritimen Einsatz.</translation>
     </message>

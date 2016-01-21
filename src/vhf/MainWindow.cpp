@@ -344,9 +344,14 @@ void MainWindow::on_exam_mode(bool checked)
 
 void MainWindow::on_about()
 {
+	QString authors;
+	for (auto const & author : QString{git_authors}.split(";", QString::SkipEmptyParts)) {
+		authors += "\n- " + author;
+	}
+
 	auto app = QCoreApplication::instance();
 	QMessageBox::about(this, app->applicationName(),
-		tr("%1\nVersion: %2\n\nCopyright %3\n\n%4\n\nLicense: %5\n\ngit: %6/%7\n\nAuthor: %8")
+		tr("%1\nVersion: %2\n\nCopyright %3\n\n%4\n\nLicense: %5\n\ngit: %6/%7\n\nAuthor(s): %8")
 			.arg(app->applicationName())
 			.arg(app->applicationVersion())
 			.arg("2016 Mario Konrad")
@@ -354,7 +359,7 @@ void MainWindow::on_about()
 			.arg(project_license)
 			.arg(git_branch)
 			.arg(git_commit_hash)
-			.arg("Mario Konrad"));
+			.arg(authors));
 }
 
 void MainWindow::on_about_qt()
