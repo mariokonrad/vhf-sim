@@ -1,5 +1,5 @@
-Simrad-RD68
-===========
+VHF-Sim
+=======
 
 Simulates a VHF radio for maritime navigation. The purpose of this software
 to learn and practice the handling of radio infrastructure, usually found

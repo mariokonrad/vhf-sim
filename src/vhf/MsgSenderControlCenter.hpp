@@ -1,12 +1,12 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__MSGSENDERCONTROLCENTER__HPP__
-#define __SIMRADRD68__MSGSENDERCONTROLCENTER__HPP__
+#ifndef __VHFSIM__MSGSENDERCONTROLCENTER__HPP__
+#define __VHFSIM__MSGSENDERCONTROLCENTER__HPP__
 
 #include "MsgSender.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 class ControlCenter;
 

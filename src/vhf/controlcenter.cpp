@@ -6,7 +6,7 @@
 #include <vector>
 #include <QMessageBox>
 
-namespace simradrd68
+namespace vhfsim
 {
 static const std::vector<int> work_channels
 	= {6, 8, 9, 10, 12, 13, 15, 16, 17, 67, 69, 72, 73, 77};

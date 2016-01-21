@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
-add_executable(simrad-rd68 ${GUI_TYPE}
+add_executable(vhf-sim ${GUI_TYPE}
 	main.cpp
 	MainWindow.cpp
 	Widget.cpp
@@ -21,7 +21,7 @@ add_executable(simrad-rd68 ${GUI_TYPE}
 	resources.rc
 	)
 
-target_compile_options(simrad-rd68
+target_compile_options(vhf-sim
 	PUBLIC
 		-Wall
 		-Wextra
@@ -32,7 +32,7 @@ target_compile_options(simrad-rd68
 		${Qt5Multimedia_EXECUTABLE_COMPILE_FLAGS}
 	)
 
-target_include_directories(simrad-rd68
+target_include_directories(vhf-sim
 	PRIVATE
 		${CMAKE_CURRENT_BINARY_DIR}
 		${CMAKE_CURRENT_BINARY_DIR}/..
@@ -43,7 +43,7 @@ target_include_directories(simrad-rd68
 		${Qt5Multimedia_INCLUDE_DIRS}
 	)
 
-target_link_libraries(simrad-rd68
+target_link_libraries(vhf-sim
 	util
 	nmea
 	engine
@@ -56,7 +56,7 @@ target_link_libraries(simrad-rd68
 	)
 
 install(
-	TARGETS simrad-rd68
+	TARGETS vhf-sim
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
 	RUNTIME DESTINATION bin
@@ -64,7 +64,7 @@ install(
 	)
 
 # language files
-add_custom_command(TARGET simrad-rd68 POST_BUILD
+add_custom_command(TARGET vhf-sim POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E echo "Copy language files"
 	COMMAND ${CMAKE_COMMAND} -E copy ${QM_FILES} ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/lang/
 	)
@@ -75,7 +75,7 @@ install(
 	)
 
 # simrad-rd68 files
-add_custom_command(TARGET simrad-rd68 POST_BUILD
+add_custom_command(TARGET vhf-sim POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E echo "Copy Simrad-RD68 files to: ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/"
 	COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/simrad-rd68 ${CMAKE_BINARY_DIR}/share/${PROJECT_NAME}/simrad-rd68/
 	)
@@ -99,21 +99,21 @@ if(WIN32)
 	message(STATUS "Found: ${WINDEPLOYQT}")
 
 	# install necessary libraries in binary folder
-	add_custom_command(TARGET simrad-rd68 POST_BUILD
+	add_custom_command(TARGET vhf-sim POST_BUILD
 		COMMAND ${WINDEPLOYQT}
 			--release
 			--dir ${CMAKE_BINARY_DIR}/bin
 			--verbose 0
-			$<TARGET_FILE:simrad-rd68>
+			$<TARGET_FILE:vhf-sim>
 		)
 
 	# install necessary libraries
-	add_custom_command(TARGET simrad-rd68 POST_BUILD
+	add_custom_command(TARGET vhf-sim POST_BUILD
 		COMMAND ${WINDEPLOYQT}
 			--release
 			--dir ${CMAKE_BINARY_DIR}/qt
 			--verbose 0
-			$<TARGET_FILE:simrad-rd68>
+			$<TARGET_FILE:vhf-sim>
 		)
 	install(DIRECTORY "${CMAKE_BINARY_DIR}/qt/" DESTINATION bin)
 endif()

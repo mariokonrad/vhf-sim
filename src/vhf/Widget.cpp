@@ -15,7 +15,7 @@
 #include "System.hpp"
 #include "version.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace
 {
@@ -50,7 +50,7 @@ static bool valid_key(int key)
 static QDir device_path(const std::string & filename)
 {
 	auto app = QCoreApplication::instance();
-	return QDir{app->applicationDirPath() + "/../share/" + simradrd68::project_name + "/"
+	return QDir{app->applicationDirPath() + "/../share/" + vhfsim::project_name + "/"
 		+ System::type() + "/" + filename.c_str()};
 }
 

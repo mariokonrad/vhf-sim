@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__WIDGET__HPP__
-#define __SIMRADRD68__WIDGET__HPP__
+#ifndef __VHFSIM__WIDGET__HPP__
+#define __VHFSIM__WIDGET__HPP__
 
 #include <memory>
 #include <map>
@@ -20,7 +20,7 @@
 #include "engine/ErrorWriter.hpp"
 #include "MsgSender.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 class Widget : public QWidget,
 			   virtual public engine::View,

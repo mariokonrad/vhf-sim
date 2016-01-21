@@ -10,7 +10,7 @@
 #include "Controller.hpp"
 #include "ErrorWriter.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {
@@ -1267,7 +1267,7 @@ void Engine::init(const std::string & script)
 		std::string s = lua_tostring(lua, -1);
 		lua_pop(lua, 1);
 		write_error(s);
-		throw simradrd68::engine::exception(s);
+		throw vhfsim::engine::exception(s);
 	}
 }
 
@@ -1289,7 +1289,7 @@ int Engine::event(int event)
 		std::string s = lua_tostring(lua, -1);
 		lua_pop(lua, 1);
 		write_error(s);
-		throw simradrd68::engine::exception(s);
+		throw vhfsim::engine::exception(s);
 	}
 	result = luaL_checkinteger(lua, -1);
 	lua_pop(lua, 1);

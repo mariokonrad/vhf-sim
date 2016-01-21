@@ -2,9 +2,8 @@
 // All Rights reserved.
 
 #include "PeerModel.hpp"
-#include <QDebug>
 
-namespace simradrd68
+namespace vhfsim
 {
 PeerModel::PeerModel(QObject * parent)
 	: QAbstractItemModel(parent)

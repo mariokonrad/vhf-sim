@@ -4,7 +4,7 @@
 #include "Angle.hpp"
 #include <cstring>
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {

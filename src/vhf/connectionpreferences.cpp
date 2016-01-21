@@ -3,7 +3,7 @@
 
 #include "connectionpreferences.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 ConnectionPreferences::ConnectionPreferences(QWidget * parent)
 	: QDialog(parent)

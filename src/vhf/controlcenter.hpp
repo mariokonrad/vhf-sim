@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__CONTROLCENTER__HPP__
-#define __SIMRADRD68__CONTROLCENTER__HPP__
+#ifndef __VHFSIM__CONTROLCENTER__HPP__
+#define __VHFSIM__CONTROLCENTER__HPP__
 
 #include "ui_controlcenter.h"
 #include "engine/msg.hpp"
@@ -14,7 +14,7 @@ namespace engine
 struct msg_t;
 }
 
-namespace simradrd68
+namespace vhfsim
 {
 class ControlCenter : public QWidget, public Ui::ControlCenter
 {

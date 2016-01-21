@@ -1,15 +1,15 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __RADIO_SIM__MAINWINDOW__HPP__
-#define __RADIO_SIM__MAINWINDOW__HPP__
+#ifndef __VHFSIM__MAINWINDOW__HPP__
+#define __VHFSIM__MAINWINDOW__HPP__
 
 #include <QMainWindow>
 
 class QTcpSocket;
 class QAction;
 
-namespace simradrd68
+namespace vhfsim
 {
 class Widget;
 class GPSWindow;

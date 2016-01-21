@@ -1,14 +1,14 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__GPSWINDOW__HPP__
-#define __SIMRADRD68__GPSWINDOW__HPP__
+#ifndef __VHFSIM__GPSWINDOW__HPP__
+#define __VHFSIM__GPSWINDOW__HPP__
 
 #include "ui_gpswindow.h"
 
 class QTimer;
 
-namespace simradrd68
+namespace vhfsim
 {
 class GPSWindow : public QWidget, public Ui::GPSWindow
 {

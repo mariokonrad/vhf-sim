@@ -1,12 +1,12 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__RECTANGLE__HPP__
-#define __SIMRADRD68__RECTANGLE__HPP__
+#ifndef __VHFSIM__RECTANGLE__HPP__
+#define __VHFSIM__RECTANGLE__HPP__
 
 #include "Button.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 class Rectangle : public Button
 {

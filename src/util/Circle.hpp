@@ -1,12 +1,12 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__CIRCLE__HPP__
-#define __SIMRADRD68__CIRCLE__HPP__
+#ifndef __VHFSIM__CIRCLE__HPP__
+#define __VHFSIM__CIRCLE__HPP__
 
 #include "Button.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 class Circle : public Button
 {

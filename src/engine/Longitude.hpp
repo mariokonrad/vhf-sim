@@ -1,23 +1,22 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__ENGINE__LONGITUDE__HPP__
-#define __SIMRADRD68__ENGINE__LONGITUDE__HPP__
+#ifndef __VHFSIM__ENGINE__LONGITUDE__HPP__
+#define __VHFSIM__ENGINE__LONGITUDE__HPP__
 
 #include "Angle.hpp"
 #include "Parser.hpp"
 #include <cmath>
 #include <cstdio>
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {
-
 class Longitude : public Angle
 {
 private:
-	class Parser : public ::simradrd68::engine::Parser
+	class Parser : public ::vhfsim::engine::Parser
 	{
 	public:
 		typedef value_t Result;
@@ -27,7 +26,7 @@ private:
 
 	public:
 		Parser(Scanner & scan, Result & result)
-			: ::simradrd68::engine::Parser(scan)
+			: ::vhfsim::engine::Parser(scan)
 			, result(result)
 		{
 		}

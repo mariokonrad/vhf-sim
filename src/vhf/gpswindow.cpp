@@ -7,7 +7,7 @@
 #include <QMessageBox>
 #include <QTimer>
 
-namespace simradrd68
+namespace vhfsim
 {
 GPSWindow::GPSWindow(QWidget * parent)
 	: QWidget(parent, Qt::Window)

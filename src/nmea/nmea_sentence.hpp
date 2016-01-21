@@ -11,7 +11,6 @@
 
 namespace nmea
 {
-
 class RMC
 {
 public:
@@ -33,12 +32,12 @@ public:
 	static bool set(RMC & d, const Fields &);
 	bool set(const Fields &);
 	std::string str() const;
-	void set(const simradrd68::engine::Date &);
-	void set(const simradrd68::engine::Latitude &);
-	void set(const simradrd68::engine::Longitude &);
-	bool get(simradrd68::engine::Date &);
-	bool get(simradrd68::engine::Latitude &);
-	bool get(simradrd68::engine::Longitude &);
+	void set(const vhfsim::engine::Date &);
+	void set(const vhfsim::engine::Latitude &);
+	void set(const vhfsim::engine::Longitude &);
+	bool get(vhfsim::engine::Date &);
+	bool get(vhfsim::engine::Latitude &);
+	bool get(vhfsim::engine::Longitude &);
 };
 }
 

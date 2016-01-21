@@ -6,7 +6,7 @@
 #include <cstring>
 #include <cstdio>
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {

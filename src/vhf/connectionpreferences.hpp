@@ -1,12 +1,12 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__CONNECTIONPREFERENCES__HPP__
-#define __SIMRADRD68__CONNECTIONPREFERENCES__HPP__
+#ifndef __VHFSIM__CONNECTIONPREFERENCES__HPP__
+#define __VHFSIM__CONNECTIONPREFERENCES__HPP__
 
 #include "ui_connectionpreferences.h"
 
-namespace simradrd68
+namespace vhfsim
 {
 class ConnectionPreferences : public QDialog, public Ui::ConnectionPreferences
 {

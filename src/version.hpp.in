@@ -1,7 +1,7 @@
-#ifndef __RADIO_SIM__VERISION__HPP__
-#define __RADIO_SIM__VERISION__HPP__
+#ifndef __VHFSIM__VERISION__HPP__
+#define __VHFSIM__VERISION__HPP__
 
-namespace simradrd68
+namespace vhfsim
 {
 constexpr auto project_name = "@PROJECT_NAME@";
 constexpr auto project_version = "@PROJECT_VERSION@";
@@ -12,6 +12,7 @@ constexpr auto project_license = "@PROJECT_LICENSE@";
 
 constexpr auto git_branch = "@GIT_BRANCH@";
 constexpr auto git_commit_hash = "@GIT_COMMIT_HASH@";
+constexpr auto git_authors = "@GIT_AUTHORS@";
 }
 
 #endif

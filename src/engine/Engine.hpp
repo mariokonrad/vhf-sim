@@ -1,14 +1,14 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__ENGINE__ENGINE__HPP__
-#define __SIMRADRD68__ENGINE__ENGINE__HPP__
+#ifndef __VHFSIM__ENGINE__ENGINE__HPP__
+#define __VHFSIM__ENGINE__ENGINE__HPP__
 
 #include <string>
 
 struct lua_State;
 
-namespace simradrd68 {
+namespace vhfsim {
 namespace engine {
 
 class View;
@@ -101,6 +101,7 @@ public:
 
 	static std::string get_lua_version();
 };
-}}
+}
+}
 
 #endif

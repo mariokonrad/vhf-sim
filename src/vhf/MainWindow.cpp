@@ -20,7 +20,7 @@
 #include "MsgSenderSocket.hpp"
 #include "communicationshubwindow.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 MainWindow::MainWindow()
 	: socket(nullptr)

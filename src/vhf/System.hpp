@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__SYSTEM__HPP__
-#define __SIMRADRD68__SYSTEM__HPP__
+#ifndef __VHFSIM__SYSTEM__HPP__
+#define __VHFSIM__SYSTEM__HPP__
 
 #include <string>
 #include <memory>
@@ -15,7 +15,7 @@
 
 class QSettings;
 
-namespace simradrd68
+namespace vhfsim
 {
 class System
 {

@@ -1,12 +1,12 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__MSGSENDER__HPP__
-#define __SIMRADRD68__MSGSENDER__HPP__
+#ifndef __VHFSIM__MSGSENDER__HPP__
+#define __VHFSIM__MSGSENDER__HPP__
 
 #include "engine/msg.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 class MsgSender
 {

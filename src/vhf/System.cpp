@@ -5,7 +5,7 @@
 #include <QSettings>
 #include "System.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 std::unique_ptr<System> System::instance;
 

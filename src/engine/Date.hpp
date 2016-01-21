@@ -1,14 +1,14 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHF__ENGINE__DATE__HPP__
-#define __VHF__ENGINE__DATE__HPP__
+#ifndef __VHFSIM__ENGINE__DATE__HPP__
+#define __VHFSIM__ENGINE__DATE__HPP__
 
 #include <string>
 #include <cstdlib>
 #include "Parser.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {
@@ -25,14 +25,14 @@ private:
 	};
 
 private:
-	class Parser : public ::simradrd68::engine::Parser
+	class Parser : public ::vhfsim::engine::Parser
 	{
 	private:
 		Time & result;
 
 	public:
 		Parser(Scanner & scan, Time & result)
-			: ::simradrd68::engine::Parser(scan)
+			: ::vhfsim::engine::Parser(scan)
 			, result(result)
 		{
 		}

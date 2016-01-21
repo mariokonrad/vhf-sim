@@ -4,7 +4,7 @@
 #include "MsgSenderControlCenter.hpp"
 #include "controlcenter.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 MsgSenderControlCenter::MsgSenderControlCenter(ControlCenter * cc)
 	: control_center(cc)

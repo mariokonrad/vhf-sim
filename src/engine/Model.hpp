@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__ENGINE__MODEL__HPP__
-#define __SIMRADRD68__ENGINE__MODEL__HPP__
+#ifndef __VHFSIM__ENGINE__MODEL__HPP__
+#define __VHFSIM__ENGINE__MODEL__HPP__
 
 #include "MMSI.hpp"
 #include "Latitude.hpp"
@@ -10,7 +10,7 @@
 #include "Date.hpp"
 #include "Directory.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {

@@ -10,7 +10,7 @@ set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 
 ### information about repository and project
 include(GitInformation)
-project(simrad-rd68 VERSION 2.0.0 LANGUAGES CXX)
+project(vhf-sim VERSION 2.0.0 LANGUAGES CXX)
 set(PROJECT_LICENSE "GPLv3")
 
 ### compiler check

@@ -280,7 +280,7 @@
     </message>
 </context>
 <context>
-    <name>simradrd68::CommunicationsHubWindow</name>
+    <name>vhfsim::CommunicationsHubWindow</name>
     <message>
         <location filename="../src/vhf/communicationshubwindow.cpp" line="33"/>
         <source>OFF</source>
@@ -303,7 +303,7 @@
     </message>
 </context>
 <context>
-    <name>simradrd68::ControlCenter</name>
+    <name>vhfsim::ControlCenter</name>
     <message>
         <location filename="../src/vhf/controlcenter.cpp" line="302"/>
         <source>Routine Call</source>
@@ -377,7 +377,7 @@
     </message>
 </context>
 <context>
-    <name>simradrd68::GPSWindow</name>
+    <name>vhfsim::GPSWindow</name>
     <message>
         <location filename="../src/vhf/gpswindow.cpp" line="42"/>
         <location filename="../src/vhf/gpswindow.cpp" line="55"/>
@@ -404,7 +404,7 @@
     </message>
 </context>
 <context>
-    <name>simradrd68::MainWindow</name>
+    <name>vhfsim::MainWindow</name>
     <message>
         <location filename="../src/vhf/MainWindow.cpp" line="59"/>
         <source>About</source>
@@ -579,7 +579,7 @@ Autor: %8</translation>
     </message>
 </context>
 <context>
-    <name>simradrd68::Widget</name>
+    <name>vhfsim::Widget</name>
     <message>
         <location filename="../src/vhf/Widget.cpp" line="100"/>
         <location filename="../src/vhf/Widget.cpp" line="135"/>

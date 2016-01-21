@@ -4,7 +4,7 @@
 #include "Circle.hpp"
 #include <QPainter>
 
-namespace simradrd68
+namespace vhfsim
 {
 template <typename T> static inline T sqr(const T & a) { return a * a; }
 

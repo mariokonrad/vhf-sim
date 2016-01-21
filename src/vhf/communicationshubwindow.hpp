@@ -1,15 +1,15 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__COMMUNICATIONSHUBWINDOW__HPP__
-#define __SIMRADRD68__COMMUNICATIONSHUBWINDOW__HPP__
+#ifndef __VHFSIM__COMMUNICATIONSHUBWINDOW__HPP__
+#define __VHFSIM__COMMUNICATIONSHUBWINDOW__HPP__
 
 #include "ui_communicationshubwindow.h"
 
 class QTcpServer;
 class QTcpSocket;
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {

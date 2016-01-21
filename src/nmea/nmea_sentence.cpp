@@ -75,7 +75,7 @@ bool RMC::set(RMC & d, const Fields & f)
 
 bool RMC::set(const Fields & f) { return set(*this, f); }
 
-void RMC::set(const simradrd68::engine::Date & d)
+void RMC::set(const vhfsim::engine::Date & d)
 {
 	char buf[8];
 
@@ -90,40 +90,40 @@ void RMC::set(const simradrd68::engine::Date & d)
 	date = buf;
 }
 
-void RMC::set(const simradrd68::engine::Latitude & l)
+void RMC::set(const vhfsim::engine::Latitude & l)
 {
 	lat = static_cast<float>(l.deg()) * 100.0f + l.min();
 	lat_h = l.hem();
 }
 
-void RMC::set(const simradrd68::engine::Longitude & l)
+void RMC::set(const vhfsim::engine::Longitude & l)
 {
 	lon = static_cast<float>(l.deg()) * 100.0f + l.min();
 	lon_h = l.hem();
 }
 
-bool RMC::get(simradrd68::engine::Date & d)
+bool RMC::get(vhfsim::engine::Date & d)
 {
 	unsigned long vd = strtoul(date.c_str(), 0, 10); // "ddmmyy"
 	unsigned long vt = strtoul(time.c_str(), 0, 10); // "hhmmss"
-	d = simradrd68::engine::Date((vd % 100) + 2000, (vd / 100) % 100, (vd / 10000) % 100,
+	d = vhfsim::engine::Date((vd % 100) + 2000, (vd / 100) % 100, (vd / 10000) % 100,
 		(vt / 10000) % 100, (vt / 100) % 100, (vt % 100));
 	return true;
 }
 
-bool RMC::get(simradrd68::engine::Latitude & l)
+bool RMC::get(vhfsim::engine::Latitude & l)
 {
 	unsigned int deg = static_cast<unsigned int>(floor(lat / 100.0));
 	unsigned int min = static_cast<unsigned int>(floor(fmod(lat, 100.0)));
-	l = simradrd68::engine::Latitude(lat_h, deg, min); // ignoring seconds
+	l = vhfsim::engine::Latitude(lat_h, deg, min); // ignoring seconds
 	return true;
 }
 
-bool RMC::get(simradrd68::engine::Longitude & l)
+bool RMC::get(vhfsim::engine::Longitude & l)
 {
 	unsigned int deg = static_cast<unsigned int>(floor(lon / 100.0));
 	unsigned int min = static_cast<unsigned int>(floor(fmod(lon, 100.0)));
-	l = simradrd68::engine::Longitude(lon_h, deg, min); // ignoring seconds
+	l = vhfsim::engine::Longitude(lon_h, deg, min); // ignoring seconds
 	return true;
 }
 }

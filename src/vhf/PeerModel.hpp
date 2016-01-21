@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__PEERMODEL__HPP__
-#define __SIMRADRD68__PEERMODEL__HPP__
+#ifndef __VHFSIM__PEERMODEL__HPP__
+#define __VHFSIM__PEERMODEL__HPP__
 
 #include <vector>
 #include <QAbstractItemModel>
@@ -10,7 +10,7 @@
 
 class QTcpSocket;
 
-namespace simradrd68
+namespace vhfsim
 {
 class PeerModel : public QAbstractItemModel
 {

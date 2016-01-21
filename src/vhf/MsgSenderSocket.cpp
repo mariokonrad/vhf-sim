@@ -5,7 +5,7 @@
 #include <cassert>
 #include <QTcpSocket>
 
-namespace simradrd68
+namespace vhfsim
 {
 MsgSenderSocket::MsgSenderSocket(QTcpSocket * s)
 	: sock(s)

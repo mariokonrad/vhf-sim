@@ -1,17 +1,16 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__ENGINE__PARSER__HPP__
-#define __SIMRADRD68__ENGINE__PARSER__HPP__
+#ifndef __VHFSIM__ENGINE__PARSER__HPP__
+#define __VHFSIM__ENGINE__PARSER__HPP__
 
 #include "Scanner.hpp"
 #include <limits.h>
 
-namespace simradrd68
+namespace vhfsim
 {
 namespace engine
 {
-
 class Parser
 {
 public:

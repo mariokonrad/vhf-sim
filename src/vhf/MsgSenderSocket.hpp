@@ -1,15 +1,15 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __SIMRADRD68__MSGSENDERSOCKET__HPP__
-#define __SIMRADRD68__MSGSENDERSOCKET__HPP__
+#ifndef __VHFSIM__MSGSENDERSOCKET__HPP__
+#define __VHFSIM__MSGSENDERSOCKET__HPP__
 
 #include "MsgSender.hpp"
 #include "engine/msg.hpp"
 
 class QTcpSocket;
 
-namespace simradrd68
+namespace vhfsim
 {
 class MsgSenderSocket : public MsgSender
 {

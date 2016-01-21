@@ -3,7 +3,7 @@
 
 #include "vhfpreferences.hpp"
 
-namespace simradrd68
+namespace vhfsim
 {
 VHFPreferences::VHFPreferences(QWidget * parent)
 	: QDialog(parent)

@@ -4,7 +4,7 @@
 #include "Rectangle.hpp"
 #include <QPainter>
 
-namespace simradrd68
+namespace vhfsim
 {
 Rectangle::Rectangle(float x0, float y0, float x1, float y1)
 	: x0(x0)

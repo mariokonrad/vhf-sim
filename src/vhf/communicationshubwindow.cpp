@@ -8,7 +8,7 @@
 #include <QTcpSocket>
 #include <QMessageBox>
 
-namespace simradrd68
+namespace vhfsim
 {
 CommunicationsHubWindow::CommunicationsHubWindow(QWidget * parent)
 	: QWidget(parent, Qt::Window)

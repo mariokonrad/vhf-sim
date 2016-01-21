@@ -15,8 +15,8 @@ int main(int argc, char ** argv)
 {
 	// application
 	QApplication app(argc, argv);
-	app.setApplicationName(simradrd68::project_name);
-	app.setApplicationVersion(simradrd68::project_version);
+	app.setApplicationName(vhfsim::project_name);
+	app.setApplicationVersion(vhfsim::project_version);
 
 	// command line arguments
 
@@ -30,25 +30,25 @@ int main(int argc, char ** argv)
 	QSettings config(
 		QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/vhf.conf",
 		QSettings::IniFormat);
-	simradrd68::System::init(&config);
+	vhfsim::System::init(&config);
 
 	if (parser.isSet("mmsi")) {
-		using namespace simradrd68;
+		using namespace vhfsim;
 		System::fix_vhf_mmsi(engine::MMSI{parser.value("mmsi").toStdString()});
 	}
 
 	// internationalization
 	QTranslator translator;
-	translator.load(simradrd68::System::lang(),
-		app.applicationDirPath() + "/../share/" + simradrd68::project_name + "/lang");
+	translator.load(vhfsim::System::lang(),
+		app.applicationDirPath() + "/../share/" + vhfsim::project_name + "/lang");
 	app.installTranslator(&translator);
 
 	// run the application
-	simradrd68::MainWindow win;
+	vhfsim::MainWindow win;
 	win.show();
 	auto rc = app.exec();
 
 	// cleanup
-	simradrd68::System::save();
+	vhfsim::System::save();
 	return rc;
 }

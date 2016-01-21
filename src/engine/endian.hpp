@@ -32,7 +32,6 @@
 
 namespace endian
 {
-
 template <typename T> inline T swap_bytes(T v)
 {
 	union {
