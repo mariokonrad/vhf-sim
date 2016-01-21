@@ -102,7 +102,6 @@ if(WIN32)
 	add_custom_command(TARGET simrad-rd68 POST_BUILD
 		COMMAND ${WINDEPLOYQT}
 			--release
-			--no-compiler-runtime
 			--dir ${CMAKE_BINARY_DIR}/bin
 			--verbose 0
 			$<TARGET_FILE:simrad-rd68>
@@ -112,7 +111,6 @@ if(WIN32)
 	add_custom_command(TARGET simrad-rd68 POST_BUILD
 		COMMAND ${WINDEPLOYQT}
 			--release
-			--no-compiler-runtime
 			--dir ${CMAKE_BINARY_DIR}/qt
 			--verbose 0
 			$<TARGET_FILE:simrad-rd68>
