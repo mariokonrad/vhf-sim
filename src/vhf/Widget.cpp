@@ -9,8 +9,8 @@
 #include <QDir>
 #include <QPainter>
 #include <QKeyEvent>
-#include "util/Circle.hpp"
-#include "util/Rectangle.hpp"
+#include "Circle.hpp"
+#include "Rectangle.hpp"
 #include "nmea/nmea_sentence.hpp"
 #include "System.hpp"
 #include "version.hpp"

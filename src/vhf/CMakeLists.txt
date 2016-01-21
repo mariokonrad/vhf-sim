@@ -4,6 +4,8 @@ qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
 add_executable(vhf-sim ${GUI_TYPE}
 	main.cpp
+	Circle.cpp
+	Rectangle.cpp
 	MainWindow.cpp
 	Widget.cpp
 	System.cpp
@@ -44,7 +46,6 @@ target_include_directories(vhf-sim
 	)
 
 target_link_libraries(vhf-sim
-	util
 	nmea
 	engine
 	lua

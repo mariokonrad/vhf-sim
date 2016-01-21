@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.1)
 add_subdirectory(lua)
 add_subdirectory(engine)
 add_subdirectory(nmea)
-add_subdirectory(util)
 add_subdirectory(vhf)
 
 configure_file(

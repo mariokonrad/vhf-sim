@@ -12,7 +12,7 @@
 #include <QSoundEffect>
 #include <QTimer>
 #include <QPen>
-#include "util/Button.hpp"
+#include "Button.hpp"
 #include "engine/Engine.hpp"
 #include "engine/View.hpp"
 #include "engine/Model.hpp"
