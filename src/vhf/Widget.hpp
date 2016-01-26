@@ -35,6 +35,7 @@ public:
 
 	void show_buttons(bool);
 	void set_msg_sender(std::unique_ptr<MsgSender> sender);
+	std::string get_vhf_version() const;
 
 public: // error writer
 	virtual void engine_error(const std::string &) override;

@@ -406,147 +406,147 @@
 <context>
     <name>vhfsim::MainWindow</name>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="59"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="58"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="63"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="62"/>
         <source>About Qt</source>
         <translation>Über Qt</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="64"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="63"/>
         <source>Shows information about Qt</source>
         <translation>Zeigt Informationen über Qt</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="67"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="66"/>
         <source>E&amp;xit</source>
         <translation>B&amp;eenden</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="68"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="67"/>
         <source>Closes the application</source>
         <translation>Beendet das Programm</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="72"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="71"/>
         <source>Fullscreen</source>
         <translation>Vollbild</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="73"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="72"/>
         <source>Shows the window in fullscreen</source>
         <translation>Schaltet das Programm in den Vollbildmodus</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="80"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="79"/>
         <source>Show Buttons</source>
         <translation>Zeige Schaltflächen</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="85"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="84"/>
         <source>Open Connection...</source>
         <translation>Öffne Verbindung...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="89"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="88"/>
         <source>Close Connection</source>
         <translation>Verbindung schliessen</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="93"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="92"/>
         <source>Control Center...</source>
         <translation>Kontrolzentrum...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="97"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="96"/>
         <source>GPS...</source>
         <translation>GPS...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="101"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="100"/>
         <source>VHF Preferences...</source>
         <translation>VHF Einstellungen...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="105"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="104"/>
         <source>Connection Preferences...</source>
         <translation>Verbindungseinstellungen...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="110"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="109"/>
         <source>Exam Mode</source>
         <translation>Prüfungsmodus</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="115"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="114"/>
         <source>Communications Hub...</source>
         <translation>Kommunikationszentrale...</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="122"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="121"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="130"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="129"/>
         <source>&amp;Communication</source>
         <translation>&amp;Kommunikation</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="138"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="137"/>
         <source>&amp;View</source>
         <translation>&amp;Anzeige</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="142"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="141"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="165"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="164"/>
         <source> (MMSI:none)</source>
         <translation> (MMSI: keine)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="167"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="166"/>
         <source> (MMSI:%1)</source>
         <translation> (MMSI:%1)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="171"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="170"/>
         <source> (Exam Mode)</source>
         <translation> (Prüfungmodus)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="174"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="173"/>
         <source> (Audio Off)</source>
         <translation> (Audio Aus)</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="219"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="218"/>
         <source>Connection Error</source>
         <translation>Verbindungsfehler</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="219"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="218"/>
         <source>Unable to connect to %1:%2</source>
         <translation>Fehler beim Verbinden zu %1:%2</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="288"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="287"/>
         <source>English</source>
         <translation>Englisch</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="288"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="287"/>
         <source>German</source>
         <translation>Deutsch</translation>
     </message>
     <message>
-        <location filename="../src/vhf/MainWindow.cpp" line="354"/>
+        <location filename="../src/vhf/MainWindow.cpp" line="353"/>
         <source>%1
 Version: %2
 
@@ -588,9 +588,9 @@ Autor(en): %8</translation>
         <location filename="../src/vhf/Widget.cpp" line="257"/>
         <location filename="../src/vhf/Widget.cpp" line="267"/>
         <location filename="../src/vhf/Widget.cpp" line="323"/>
-        <location filename="../src/vhf/Widget.cpp" line="401"/>
-        <location filename="../src/vhf/Widget.cpp" line="442"/>
-        <location filename="../src/vhf/Widget.cpp" line="456"/>
+        <location filename="../src/vhf/Widget.cpp" line="406"/>
+        <location filename="../src/vhf/Widget.cpp" line="447"/>
+        <location filename="../src/vhf/Widget.cpp" line="461"/>
         <source>Script Error</source>
         <translation>Script Fehler</translation>
     </message>
@@ -602,9 +602,9 @@ Autor(en): %8</translation>
         <location filename="../src/vhf/Widget.cpp" line="257"/>
         <location filename="../src/vhf/Widget.cpp" line="267"/>
         <location filename="../src/vhf/Widget.cpp" line="323"/>
-        <location filename="../src/vhf/Widget.cpp" line="401"/>
-        <location filename="../src/vhf/Widget.cpp" line="442"/>
-        <location filename="../src/vhf/Widget.cpp" line="456"/>
+        <location filename="../src/vhf/Widget.cpp" line="406"/>
+        <location filename="../src/vhf/Widget.cpp" line="447"/>
+        <location filename="../src/vhf/Widget.cpp" line="461"/>
         <source>Lua error:
 %1</source>
         <translation>Lua Fehler:

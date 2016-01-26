@@ -370,6 +370,11 @@ int Widget::msg_recv(engine::msg_t & m)
 	return 0;
 }
 
+std::string Widget::get_vhf_version() const
+{
+	return engine->get_vhf_version();
+}
+
 void Widget::set_msg_sender(std::unique_ptr<MsgSender> sender)
 {
 	msg_sender = std::move(sender);

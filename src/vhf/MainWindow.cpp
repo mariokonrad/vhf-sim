@@ -350,11 +350,13 @@ void MainWindow::on_about()
 
 	auto app = QCoreApplication::instance();
 	QMessageBox::about(this, app->applicationName(),
-		tr("%1\nVersion: %2\n\nCopyright %3\n\n%4\n\nLicense: %5\n\ngit: %6/%7\n\nAuthor(s): %8")
+		tr("%1\nVersion: %2\n\nCopyright %3\n\n%4\n\nLicense: %5\n\ngit: %6/%7\n\nAuthor(s): "
+		   "%8")
 			.arg(app->applicationName())
 			.arg(app->applicationVersion())
 			.arg("2016 Mario Konrad")
-			.arg(tr("Simulation of a VHF radio for maritime purposes."))
+			.arg(tr("Simulation of a VHF radio for maritime purposes.") + "\n"
+				+ QString{widget->get_vhf_version().c_str()})
 			.arg(project_license)
 			.arg(git_branch)
 			.arg(git_commit_hash)
