@@ -84,14 +84,61 @@ It is possible to use the computer keyboard, following keys are defined:
 
 See file [LICENSE](License)
 
-
 ## Technical
 
-Following tools are being used:
-- Compiler: GCC 4.9 / 5.3
-- Source Control: git
-- Build System: cmake 3.2
-- clang-format-3.7
+Tested build environments: Linux, Windows (mingw)
+
+Formatted using `clang-format-3.7`.
+
+Language translations done using Qt's `linguist`, language files in directory `lang`.
+
+
+### Build on Linux
+
+Tested on Ubuntu 14.04
+
+#### Requirements
+
+- C++ Compiler, current supported/tested: GCC 4.9, GCC 5.3
 - Qt 5.5
-- Lua 5.1.1
+- cmake 3.2
+- git
+
+#### Build
+
+~~~{.sh}
+$ git clone https://github.com/mariokonrad/vhf-sim
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_BUILD_TYPE=Release ../vhf-sim
+$ make -j8
+~~~
+
+### Build on Windows
+
+Tested on Windows 7 Professional 32bit
+
+#### Requirements
+
+Packages used to build:
+
+- Git-2.7.0-32-bit.exe
+- cmake-3.4.1-win32-x86.exe
+- nsis-2.50-setup.exe
+- qt-unified-windows-x68-2.0.2-2-online.exe
+  - installed: Qt 5.5, MinGW 4.9.2
+
+#### Build
+
+On the console (`cmd.exe`, all necessary paths must be in order):
+
+~~~{.bat}
+> git clone https://github.com/mariokonrad/vhf-sim
+> mkdir build
+> cd build
+> cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release ..\vhf-sim
+> cmake --build .
+> cpack
+~~~
+
 
