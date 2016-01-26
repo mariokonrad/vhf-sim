@@ -13,15 +13,34 @@ matrix:
           - gcc-4.9
           - g++-4.9
 
+    - os: linux
+      env: QT_BASE=55 COMPILER=g++-4.9 CMAKE_BUILD_TYPE=Release
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - gcc-4.9
+          - g++-4.9
+
+    - os: linux
+      env: QT_BASE=55 COMPILER=g++-5 CMAKE_BUILD_TYPE=Release
+      compiler: gcc
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - gcc-5
+          - g++-5
+
 before_install:
   - if [ "$QT_BASE" = "55" ]; then sudo add-apt-repository ppa:beineri/opt-qt551 -y; fi
   - sudo apt-get update -qq
 
 install:
-  - if [ "$QT_BASE" = "55" ]; then
-      sudo apt-get install -qq qt55base
-      source /opt/qt55/bin/qt55-env.sh
-    fi
+  - if [ "$QT_BASE" = "55" ]; then sudo apt-get install -qq qt55base qt55multimedia qt55translations qt55tools ; source /opt/qt55/bin/qt55-env.sh ; export QTHOME=/opt/qt55 ; fi
 
   # cmake
   - curl -O https://cmake.org/files/v3.4/cmake-3.4.1-Linux-x86_64.tar.gz
