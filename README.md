@@ -9,11 +9,11 @@ on pleasure crafts.
 
 It is also useful for SRC exams.
 
-**Note:** this is direct successor of the old implementation from 2007. The old
-      version was implemented in wxWidgets-2.8.12 and OpenAL. The current
-      software is not a complete overhaul, but merely a port with minor
-      refactoring.
-      There is however, no guarantee of compatibility.
+**Note:** this is direct successor of the old implementation from 2007 (which was
+  for free but not open source). The old version was implemented in
+  `wxWidgets-2.8.12` and `OpenAL 1.15`. The current
+  software is not a complete overhaul, but merely a port with minor refactoring.
+  There is however, no guarantee of compatibility.
 
 ## Usage
 
@@ -86,11 +86,14 @@ See file [LICENSE](License)
 
 ## Technical
 
-Tested build environments: Linux, Windows (mingw)
+Tested build environments: Linux, Windows (mingw), currently the packaging is done
+only for Windows.
 
 Formatted using `clang-format-3.7`.
 
 Language translations done using Qt's `linguist`, language files in directory `lang`.
+
+The software is written in C++ (some C++11) and Lua 5.1.1
 
 
 ### Build on Linux
@@ -102,9 +105,11 @@ Tested on Ubuntu 14.04
 - C++ Compiler, current supported/tested: GCC 4.9, GCC 5.3
 - Qt 5.5
 - cmake 3.2
-- git
+- git 2.6
 
 #### Build
+
+The environment variable `QTHOME` must be set properly.
 
 ~~~{.sh}
 $ git clone https://github.com/mariokonrad/vhf-sim
@@ -122,13 +127,14 @@ Tested on Windows 7 Professional 32bit
 
 Packages used to build:
 
-- Git-2.7.0-32-bit.exe
-- cmake-3.4.1-win32-x86.exe
-- nsis-2.50-setup.exe
-- qt-unified-windows-x68-2.0.2-2-online.exe
-  - installed: Qt 5.5, MinGW 4.9.2
+- Git 2.7.0
+- CMake 3.4.1
+- NSIS 2.50
+- Qt 5.5 MinGW 4.9
 
 #### Build
+
+The environment variable `QTHOME` must be set properly.
 
 On the console (`cmd.exe`, all necessary paths must be in order):
 
