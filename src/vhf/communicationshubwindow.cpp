@@ -28,12 +28,16 @@ CommunicationsHubWindow::CommunicationsHubWindow(QWidget * parent)
 	server_close();
 }
 
+bool CommunicationsHubWindow::is_running() const { return server != nullptr; }
+
 void CommunicationsHubWindow::server_close()
 {
 	button_toggle->setText(tr("OFF"));
+	port->setEnabled(true);
 	if (server) {
 		delete server;
 		server = nullptr;
+		emit toggled();
 	}
 }
 
@@ -47,6 +51,8 @@ void CommunicationsHubWindow::toggle_server()
 			button_toggle->setText(tr("ON"));
 			connect(server, &QTcpServer::newConnection, this,
 				[this]() { this->handle_new_connection(); });
+			port->setEnabled(false);
+			emit toggled();
 		} else {
 			QMessageBox::critical(this, tr("Connection Error"), tr("Unable to open server"));
 			server_close();

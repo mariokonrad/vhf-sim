@@ -32,7 +32,7 @@
      <item>
       <widget class="QLineEdit" name="port">
        <property name="inputMask">
-        <string notr="true"/>
+        <string notr="true">09999</string>
        </property>
        <property name="maxLength">
         <number>5</number>

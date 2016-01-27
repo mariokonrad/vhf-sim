@@ -22,13 +22,16 @@
 namespace vhfsim
 {
 MainWindow::MainWindow()
-	: socket(nullptr)
+	: widget(nullptr)
+	, gps(nullptr)
+	, controlcenter(nullptr)
+	, commhub(nullptr)
+	, socket(nullptr)
 	, action_open_connection(nullptr)
 	, action_close_connection(nullptr)
 	, action_control_center(nullptr)
 {
 	setWindowIcon(QIcon(":icons/vhf-main.xpm"));
-	set_title();
 
 	// main widget
 
@@ -113,6 +116,7 @@ MainWindow::MainWindow()
 
 	auto action_comm_hub = new QAction(tr("Communications Hub..."), this);
 	connect(action_comm_hub, &QAction::triggered, this, &MainWindow::on_comm_hub);
+	connect(commhub, &CommunicationsHubWindow::toggled, this, &MainWindow::set_title);
 
 	// menubar
 
@@ -145,6 +149,7 @@ MainWindow::MainWindow()
 	// misc
 	connect_to_controlcenter();
 	handle_menu_entries();
+	set_title();
 }
 
 MainWindow::~MainWindow() {}
@@ -171,6 +176,9 @@ void MainWindow::set_title()
 
 	if (System::sound_disabled())
 		title += tr(" (Audio Off)");
+
+	if (commhub->is_running())
+		title += tr(" (ComHub)");
 
 	setWindowTitle(title);
 }

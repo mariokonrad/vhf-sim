@@ -25,6 +25,11 @@ class CommunicationsHubWindow : public QWidget, public Ui::CommunicationsHubWind
 public:
 	CommunicationsHubWindow(QWidget * parent);
 
+	bool is_running() const;
+
+signals:
+	void toggled();
+
 private:
 	PeerModel * model;
 	QTcpServer * server;
