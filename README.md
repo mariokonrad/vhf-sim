@@ -9,12 +9,6 @@ on pleasure crafts.
 
 It is also useful for SRC exams.
 
-**Note:** this is direct successor of the old implementation from 2007 (which was
-  for free but not open source). The old version was implemented in
-  `wxWidgets-2.8.12` and `OpenAL 1.15`. The current
-  software is not a complete overhaul, but merely a port with minor refactoring.
-  There is however, no guarantee of compatibility.
-
 ## Usage
 
 The VHF simulator has one main window, showing the simulated VHF and a menu.
@@ -23,6 +17,23 @@ usable areas are, use the menu `View / Show Buttons` to reveal all existing
 buttons.
 
 ![vhf-sim](doc/vhf-sim.png)
+
+### Features
+
+- Simulation (partial) of an Simrad-RD68 VHF radio.
+- All "buttons" displayed by the VHF front end are usable.
+- Simulates an "empty" (factory reset) device as well.
+- Contains a pseudo GPS unit to provide position, or enter it manually.
+  Also simulates the loss of GPS signal.
+- Use DSC function to do routine, safety, urgency calls, as
+  well as distress alerts.
+- Simulates DSC calls from a shore station.
+- Communicate with other instances of the simulator, either on
+  the same PC or over network, to simulate DSC calls and distress
+  alerts.
+- Fullscreen mode.
+- Exam mode. This disables repeated distress alerts. Useful for exam
+  situations (SRC).
 
 ### Menu
 
@@ -85,6 +96,12 @@ It is possible to use the computer keyboard, following keys are defined:
 See file [LICENSE](License)
 
 ## Technical
+
+**Note:** this is direct successor of the old implementation from 2007 (which was
+  for free but not open source). The old version was implemented in
+  `wxWidgets-2.8.12` and `OpenAL 1.15`. The current
+  software is not a complete overhaul, but merely a port with minor refactoring.
+  There is however, no guarantee of compatibility.
 
 Tested build environments: Linux, Windows (mingw), currently the packaging is done
 only for Windows.
