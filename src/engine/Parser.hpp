@@ -83,7 +83,7 @@ public:
 
 	virtual ~Parser() {}
 
-	virtual void parse() throw(exception) = 0;
+	virtual void parse() = 0;
 
 protected:
 	inline void range(int val, int lo = INT_MIN, int hi = INT_MAX) const

@@ -121,7 +121,7 @@ Tested on Ubuntu 14.04
 
 - C++ Compiler, current supported/tested: GCC 4.9, GCC 5.3
 - Qt 5.5
-- cmake 3.2
+- cmake 3.12
 - git 2.6
 
 #### Build
@@ -145,7 +145,7 @@ Tested on Windows 7 Professional 32bit
 Packages used to build:
 
 - Git 2.7.0
-- CMake 3.4.1
+- CMake 3.12
 - NSIS 2.50
 - Qt 5.5 MinGW 4.9
 

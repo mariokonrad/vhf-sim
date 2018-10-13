@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 3.1)
 project(lua VERSION 5.1.1 LANGUAGES C)
 
 add_library(lua STATIC
@@ -44,4 +43,7 @@ target_compile_options(lua
 		-pedantic
 	)
 
-target_include_directories(lua PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_include_directories(lua
+	PUBLIC
+		${CMAKE_CURRENT_SOURCE_DIR}/include
+	)

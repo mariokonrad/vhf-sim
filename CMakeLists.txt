@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.12)
 
 ### module and prefix path
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;${CMAKE_CURRENT_SOURCE_DIR};${CMAKE_MODULE_PATH}")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 if(NOT DEFINED ENV{QTHOME})
 	message(FATAL_ERROR "Environment variable QTHOME not set")
 endif()
@@ -10,17 +11,27 @@ set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 
 ### information about repository and project
 include(GitInformation)
-project(vhf-sim VERSION 2.0.0 LANGUAGES CXX)
+project(vhf-sim VERSION 2.0.0 LANGUAGES CXX C)
 set(PROJECT_LICENSE "GPLv3")
+
+### build type
+message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
 
 ### compiler check
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-	message(STATUS "Compiler: GNU")
+	message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER_ID}")
+	message(STATUS "C Compiler  : ${CMAKE_C_COMPILER_ID}")
 elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-	message(STATUS "Compiler: Clang")
+	message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER_ID}")
+	message(STATUS "C Compiler  : ${CMAKE_C_COMPILER_ID}")
 else()
 	message(FATAL_ERROR "Unsupported compiler detected: ${CMAKE_CXX_COMPILER_ID}")
 endif()
+
+# C++11, no compiler extensions
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 ### GUI options
 if(WIN32)

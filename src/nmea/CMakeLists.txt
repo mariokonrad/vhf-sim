@@ -1,17 +1,20 @@
-cmake_minimum_required(VERSION 3.1)
-
 add_library(nmea STATIC
 	nmea.cpp
 	nmea_sentence.cpp
 	)
 
 target_compile_options(nmea
-	PUBLIC
+	PRIVATE
 		-Wall
 		-Wextra
-		-std=c++11
 	)
 
-target_include_directories(nmea PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..)
+target_link_libraries(nmea
+	PRIVATE
+		engine
+	)
 
-add_dependencies(nmea engine)
+target_include_directories(nmea
+	PUBLIC
+		${CMAKE_CURRENT_SOURCE_DIR}/..
+	)

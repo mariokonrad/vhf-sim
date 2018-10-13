@@ -1,5 +1,3 @@
-cmake_minimum_required(VERSION 3.2)
-
 qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
 add_executable(vhf-sim ${GUI_TYPE}
@@ -27,7 +25,6 @@ target_compile_options(vhf-sim
 	PUBLIC
 		-Wall
 		-Wextra
-		-std=c++11
 		${Qt5Core_EXECUTABLE_COMPILE_FLAGS}
 		${Qt5Gui_EXECUTABLE_COMPILE_FLAGS}
 		${Qt5Widgets_EXECUTABLE_COMPILE_FLAGS}
@@ -38,7 +35,6 @@ target_include_directories(vhf-sim
 	PRIVATE
 		${CMAKE_CURRENT_BINARY_DIR}
 		${CMAKE_CURRENT_BINARY_DIR}/..
-		${CMAKE_CURRENT_SOURCE_DIR}/..
 		${Qt5Core_INCLUDE_DIRS}
 		${Qt5Gui_INCLUDE_DIRS}
 		${Qt5Widgets_INCLUDE_DIRS}

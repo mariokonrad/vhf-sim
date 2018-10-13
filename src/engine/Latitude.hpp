@@ -31,7 +31,7 @@ private:
 		{
 		}
 
-		virtual void parse() throw(Parser::exception) { angle(); }
+		virtual void parse() { angle(); }
 	private:
 		// angle := degree [ minus minute [ point second_rational ] ] hemisphere .
 		void angle()

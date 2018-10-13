@@ -37,7 +37,7 @@ private:
 		{
 		}
 
-		virtual void parse() throw(Parser::exception) { timestamp(); }
+		virtual void parse() { timestamp(); }
 	private:
 		// timestamp := [ date space ] time .
 		void timestamp()
