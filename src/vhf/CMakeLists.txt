@@ -1,28 +1,31 @@
 qt5_add_translation(QM_FILES ${TRANSLATION_FILES})
 
-add_executable(vhf-sim ${GUI_TYPE}
-	main.cpp
-	Circle.cpp
-	Rectangle.cpp
-	MainWindow.cpp
-	Widget.cpp
-	System.cpp
-	MsgSenderSocket.cpp
-	MsgSenderControlCenter.cpp
-	vhfpreferences.cpp
-	connectionpreferences.cpp
-	gpswindow.cpp
-	controlcenter.cpp
-	PeerModel.cpp
-	communicationshubwindow.cpp
-	${UI_HEADERS}
-	${QM_FILES}
-	resources.qrc
-	resources.rc
+add_executable(vhf-sim ${GUI_TYPE})
+
+target_sources(vhf-sim
+	PRIVATE
+		main.cpp
+		Circle.cpp
+		Rectangle.cpp
+		MainWindow.cpp
+		Widget.cpp
+		System.cpp
+		MsgSenderSocket.cpp
+		MsgSenderControlCenter.cpp
+		vhfpreferences.cpp
+		connectionpreferences.cpp
+		gpswindow.cpp
+		controlcenter.cpp
+		PeerModel.cpp
+		communicationshubwindow.cpp
+		${UI_HEADERS}
+		${QM_FILES}
+		resources.qrc
+		resources.rc
 	)
 
 target_compile_options(vhf-sim
-	PUBLIC
+	PRIVATE
 		-Wall
 		-Wextra
 		${Qt5Core_EXECUTABLE_COMPILE_FLAGS}
@@ -42,14 +45,15 @@ target_include_directories(vhf-sim
 	)
 
 target_link_libraries(vhf-sim
-	nmea
-	engine
-	lua
-	Qt5::Core
-	Qt5::Widgets
-	Qt5::Gui
-	Qt5::Multimedia
-	Qt5::Network
+	PRIVATE
+		nmea
+		engine
+		lua
+		Qt5::Core
+		Qt5::Widgets
+		Qt5::Gui
+		Qt5::Multimedia
+		Qt5::Network
 	)
 
 install(
