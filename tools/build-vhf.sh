@@ -19,6 +19,6 @@ fi
 
 mkdir ${build_dir}
 cd ${build_dir}
-cmake ${project_dir}
+cmake ${project_dir} -DPACKAGE_SYSTEM_DISTRIBUTION="${1}"
 cmake --build .
-cpack -G DEB
+cpack
