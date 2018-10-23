@@ -1,15 +1,18 @@
-add_library(engine STATIC
-	Angle.cpp
-	Date.cpp
-	Engine.cpp
-	Latitude.cpp
-	Longitude.cpp
-	MMSI.cpp
-	msg.cpp
+add_library(engine STATIC)
+
+target_sources(engine
+	PRIVATE
+		Angle.cpp
+		Date.cpp
+		Engine.cpp
+		Latitude.cpp
+		Longitude.cpp
+		MMSI.cpp
+		msg.cpp
 	)
 
 target_compile_options(engine
-	PUBLIC
+	PRIVATE
 		-Wall
 		-Wextra
 	)

@@ -1,6 +1,9 @@
-add_library(nmea STATIC
-	nmea.cpp
-	nmea_sentence.cpp
+add_library(nmea STATIC)
+
+target_sources(nmea
+	PRIVATE
+		nmea.cpp
+		nmea_sentence.cpp
 	)
 
 target_compile_options(nmea
