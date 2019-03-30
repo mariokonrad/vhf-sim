@@ -5,11 +5,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 ### module and prefix path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
-if(NOT DEFINED ENV{QTHOME})
-	message(FATAL_ERROR "Environment variable QTHOME not set")
+if(DEFINED ENV{QTHOME})
+	message(STATUS "QTHOME: $ENV{QTHOME}")
+	set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 endif()
-message(STATUS "QTHOME: $ENV{QTHOME}")
-set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 
 ### information about repository and project
 include(GitInformation)

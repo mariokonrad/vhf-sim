@@ -83,4 +83,5 @@ before_script:
 
 script:
   - cmake --build .
+  - cpack -G DEB
 

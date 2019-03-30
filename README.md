@@ -1,6 +1,6 @@
 # VHF-Sim
 
-Copyright (c) 2016 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2019 Mario Konrad (mario.konrad@gmx.net)
 
 
 Simulates a VHF radio for maritime navigation. The purpose of this software
@@ -115,12 +115,12 @@ The software is written in C++ (some C++11) and Lua 5.1.1
 
 ### Build on Linux
 
-Tested on Ubuntu 14.04
+Tested on Ubuntu 14.04, Ubuntu 16.04, Ubuntu 18.04
 
 #### Requirements
 
-- C++ Compiler, current supported/tested: GCC 4.9, GCC 5.3
-- Qt 5.5
+- C++ Compiler, current supported/tested: GCC 4.9, GCC 5.3, GCC 7, GCC 8
+- Qt 5.5 (or newer)
 - cmake 3.12
 - git 2.6
 
