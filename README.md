@@ -136,6 +136,20 @@ $ cmake -DCMAKE_BUILD_TYPE=Release ../vhf-sim
 $ make -j8
 ~~~
 
+#### Using Docker
+
+There are docker files for various distributions and scripts to create and use
+the containers.
+
+Example: prepare Ubuntu 16.04 container and build the application:
+~~~{.sh}
+$ tools/docker/build.sh ubuntu1604
+$ tools/build-vhf-docker.sh ubuntu1604
+~~~
+
+The result is built in the directory `build-ubuntu1604`.
+
+
 ### Build on Windows
 
 Tested on Windows 7 Professional 32bit
