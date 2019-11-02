@@ -1,0 +1,27 @@
+version: '2.0.0+{build}'
+
+image: Visual Studio 2017
+
+configuration: Release
+
+environment:
+  matrix:
+    - QTHOME: C:\Qt\5.10\mingw53_32
+      QT_TOOLS_PATH: C:\Qt\Tools\mingw730_32\bin
+      GENERATOR: "MinGW Makefiles"
+    - QTHOME: C:\Qt\5.12\mingw73_32
+      QT_TOOLS_PATH: C:\Qt\Tools\mingw730_32\bin
+      GENERATOR: "MinGW Makefiles"
+    - QTHOME: C:\Qt\5.12\mingw73_64
+      QT_TOOLS_PATH: C:\Qt\Tools\mingw730_64\bin
+      GENERATOR: "MinGW Makefiles"
+
+install:
+- cmd: set PATH=%QT_TOOLS_PATH%;%PATH%
+
+build_script:
+- cmd: cmake -B C:\build -G "%GENERATOR%" -DCMAKE_IGNORE_PATH="C:/Program Files/Git/usr/bin" -DCMAKE_BUILD_TYPE=%CONFIGURATION% C:\projects\vhf-sim
+- cmd: cmake --build C:\build --config %CONFIGURATION%
+- cmd: cd C:\build
+- cmd: cpack -G NSIS
+
