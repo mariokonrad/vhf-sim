@@ -20,8 +20,11 @@ install:
 - cmd: set PATH=%QT_TOOLS_PATH%;%PATH%
 
 build_script:
-- cmd: cmake -B C:\build -G "%GENERATOR%" -DCMAKE_IGNORE_PATH="C:/Program Files/Git/usr/bin" -DCMAKE_BUILD_TYPE=%CONFIGURATION% C:\projects\vhf-sim
-- cmd: cmake --build C:\build --config %CONFIGURATION%
-- cmd: cd C:\build
+- cmd: cmake -B build -G "%GENERATOR%" -DCMAKE_IGNORE_PATH="C:/Program Files/Git/usr/bin" -DCMAKE_BUILD_TYPE=%CONFIGURATION% C:\projects\vhf-sim
+- cmd: cmake --build build --config %CONFIGURATION%
+- cmd: cd build
 - cmd: cpack -G NSIS
+
+artifacts:
+- path: build\vhf-sim-*.exe
 
