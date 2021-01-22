@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -6,7 +6,7 @@ USER root
 RUN apt-get update \
 	&& apt-get install -y apt-utils \
 	&& apt-get install -y curl make build-essential g++ \
-	&& apt-get install -y qtbase5-dev qtmultimedia5-dev qttools5-dev-tools \
+	&& apt-get install -y qtbase5-dev qtmultimedia5-dev qttools5-dev-tools qttools5-dev \
 	&& rm -fr /var/lib/apt/lists/*
 
 RUN useradd --groups users -M --uid 1000 user

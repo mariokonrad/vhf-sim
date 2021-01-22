@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 USER root
 RUN apt-get update \
 	&& apt-get install -y apt-utils \
