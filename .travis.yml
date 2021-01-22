@@ -38,6 +38,18 @@ matrix:
           - qttools5-dev-tools
           - qttools5-dev # to get Qt5LinguistToolsConfig.cmake
 
+    # Ubuntu 20.04
+    - os: linux
+      dist: focal
+      env: TRAVIS_DIST_NAME=focal CXX_COMPILER=g++ C_COMPILER=gcc BUILD_TYPE=Release
+      addons:
+        apt:
+          packages:
+          - qt5-default
+          - qtmultimedia5-dev
+          - qttools5-dev-tools
+          - qttools5-dev # to get Qt5LinguistToolsConfig.cmake
+
     # new GCC, new Qt, using xenial because 'ubuntu-toolchain-r-test' is not whitelisted on 'bionic'
     - os: linux
       dist: xenial
