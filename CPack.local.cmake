@@ -21,6 +21,8 @@ if(WIN32)
 	include(CPack.win32.local)
 elseif(UNIX)
 	include(CPack.linux.local)
+elseif(APPLE)
+	include(CPack.osx.local)
 endif()
 
 include(CPack)
