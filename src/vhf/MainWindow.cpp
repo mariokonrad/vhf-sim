@@ -180,6 +180,10 @@ void MainWindow::set_title()
 	if (commhub->is_running())
 		title += tr(" (ComHub)");
 
+#if defined(__APPLE__)
+	title += " (UNSUPPORTED TEST VERSION)";
+#endif
+
 	setWindowTitle(title);
 }
 
