@@ -50,8 +50,8 @@ static bool valid_key(int key)
 
 static QDir device_path(const std::string & filename)
 {
-	return QDir {platform_resource_path(*QCoreApplication::instance()) + System::type() + "/"
-		+ filename.c_str()};
+	return QDir {platform_resource_path(*QCoreApplication::instance()) + System::type()
+		+ "/" + filename.c_str()};
 }
 
 static engine::MouseButton mouse_qt_to_engine(Qt::MouseButton button)

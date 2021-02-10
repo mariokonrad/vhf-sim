@@ -11,7 +11,7 @@ QString platform_translations_path(const QCoreApplication & app)
 
 QString platform_resource_path(const QCoreApplication & app)
 {
-	return app.applicationDirPath() + "/../share/";
+	return app.applicationDirPath() + "/../share/" + vhfsim::project_name + "/";
 }
 }
 
