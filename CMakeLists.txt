@@ -1,6 +1,14 @@
 cmake_minimum_required(VERSION 3.12)
+project(vhf-sim
+	VERSION 2.0.0
+	LANGUAGES CXX C
+	DESCRIPTION "VHF Simulator for maritime radio certificate SRC"
+	HOMEPAGE_URL "https://github.com/mariokonrad/vhf-sim"
+	)
+set(PROJECT_LICENSE "GPLv3")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
+
 
 ### module and prefix path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -10,19 +18,14 @@ if(DEFINED ENV{QTHOME})
 	set(CMAKE_PREFIX_PATH "$ENV{QTHOME}")
 endif()
 
-### information about repository and project
+### information about repository
 include(GitInformation)
-project(vhf-sim VERSION 2.0.0 LANGUAGES CXX C)
-set(PROJECT_LICENSE "GPLv3")
 
 ### build type
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
 
 ### compiler check
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-	message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER_ID}")
-	message(STATUS "C Compiler  : ${CMAKE_C_COMPILER_ID}")
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU|Clang|AppleClang")
 	message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER_ID}")
 	message(STATUS "C Compiler  : ${CMAKE_C_COMPILER_ID}")
 else()
@@ -33,15 +36,6 @@ endif()
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
-### GUI options
-if(WIN32)
-	set(GUI_TYPE "WIN32")
-elseif(APPLE)
-	set(GUI_TYPE "MACOSX_BUNDLE")
-else()
-	set(GUI_TYPE "")
-endif()
 
 ### package handling
 # Find includes in corresponding build directories
@@ -77,10 +71,6 @@ endforeach()
 
 ### sources
 add_subdirectory(src)
-
-### Testing
-
-# TODO: testing
 
 ### ctags / cscope
 include(CTags)

@@ -4,6 +4,11 @@ image: Visual Studio 2017
 
 configuration: Release
 
+#branches:
+#  only:
+#  - master
+#  - /win.*/
+
 environment:
   matrix:
     - QTHOME: C:\Qt\5.10\mingw53_32

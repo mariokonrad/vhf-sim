@@ -13,6 +13,7 @@
 #include "Rectangle.hpp"
 #include "nmea/nmea_sentence.hpp"
 #include "System.hpp"
+#include "platform.hpp"
 #include "version.hpp"
 
 namespace vhfsim
@@ -49,9 +50,8 @@ static bool valid_key(int key)
 
 static QDir device_path(const std::string & filename)
 {
-	auto app = QCoreApplication::instance();
-	return QDir{app->applicationDirPath() + "/../share/" + vhfsim::project_name + "/"
-		+ System::type() + "/" + filename.c_str()};
+	return QDir {platform_resource_path(*QCoreApplication::instance()) + System::type() + "/"
+		+ filename.c_str()};
 }
 
 static engine::MouseButton mouse_qt_to_engine(Qt::MouseButton button)

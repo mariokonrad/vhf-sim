@@ -1,0 +1,24 @@
+
+#foreach(lang IN ITEMS de)
+#	execute_process(
+#		COMMAND "@LCONVERT_BIN@"
+#			-o ${CMAKE_INSTALL_PREFIX}/@TRANSLATION_DIR@/qt_${lang}.qm
+#			@qtBinDir@/../translations/qtbase_${lang}.qm
+#			@qtBinDir@/../translations/qtmultimedia_${lang}.qm
+#		RESULT_VARIABLE result
+#		)
+#	if(result)
+#		message(FATAL_ERROR "Failed to create qt_${lang}.qm: ${result}")
+#	endif()
+#endforeach()
+
+execute_process(
+	COMMAND "@DEPLOYQT_BIN@" @DEPLOY_OPTIONS@
+	WORKING_DIRECTORY ${CMAKE_INSTALL_PREFIX}
+	RESULT_VARIABLE result
+	)
+
+if(result)
+	message(FATAL_ERROR "Executing @DEPLOYQT_BIN@ failed: ${result}")
+endif()
+

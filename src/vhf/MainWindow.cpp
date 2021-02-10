@@ -362,7 +362,7 @@ void MainWindow::on_about()
 		   "%8")
 			.arg(app->applicationName())
 			.arg(app->applicationVersion())
-			.arg("2016 Mario Konrad")
+			.arg("2021 Mario Konrad")
 			.arg(tr("Simulation of a VHF radio for maritime purposes.") + "\n"
 				+ QString{widget->get_vhf_version().c_str()})
 			.arg(project_license)

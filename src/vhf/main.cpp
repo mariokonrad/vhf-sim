@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Mario Konrad
+// Copyright (c) 2021 Mario Konrad
 // All Rights reserved.
 
 #include <QApplication>
@@ -7,6 +7,7 @@
 #include <QStandardPaths>
 #include <QCommandLineParser>
 #include "MainWindow.hpp"
+#include "platform.hpp"
 #include "System.hpp"
 #include "version.hpp"
 #include "engine/MMSI.hpp"
@@ -39,8 +40,7 @@ int main(int argc, char ** argv)
 
 	// internationalization
 	QTranslator translator;
-	translator.load(vhfsim::System::lang(),
-		app.applicationDirPath() + "/../share/" + vhfsim::project_name + "/lang");
+	translator.load(vhfsim::System::lang(), vhfsim::platform_translations_path(app));
 	app.installTranslator(&translator);
 
 	// run the application

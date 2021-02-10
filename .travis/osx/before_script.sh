@@ -1,0 +1,13 @@
+#!/bin/bash
+set -ev
+
+export QTHOME=/usr/local/opt/qt5
+
+cmake -B build \
+	-DCMAKE_INSTALL_PREFIX=`pwd`/local \
+	-DCMAKE_CXX_COMPILER=${CXX_COMPILER} \
+	-DCMAKE_C_COMPILER=${C_COMPILER} \
+	-DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
+	-DPACKAGE_SYSTEM_DISTRIBUTION=${PACKAGE_SYSTEM_DISTRIBUTION} \
+	.
+
