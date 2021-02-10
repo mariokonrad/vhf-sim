@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Mario Konrad
+// Copyright (c) 2021 Mario Konrad
 // All Rights reserved.
 
 #include "Widget.hpp"

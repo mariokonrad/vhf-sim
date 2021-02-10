@@ -1,6 +1,6 @@
 # VHF-Sim
 
-Copyright (c) 2019 Mario Konrad (mario.konrad@gmx.net)
+Copyright (c) 2021 Mario Konrad (mario.konrad@gmx.net)
 
 
 Simulates a VHF radio for maritime navigation. The purpose of this software
@@ -115,11 +115,11 @@ The software is written in C++ (some C++11) and Lua 5.1.1
 
 ### Build on Linux
 
-Tested on Ubuntu 14.04, Ubuntu 16.04, Ubuntu 18.04
+Tested on Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04
 
 #### Requirements
 
-- C++ Compiler, current supported/tested: GCC 4.9, GCC 5.3, GCC 7, GCC 8
+- C++ Compiler, current supported/tested: GCC 4.9, GCC 5.3, GCC 7, GCC 8, GCC 9, GCC 10
 - Qt 5.5 (or newer)
 - cmake 3.12
 - git 2.6
@@ -141,13 +141,13 @@ $ make -j8
 There are docker files for various distributions and scripts to create and use
 the containers.
 
-Example: prepare Ubuntu 16.04 container and build the application:
+Example: prepare Ubuntu 20.04 container and build the application:
 ~~~{.sh}
-$ tools/docker/build.sh ubuntu1604
-$ tools/build-vhf-docker.sh ubuntu1604
+$ tools/docker/build.sh ubuntu2004
+$ tools/build-vhf-docker.sh ubuntu2004
 ~~~
 
-The result is built in the directory `build-ubuntu1604`.
+The result is built in the directory `build-ubuntu2004`.
 
 
 ### Build on Windows
@@ -178,4 +178,31 @@ On the console (`cmd.exe`, all necessary paths must be in order):
 > cpack
 ~~~
 
+
+### Build on OSX
+
+Tested on Sierra, Catalina, Big Sur
+
+#### Requirements
+
+Packages used to build:
+
+- Git 2.19.0
+- CMake 3.12
+- Qt 5.10
+
+#### Build
+
+The environment variable `QTHOME` must be set properly.
+
+On the console:
+
+~~~{.sh}
+> git clone https://github.com/mariokonrad/vhf-sim
+> mkdir build
+> cd build
+> cmake -DCMAKE_BUILD_TYPE=Release ../vhf-sim
+> cmake --build .
+> cpack -G DragNDrop
+~~~
 

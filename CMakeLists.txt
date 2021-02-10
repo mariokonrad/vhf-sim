@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 project(vhf-sim
-	VERSION 2.0.0
+	VERSION 2.0.1
 	LANGUAGES CXX C
 	DESCRIPTION "VHF Simulator for maritime radio certificate SRC"
 	HOMEPAGE_URL "https://github.com/mariokonrad/vhf-sim"
