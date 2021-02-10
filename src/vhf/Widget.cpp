@@ -328,7 +328,11 @@ void Widget::on_timer(int id)
 void Widget::timer_create(int id)
 {
 	timer_delete(id);
-	timers.emplace(id, new QTimer{this});
+	auto result = timers.emplace(id, new QTimer{this});
+	if (result.second) {
+		QTimer * timer = result.first->second;
+		connect(timer, &QTimer::timeout, this, [this, id]() { this->on_timer(id); });
+	}
 }
 
 void Widget::timer_delete(int id)
@@ -336,9 +340,10 @@ void Widget::timer_delete(int id)
 	auto i = timers.find(id);
 	if (i == timers.end())
 		return;
-	i->second->stop();
-	i->second->disconnect();
-	delete i->second;
+	QTimer * timer = i->second;
+	timer->stop();
+	timer->disconnect();
+	delete timer;
 	timers.erase(i);
 }
 
@@ -347,10 +352,11 @@ void Widget::timer_start(int id, int msec, bool one_shot)
 	auto i = timers.find(id);
 	if (i == timers.end())
 		return;
-	i->second->setInterval(msec);
-	i->second->setSingleShot(one_shot);
-	connect(i->second, &QTimer::timeout, this, [this, id]() { this->on_timer(id); });
-	i->second->start();
+	QTimer * timer = i->second;
+	timer->stop();
+	timer->setInterval(msec);
+	timer->setSingleShot(one_shot);
+	timer->start();
 }
 
 void Widget::timer_stop(int id)
