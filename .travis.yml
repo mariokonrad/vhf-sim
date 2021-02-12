@@ -1,10 +1,8 @@
 language: cpp
 
-#branches:
-#  only:
-#  - master
-#  - /osx.*/
-#  - /linux.*/
+branches:
+  except:
+    - gh-pages
 
 matrix:
   include:
