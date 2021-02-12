@@ -1,0 +1,17 @@
+#include "version.hpp"
+
+namespace vhfsim
+{
+namespace version
+{
+const char * project_name() { return "@PROJECT_NAME@"; }
+const char * project_version() { return "@PROJECT_VERSION@"; }
+const char * project_version_major() { return "@PROJECT_VERSION_MAJOR@"; }
+const char * project_version_minor() { return "@PROJECT_VERSION_MINOR@"; }
+const char * project_version_patch() { return "@PROJECT_VERSION_PATCH@"; }
+const char * project_license() { return "@PROJECT_LICENSE@"; }
+const char * git_branch() { return "@GIT_BRANCH@"; }
+const char * git_commit_hash() { return "@GIT_COMMIT_HASH@"; }
+const char * git_authors() { return "@GIT_AUTHORS@"; }
+}
+}

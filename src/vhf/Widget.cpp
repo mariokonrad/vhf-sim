@@ -14,7 +14,6 @@
 #include "nmea/nmea_sentence.hpp"
 #include "System.hpp"
 #include "platform.hpp"
-#include "version.hpp"
 
 namespace vhfsim
 {

@@ -6,12 +6,12 @@ namespace vhfsim
 {
 QString platform_translations_path(const QCoreApplication & app)
 {
-	return app.applicationDirPath() + "/../share/" + vhfsim::project_name + "/lang";
+	return app.applicationDirPath() + "/../share/" + version::project_name() + "/lang";
 }
 
 QString platform_resource_path(const QCoreApplication & app)
 {
-	return app.applicationDirPath() + "/../share/" + vhfsim::project_name + "/";
+	return app.applicationDirPath() + "/../share/" + version::project_name() + "/";
 }
 }
 

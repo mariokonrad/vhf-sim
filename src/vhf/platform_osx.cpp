@@ -1,5 +1,4 @@
 #include "platform.hpp"
-#include "version.hpp"
 #include <QCoreApplication>
 
 namespace vhfsim

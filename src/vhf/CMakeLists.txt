@@ -39,6 +39,7 @@ endif()
 
 target_sources(vhf-sim
 	PRIVATE
+		${CMAKE_BINARY_DIR}/version.cpp
 		main.cpp
 		Circle.cpp
 		Rectangle.cpp

@@ -4,7 +4,7 @@ add_subdirectory(nmea)
 add_subdirectory(vhf)
 
 configure_file(
-	${CMAKE_CURRENT_SOURCE_DIR}/version.hpp.in
-	${CMAKE_CURRENT_BINARY_DIR}/version.hpp
+	${CMAKE_CURRENT_SOURCE_DIR}/version.cpp.in
+	${CMAKE_BINARY_DIR}/version.cpp
 	)
 

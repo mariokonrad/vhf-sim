@@ -59,7 +59,7 @@ MainWindow::MainWindow()
 	// actions
 
 	auto action_about = new QAction(tr("About"), this);
-	action_about->setStatusTip(project_name);
+	action_about->setStatusTip(version::project_name());
 	connect(action_about, &QAction::triggered, this, &MainWindow::on_about);
 
 	auto action_about_qt = new QAction(tr("About Qt"), this);
@@ -356,7 +356,8 @@ void MainWindow::on_exam_mode(bool checked)
 void MainWindow::on_about()
 {
 	QString authors;
-	for (auto const & author : QString{git_authors}.split(";", QString::SkipEmptyParts)) {
+	for (auto const & author :
+		QString {version::git_authors()}.split(";", QString::SkipEmptyParts)) {
 		authors += "\n- " + author;
 	}
 
@@ -369,9 +370,9 @@ void MainWindow::on_about()
 			.arg("2021 Mario Konrad")
 			.arg(tr("Simulation of a VHF radio for maritime purposes.") + "\n"
 				+ QString{widget->get_vhf_version().c_str()})
-			.arg(project_license)
-			.arg(git_branch)
-			.arg(git_commit_hash)
+			.arg(version::project_license())
+			.arg(version::git_branch())
+			.arg(version::git_commit_hash())
 			.arg(authors));
 }
 

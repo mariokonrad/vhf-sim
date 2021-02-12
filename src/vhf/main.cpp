@@ -16,8 +16,8 @@ int main(int argc, char ** argv)
 {
 	// application
 	QApplication app(argc, argv);
-	app.setApplicationName(vhfsim::project_name);
-	app.setApplicationVersion(vhfsim::project_version);
+	app.setApplicationName(vhfsim::version::project_name());
+	app.setApplicationVersion(vhfsim::version::project_version());
 
 	// command line arguments
 
