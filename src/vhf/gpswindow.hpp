@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__GPSWINDOW__HPP__
-#define __VHFSIM__GPSWINDOW__HPP__
+#ifndef VHFSIM_GPSWINDOW_HPP
+#define VHFSIM_GPSWINDOW_HPP
 
 #include "ui_gpswindow.h"
 

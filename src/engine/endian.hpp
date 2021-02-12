@@ -1,5 +1,5 @@
-#ifndef __ENDIAN__HPP__
-#define __ENDIAN__HPP__
+#ifndef ENDIAN_HPP
+#define ENDIAN_HPP
 
 /* LICENSE: BSD
  *

@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__CONTROLCENTER__HPP__
-#define __VHFSIM__CONTROLCENTER__HPP__
+#ifndef VHFSIM_CONTROLCENTER_HPP
+#define VHFSIM_CONTROLCENTER_HPP
 
 #include "ui_controlcenter.h"
 #include "engine/msg.hpp"

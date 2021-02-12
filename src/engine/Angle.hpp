@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__ENGINE__ANGLE__HPP__
-#define __VHFSIM__ENGINE__ANGLE__HPP__
+#ifndef VHFSIM_ENGINE_ANGLE_HPP
+#define VHFSIM_ENGINE_ANGLE_HPP
 
 #include <string>
 

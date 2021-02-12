@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__CONNECTIONPREFERENCES__HPP__
-#define __VHFSIM__CONNECTIONPREFERENCES__HPP__
+#ifndef VHFSIM_CONNECTIONPREFERENCES_HPP
+#define VHFSIM_CONNECTIONPREFERENCES_HPP
 
 #include "ui_connectionpreferences.h"
 

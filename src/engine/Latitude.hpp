@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__ENGINE__LATITUDE__HPP__
-#define __VHFSIM__ENGINE__LATITUDE__HPP__
+#ifndef VHFSIM_ENGINE_LATITUDE_HPP
+#define VHFSIM_ENGINE_LATITUDE_HPP
 
 #include "Angle.hpp"
 #include "Parser.hpp"

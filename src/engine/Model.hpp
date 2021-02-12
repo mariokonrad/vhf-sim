@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__ENGINE__MODEL__HPP__
-#define __VHFSIM__ENGINE__MODEL__HPP__
+#ifndef VHFSIM_ENGINE_MODEL_HPP
+#define VHFSIM_ENGINE_MODEL_HPP
 
 #include "MMSI.hpp"
 #include "Latitude.hpp"

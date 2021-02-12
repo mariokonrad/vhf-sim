@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__ENGINE__CONTROLLER__HPP__
-#define __VHFSIM__ENGINE__CONTROLLER__HPP__
+#ifndef VHFSIM_ENGINE_CONTROLLER_HPP
+#define VHFSIM_ENGINE_CONTROLLER_HPP
 
 #include "msg.hpp"
 #include <string>

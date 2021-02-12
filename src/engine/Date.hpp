@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__ENGINE__DATE__HPP__
-#define __VHFSIM__ENGINE__DATE__HPP__
+#ifndef VHFSIM_ENGINE_DATE_HPP
+#define VHFSIM_ENGINE_DATE_HPP
 
 #include <string>
 #include <cstdlib>

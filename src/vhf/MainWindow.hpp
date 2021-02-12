@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__MAINWINDOW__HPP__
-#define __VHFSIM__MAINWINDOW__HPP__
+#ifndef VHFSIM_MAINWINDOW_HPP
+#define VHFSIM_MAINWINDOW_HPP
 
 #include <QMainWindow>
 

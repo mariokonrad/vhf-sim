@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__ENGINE__MSG__HPP__
-#define __VHFSIM__ENGINE__MSG__HPP__
+#ifndef VHFSIM_ENGINE_MSG_HPP
+#define VHFSIM_ENGINE_MSG_HPP
 
 #include <cstdint>
 #include <string>

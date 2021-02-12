@@ -1,5 +1,5 @@
-#ifndef __VHFSIM__VERISION__HPP__
-#define __VHFSIM__VERISION__HPP__
+#ifndef VHFSIM_VERISION_HPP
+#define VHFSIM_VERISION_HPP
 
 namespace vhfsim
 {

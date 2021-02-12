@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__CIRCLE__HPP__
-#define __VHFSIM__CIRCLE__HPP__
+#ifndef VHFSIM_CIRCLE_HPP
+#define VHFSIM_CIRCLE_HPP
 
 #include "Button.hpp"
 

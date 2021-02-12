@@ -92,7 +92,7 @@ static void helper_setfield(lua_State * lua, const char * name, int value)
 // GENERAL FUNCTIONS {{{
 
 // bool = gen_vhf_lat_set()
-static int lua__gen_vhf_lat_set(lua_State * lua)
+static int luaapi_gen_vhf_lat_set(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -102,7 +102,7 @@ static int lua__gen_vhf_lat_set(lua_State * lua)
 }
 
 // bool = gen_vhf_lon_set()
-static int lua__gen_vhf_lon_set(lua_State * lua)
+static int luaapi_gen_vhf_lon_set(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -112,7 +112,7 @@ static int lua__gen_vhf_lon_set(lua_State * lua)
 }
 
 // bool = gen_vhf_time_set()
-static int lua__gen_vhf_time_set(lua_State * lua)
+static int luaapi_gen_vhf_time_set(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -122,7 +122,7 @@ static int lua__gen_vhf_time_set(lua_State * lua)
 }
 
 // gen_vhf_clear_pos_time()
-static int lua__gen_vhf_clear_pos_time(lua_State * lua)
+static int luaapi_gen_vhf_clear_pos_time(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -138,7 +138,7 @@ static int lua__gen_vhf_clear_pos_time(lua_State * lua)
 // DSC / MSG FUNCTIONS {{{
 
 // res = msg_send(mmsi, work_channel, power, type, recv, designation)
-static int lua__msg_send(lua_State * lua)
+static int luaapi_msg_send(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -200,7 +200,7 @@ static int lua__msg_send(lua_State * lua)
 }
 
 // result,msg = msg_recv()
-static int lua__msg_recv(lua_State * lua)
+static int luaapi_msg_recv(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -218,7 +218,7 @@ static int lua__msg_recv(lua_State * lua)
 }
 
 // msg_destroy(msg)
-static int lua__msg_destroy(lua_State * lua)
+static int luaapi_msg_destroy(lua_State * lua)
 {
 	assert(lua);
 	const msg_t * m = helper_checkmsg(lua);
@@ -248,7 +248,7 @@ static int lua__msg_destroy(lua_State * lua)
 //         mmsi,
 //     },
 // }
-static int lua__msg_tab(lua_State * lua)
+static int luaapi_msg_tab(lua_State * lua)
 {
 	assert(lua);
 	const msg_t * m = helper_checkmsg(lua);
@@ -285,7 +285,7 @@ static int lua__msg_tab(lua_State * lua)
 }
 
 // bind_msg(event)
-static int lua__bind_msg(lua_State * lua)
+static int luaapi_bind_msg(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -300,7 +300,7 @@ static int lua__bind_msg(lua_State * lua)
 // TIMER FUNCTIONS {{{
 
 // timer_create(id)
-static int lua__timer_create(lua_State * lua)
+static int luaapi_timer_create(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -311,7 +311,7 @@ static int lua__timer_create(lua_State * lua)
 }
 
 // timer_delete(id)
-static int lua__timer_delete(lua_State * lua)
+static int luaapi_timer_delete(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -322,7 +322,7 @@ static int lua__timer_delete(lua_State * lua)
 }
 
 // timer_start(id, msec)
-static int lua__timer_start(lua_State * lua)
+static int luaapi_timer_start(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -336,7 +336,7 @@ static int lua__timer_start(lua_State * lua)
 }
 
 // timer_stop(id)
-static int lua__timer_stop(lua_State * lua)
+static int luaapi_timer_stop(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -351,7 +351,7 @@ static int lua__timer_stop(lua_State * lua)
 // BUTTON FUNCTIONS {{{
 
 // bind_btn_circle(mx, my, r, button, id_press, id_release)
-static int lua__bind_btn_circle(lua_State * lua)
+static int luaapi_bind_btn_circle(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -370,7 +370,7 @@ static int lua__bind_btn_circle(lua_State * lua)
 }
 
 // bind_btn_rect(x0, y0, x1, y1, button, id_press, id_release)
-static int lua__bind_btn_rect(lua_State * lua)
+static int luaapi_bind_btn_rect(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -399,7 +399,7 @@ struct KeyEventMap {
 };
 
 // bind_key('key', event_press, event_release)
-static int lua__bind_key(lua_State * lua)
+static int luaapi_bind_key(lua_State * lua)
 {
 	static const KeyEventMap KEM[] = {
 		{"0", EVT_KEY_0}, {"1", EVT_KEY_1}, {"2", EVT_KEY_2}, {"3", EVT_KEY_3},
@@ -431,7 +431,7 @@ static int lua__bind_key(lua_State * lua)
 // GPS FUNCTIONS {{{
 
 // bind_gps(event)
-static int lua__bind_gps(lua_State * lua)
+static int luaapi_bind_gps(lua_State * lua)
 {
 	assert(lua);
 	Controller * controller = get_controller(lua);
@@ -450,7 +450,7 @@ static int lua__bind_gps(lua_State * lua)
 // VIEW FUNCTIONS {{{
 
 // view_update()
-static int lua__view_update(lua_State * lua)
+static int luaapi_view_update(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -464,7 +464,7 @@ static int lua__view_update(lua_State * lua)
 // DRAW FUNCTIONS {{{
 
 // draw_clear(x, y, w, h)
-static int lua__draw_clear(lua_State * lua)
+static int luaapi_draw_clear(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -484,7 +484,7 @@ static int lua__draw_clear(lua_State * lua)
 // draw_text(text, x, y, font-id, alignment)
 //
 // align: left=0, right=1
-static int lua__draw_text(lua_State * lua)
+static int luaapi_draw_text(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -501,7 +501,7 @@ static int lua__draw_text(lua_State * lua)
 }
 
 // draw_ch(channel, x, y, font-id)
-static int lua__draw_ch(lua_State * lua)
+static int luaapi_draw_ch(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -516,7 +516,7 @@ static int lua__draw_ch(lua_State * lua)
 }
 
 // draw_img(img-id, x, y)
-static int lua__draw_img(lua_State * lua)
+static int luaapi_draw_img(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -529,7 +529,7 @@ static int lua__draw_img(lua_State * lua)
 }
 
 // draw_bitmap(id, x, y, pixel_width, pixel_height)
-static int lua__draw_bitmap(lua_State * lua)
+static int luaapi_draw_bitmap(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -543,7 +543,7 @@ static int lua__draw_bitmap(lua_State * lua)
 	return 0;
 }
 
-static int __getraw(lua_State * lua, int i)
+static int getraw(lua_State * lua, int i)
 {
 	lua_rawgeti(lua, -1, i);
 	int r = luaL_checkinteger(lua, -1);
@@ -552,16 +552,16 @@ static int __getraw(lua_State * lua, int i)
 }
 
 // draw_set_pen(r, g, b)
-static int lua__draw_set_pen(lua_State * lua)
+static int luaapi_draw_set_pen(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
 	assert(view);
 	int r, g, b;
 	if (lua_istable(lua, -1)) {
-		r = __getraw(lua, 1);
-		g = __getraw(lua, 2);
-		b = __getraw(lua, 3);
+		r = getraw(lua, 1);
+		g = getraw(lua, 2);
+		b = getraw(lua, 3);
 	} else {
 		r = luaL_checkinteger(lua, -3);
 		g = luaL_checkinteger(lua, -2);
@@ -573,16 +573,16 @@ static int lua__draw_set_pen(lua_State * lua)
 }
 
 // draw_set_brush(r, g, b)
-static int lua__draw_set_brush(lua_State * lua)
+static int luaapi_draw_set_brush(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
 	assert(view);
 	int r, g, b;
 	if (lua_istable(lua, -1)) {
-		r = __getraw(lua, 1);
-		g = __getraw(lua, 2);
-		b = __getraw(lua, 3);
+		r = getraw(lua, 1);
+		g = getraw(lua, 2);
+		b = getraw(lua, 3);
 	} else {
 		r = luaL_checkinteger(lua, -3);
 		g = luaL_checkinteger(lua, -2);
@@ -594,16 +594,16 @@ static int lua__draw_set_brush(lua_State * lua)
 }
 
 // draw_set_bg(r, g, b)
-static int lua__draw_set_bg(lua_State * lua)
+static int luaapi_draw_set_bg(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
 	assert(view);
 	int r, g, b;
 	if (lua_istable(lua, -1)) {
-		r = __getraw(lua, 1);
-		g = __getraw(lua, 2);
-		b = __getraw(lua, 3);
+		r = getraw(lua, 1);
+		g = getraw(lua, 2);
+		b = getraw(lua, 3);
 	} else {
 		r = luaL_checkinteger(lua, -3);
 		g = luaL_checkinteger(lua, -2);
@@ -614,7 +614,7 @@ static int lua__draw_set_bg(lua_State * lua)
 }
 
 // draw_reg_font(id, size)
-static int lua__draw_reg_font(lua_State * lua)
+static int luaapi_draw_reg_font(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -627,7 +627,7 @@ static int lua__draw_reg_font(lua_State * lua)
 }
 
 // draw_rect(x0, y0, x1, y1)
-static int lua__draw_rect(lua_State * lua)
+static int luaapi_draw_rect(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -647,7 +647,7 @@ static int lua__draw_rect(lua_State * lua)
 }
 
 // draw_circ(x, y, r)
-static int lua__draw_circ(lua_State * lua)
+static int luaapi_draw_circ(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -668,7 +668,7 @@ static int lua__draw_circ(lua_State * lua)
 // IMAGE FUNCTIONS {{{
 
 // img_load(id, filename)
-static int lua__img_load(lua_State * lua)
+static int luaapi_img_load(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -680,7 +680,7 @@ static int lua__img_load(lua_State * lua)
 }
 
 // width,height = img_get_size(id)
-static int lua__img_get_size(lua_State * lua)
+static int luaapi_img_get_size(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -695,7 +695,7 @@ static int lua__img_get_size(lua_State * lua)
 }
 
 // bitmap_register(id, w, h, char, data)
-static int lua__bitmap_register(lua_State * lua)
+static int luaapi_bitmap_register(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -710,7 +710,7 @@ static int lua__bitmap_register(lua_State * lua)
 }
 
 // bitmap_unregister(id)
-static int lua__bitmap_unregister(lua_State * lua)
+static int luaapi_bitmap_unregister(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -729,7 +729,7 @@ static int lua__bitmap_unregister(lua_State * lua)
 // MMSI FUNCTIONS {{{
 
 // mmsi_set_ship(mmsi)
-static int lua__mmsi_set_ship(lua_State * lua)
+static int luaapi_mmsi_set_ship(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -739,7 +739,7 @@ static int lua__mmsi_set_ship(lua_State * lua)
 }
 
 // mmsi = mmsi_get_ship()
-static int lua__mmsi_get_ship(lua_State * lua)
+static int luaapi_mmsi_get_ship(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -749,7 +749,7 @@ static int lua__mmsi_get_ship(lua_State * lua)
 }
 
 // mmsi_set_group(mmsi)
-static int lua__mmsi_set_group(lua_State * lua)
+static int luaapi_mmsi_set_group(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -759,7 +759,7 @@ static int lua__mmsi_set_group(lua_State * lua)
 }
 
 // mmsi = mmsi_get_group()
-static int lua__mmsi_get_group(lua_State * lua)
+static int luaapi_mmsi_get_group(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -774,7 +774,7 @@ static int lua__mmsi_get_group(lua_State * lua)
 
 // pos_set_lat(hem, deg, min)
 // hem: +1=N, -1=S
-static int lua__pos_set_lat(lua_State * lua)
+static int luaapi_pos_set_lat(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -788,7 +788,7 @@ static int lua__pos_set_lat(lua_State * lua)
 
 // pos_set_lon(hem, deg, min)
 // hem: +1=W, -1=E
-static int lua__pos_set_lon(lua_State * lua)
+static int luaapi_pos_set_lon(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -802,7 +802,7 @@ static int lua__pos_set_lon(lua_State * lua)
 
 // hem,deg,min = pos_get_lat()
 // hem: +1=N, -1=S
-static int lua__pos_get_lat(lua_State * lua)
+static int luaapi_pos_get_lat(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -816,7 +816,7 @@ static int lua__pos_get_lat(lua_State * lua)
 
 // deg = pos_get_lon()
 // hem: +1=W, -1=E
-static int lua__pos_get_lon(lua_State * lua)
+static int luaapi_pos_get_lon(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -833,7 +833,7 @@ static int lua__pos_get_lon(lua_State * lua)
 // TIME FUNCTIONS {{{
 
 // time_set(time)
-static int lua__time_set(lua_State * lua)
+static int luaapi_time_set(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -846,7 +846,7 @@ static int lua__time_set(lua_State * lua)
 }
 
 // time_sethm(hour, minute)
-static int lua__time_sethm(lua_State * lua)
+static int luaapi_time_sethm(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -858,7 +858,7 @@ static int lua__time_sethm(lua_State * lua)
 }
 
 // time = time_get()
-static int lua__time_get(lua_State * lua)
+static int luaapi_time_get(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -874,7 +874,7 @@ static int lua__time_get(lua_State * lua)
 // DIRECTORY FUNCTIONS {{{
 
 // directory = dir_get()
-static int lua__dir_get(lua_State * lua)
+static int luaapi_dir_get(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -901,7 +901,7 @@ static int lua__dir_get(lua_State * lua)
 //   [3] = { name='...', mmsi='...' },
 //   ...
 // }
-static int lua__dir_set(lua_State * lua)
+static int luaapi_dir_set(lua_State * lua)
 {
 	assert(lua);
 	Model * model = get_model(lua);
@@ -936,7 +936,7 @@ static int lua__dir_set(lua_State * lua)
 // SOUND FUNCTIONS {{{
 
 // snd_destroy()
-static int lua__snd_destroy(lua_State * lua)
+static int luaapi_snd_destroy(lua_State * lua)
 {
 	assert(lua);
 	View * view = get_view(lua);
@@ -946,7 +946,7 @@ static int lua__snd_destroy(lua_State * lua)
 }
 
 // bool success = snd_init(num)
-static int lua__snd_init(lua_State * lua)
+static int luaapi_snd_init(lua_State * lua)
 {
 	assert(lua);
 	int snd_num = luaL_checkinteger(lua, -1);
@@ -967,7 +967,7 @@ static int lua__snd_init(lua_State * lua)
 }
 
 // snd_load_wav(id, filename)
-static int lua__snd_load_wav(lua_State * lua)
+static int luaapi_snd_load_wav(lua_State * lua)
 {
 	assert(lua);
 	int id = luaL_checkinteger(lua, -2);
@@ -979,7 +979,7 @@ static int lua__snd_load_wav(lua_State * lua)
 }
 
 // snd_play(id, loop)
-static int lua__snd_play(lua_State * lua)
+static int luaapi_snd_play(lua_State * lua)
 {
 	assert(lua);
 	int id = luaL_checkinteger(lua, -2);
@@ -991,7 +991,7 @@ static int lua__snd_play(lua_State * lua)
 }
 
 // snd_stop(id)
-static int lua__snd_stop(lua_State * lua)
+static int luaapi_snd_stop(lua_State * lua)
 {
 	assert(lua);
 	int id = luaL_checkinteger(lua, -1);
@@ -1003,7 +1003,7 @@ static int lua__snd_stop(lua_State * lua)
 
 // snd_gain(id, gain)
 // gain = 0.0 .. 1.0
-static int lua__snd_gain(lua_State * lua)
+static int luaapi_snd_gain(lua_State * lua)
 {
 	assert(lua);
 	int id = luaL_checkinteger(lua, -2);
@@ -1016,7 +1016,7 @@ static int lua__snd_gain(lua_State * lua)
 
 // snd_pitch(id, pitch)
 // pitch = 0.0 .. 1.0
-static int lua__snd_pitch(lua_State * lua)
+static int luaapi_snd_pitch(lua_State * lua)
 {
 	assert(lua);
 	int id = luaL_checkinteger(lua, -2);
@@ -1034,7 +1034,7 @@ static int lua__snd_pitch(lua_State * lua)
 // BIT ARITHMETHIC FUNCTIONS {{{
 
 // value = bit_and(value1, value2)  : means in C: value = value1 & value2
-static int lua__bit_and(lua_State * lua)
+static int luaapi_bit_and(lua_State * lua)
 {
 	assert(lua);
 	int v1 = luaL_checkinteger(lua, -2);
@@ -1044,7 +1044,7 @@ static int lua__bit_and(lua_State * lua)
 }
 
 // value = bit_or(value1, value2)  : means in C: value = value1 | value2
-static int lua__bit_or(lua_State * lua)
+static int luaapi_bit_or(lua_State * lua)
 {
 	assert(lua);
 	int v1 = luaL_checkinteger(lua, -2);
@@ -1061,89 +1061,89 @@ static int lua__bit_or(lua_State * lua)
 static int lua_register_functions(lua_State * lua)
 {
 	// controller manipulation: timers
-	lua_register(lua, "timer_create", lua__timer_create);
-	lua_register(lua, "timer_delete", lua__timer_delete);
-	lua_register(lua, "timer_start", lua__timer_start);
-	lua_register(lua, "timer_stop", lua__timer_stop);
+	lua_register(lua, "timer_create", luaapi_timer_create);
+	lua_register(lua, "timer_delete", luaapi_timer_delete);
+	lua_register(lua, "timer_start", luaapi_timer_start);
+	lua_register(lua, "timer_stop", luaapi_timer_stop);
 
 	// controller manipulation: button register
-	lua_register(lua, "bind_btn_circle", lua__bind_btn_circle);
-	lua_register(lua, "bind_btn_rect", lua__bind_btn_rect);
+	lua_register(lua, "bind_btn_circle", luaapi_bind_btn_circle);
+	lua_register(lua, "bind_btn_rect", luaapi_bind_btn_rect);
 
 	// controller manipulation: key bindings
-	lua_register(lua, "bind_key", lua__bind_key);
+	lua_register(lua, "bind_key", luaapi_bind_key);
 
 	// controller manipulation: gps bindings
-	lua_register(lua, "bind_gps", lua__bind_gps);
+	lua_register(lua, "bind_gps", luaapi_bind_gps);
 
 	// controller manipulation: message sending and receiving
-	lua_register(lua, "msg_send", lua__msg_send);
-	lua_register(lua, "msg_recv", lua__msg_recv);
-	lua_register(lua, "msg_destroy", lua__msg_destroy);
-	lua_register(lua, "msg_tab", lua__msg_tab);
-	lua_register(lua, "bind_msg", lua__bind_msg);
+	lua_register(lua, "msg_send", luaapi_msg_send);
+	lua_register(lua, "msg_recv", luaapi_msg_recv);
+	lua_register(lua, "msg_destroy", luaapi_msg_destroy);
+	lua_register(lua, "msg_tab", luaapi_msg_tab);
+	lua_register(lua, "bind_msg", luaapi_bind_msg);
 
 	// view manipulation: misc
-	lua_register(lua, "view_update", lua__view_update);
+	lua_register(lua, "view_update", luaapi_view_update);
 
 	// view manipulation: drawing
-	lua_register(lua, "draw_clear", lua__draw_clear);
-	lua_register(lua, "draw_img", lua__draw_img);
-	lua_register(lua, "draw_set_pen", lua__draw_set_pen);
-	lua_register(lua, "draw_set_brush", lua__draw_set_brush);
-	lua_register(lua, "draw_set_bg", lua__draw_set_bg);
-	lua_register(lua, "draw_rect", lua__draw_rect);
-	lua_register(lua, "draw_circ", lua__draw_circ);
-	lua_register(lua, "draw_bitmap", lua__draw_bitmap);
-	lua_register(lua, "img_load", lua__img_load);
-	lua_register(lua, "img_get_size", lua__img_get_size);
-	lua_register(lua, "bitmap_register", lua__bitmap_register);
-	lua_register(lua, "bitmap_unregister", lua__bitmap_unregister);
+	lua_register(lua, "draw_clear", luaapi_draw_clear);
+	lua_register(lua, "draw_img", luaapi_draw_img);
+	lua_register(lua, "draw_set_pen", luaapi_draw_set_pen);
+	lua_register(lua, "draw_set_brush", luaapi_draw_set_brush);
+	lua_register(lua, "draw_set_bg", luaapi_draw_set_bg);
+	lua_register(lua, "draw_rect", luaapi_draw_rect);
+	lua_register(lua, "draw_circ", luaapi_draw_circ);
+	lua_register(lua, "draw_bitmap", luaapi_draw_bitmap);
+	lua_register(lua, "img_load", luaapi_img_load);
+	lua_register(lua, "img_get_size", luaapi_img_get_size);
+	lua_register(lua, "bitmap_register", luaapi_bitmap_register);
+	lua_register(lua, "bitmap_unregister", luaapi_bitmap_unregister);
 
 	// view manipulation: font
-	lua_register(lua, "draw_ch", lua__draw_ch);
-	lua_register(lua, "draw_text", lua__draw_text);
-	lua_register(lua, "draw_reg_font", lua__draw_reg_font);
+	lua_register(lua, "draw_ch", luaapi_draw_ch);
+	lua_register(lua, "draw_text", luaapi_draw_text);
+	lua_register(lua, "draw_reg_font", luaapi_draw_reg_font);
 
 	// model manipulation: read access
-	lua_register(lua, "gen_vhf_lat_set", lua__gen_vhf_lat_set);
-	lua_register(lua, "gen_vhf_lon_set", lua__gen_vhf_lon_set);
-	lua_register(lua, "gen_vhf_time_set", lua__gen_vhf_time_set);
-	lua_register(lua, "gen_vhf_clear_pos_time", lua__gen_vhf_clear_pos_time);
+	lua_register(lua, "gen_vhf_lat_set", luaapi_gen_vhf_lat_set);
+	lua_register(lua, "gen_vhf_lon_set", luaapi_gen_vhf_lon_set);
+	lua_register(lua, "gen_vhf_time_set", luaapi_gen_vhf_time_set);
+	lua_register(lua, "gen_vhf_clear_pos_time", luaapi_gen_vhf_clear_pos_time);
 
 	// model manipulation: identification
-	lua_register(lua, "mmsi_set_ship", lua__mmsi_set_ship);
-	lua_register(lua, "mmsi_get_ship", lua__mmsi_get_ship);
-	lua_register(lua, "mmsi_set_group", lua__mmsi_set_group);
-	lua_register(lua, "mmsi_get_group", lua__mmsi_get_group);
+	lua_register(lua, "mmsi_set_ship", luaapi_mmsi_set_ship);
+	lua_register(lua, "mmsi_get_ship", luaapi_mmsi_get_ship);
+	lua_register(lua, "mmsi_set_group", luaapi_mmsi_set_group);
+	lua_register(lua, "mmsi_get_group", luaapi_mmsi_get_group);
 
 	// model manipulation: position
-	lua_register(lua, "pos_set_lat", lua__pos_set_lat);
-	lua_register(lua, "pos_set_lon", lua__pos_set_lon);
-	lua_register(lua, "pos_get_lat", lua__pos_get_lat);
-	lua_register(lua, "pos_get_lon", lua__pos_get_lon);
+	lua_register(lua, "pos_set_lat", luaapi_pos_set_lat);
+	lua_register(lua, "pos_set_lon", luaapi_pos_set_lon);
+	lua_register(lua, "pos_get_lat", luaapi_pos_get_lat);
+	lua_register(lua, "pos_get_lon", luaapi_pos_get_lon);
 
 	// model manipulation: time
-	lua_register(lua, "time_get",   lua__time_get);
-	lua_register(lua, "time_set",   lua__time_set);
-	lua_register(lua, "time_sethm", lua__time_sethm);
+	lua_register(lua, "time_get",   luaapi_time_get);
+	lua_register(lua, "time_set",   luaapi_time_set);
+	lua_register(lua, "time_sethm", luaapi_time_sethm);
 
 	// model manipulation: directory
-	lua_register(lua, "dir_get", lua__dir_get);
-	lua_register(lua, "dir_set", lua__dir_set);
+	lua_register(lua, "dir_get", luaapi_dir_get);
+	lua_register(lua, "dir_set", luaapi_dir_set);
 
 	// sound
-	lua_register(lua, "snd_init", lua__snd_init);
-	lua_register(lua, "snd_destroy", lua__snd_destroy);
-	lua_register(lua, "snd_load_wav", lua__snd_load_wav);
-	lua_register(lua, "snd_play", lua__snd_play);
-	lua_register(lua, "snd_stop", lua__snd_stop);
-	lua_register(lua, "snd_gain", lua__snd_gain);
-	lua_register(lua, "snd_pitch", lua__snd_pitch);
+	lua_register(lua, "snd_init", luaapi_snd_init);
+	lua_register(lua, "snd_destroy", luaapi_snd_destroy);
+	lua_register(lua, "snd_load_wav", luaapi_snd_load_wav);
+	lua_register(lua, "snd_play", luaapi_snd_play);
+	lua_register(lua, "snd_stop", luaapi_snd_stop);
+	lua_register(lua, "snd_gain", luaapi_snd_gain);
+	lua_register(lua, "snd_pitch", luaapi_snd_pitch);
 
 	// misc
-	lua_register(lua, "bit_and", lua__bit_and);
-	lua_register(lua, "bit_or", lua__bit_or);
+	lua_register(lua, "bit_and", luaapi_bit_and);
+	lua_register(lua, "bit_or", luaapi_bit_or);
 	return 0;
 }
 

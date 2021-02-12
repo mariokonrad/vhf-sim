@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__ENGINE__DIRECTORY__HPP__
-#define __VHFSIM__ENGINE__DIRECTORY__HPP__
+#ifndef VHFSIM_ENGINE_DIRECTORY_HPP
+#define VHFSIM_ENGINE_DIRECTORY_HPP
 
 #include <string>
 #include <vector>

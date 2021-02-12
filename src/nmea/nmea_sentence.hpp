@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __NMEA__NMEA_SENTENCE__HPP__
-#define __NMEA__NMEA_SENTENCE__HPP__
+#ifndef NMEA_NMEA_SENTENCE_HPP
+#define NMEA_NMEA_SENTENCE_HPP
 
 #include "nmea.hpp"
 #include "engine/Date.hpp"

@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__RECTANGLE__HPP__
-#define __VHFSIM__RECTANGLE__HPP__
+#ifndef VHFSIM_RECTANGLE_HPP
+#define VHFSIM_RECTANGLE_HPP
 
 #include "Button.hpp"
 

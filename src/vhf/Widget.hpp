@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__WIDGET__HPP__
-#define __VHFSIM__WIDGET__HPP__
+#ifndef VHFSIM_WIDGET_HPP
+#define VHFSIM_WIDGET_HPP
 
 #include <memory>
 #include <map>

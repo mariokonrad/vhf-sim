@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__BUTTON__HPP__
-#define __VHFSIM__BUTTON__HPP__
+#ifndef VHFSIM_BUTTON_HPP
+#define VHFSIM_BUTTON_HPP
 
 class QPainter;
 

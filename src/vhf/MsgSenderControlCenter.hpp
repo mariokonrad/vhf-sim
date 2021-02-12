@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__MSGSENDERCONTROLCENTER__HPP__
-#define __VHFSIM__MSGSENDERCONTROLCENTER__HPP__
+#ifndef VHFSIM_MSGSENDERCONTROLCENTER_HPP
+#define VHFSIM_MSGSENDERCONTROLCENTER_HPP
 
 #include "MsgSender.hpp"
 

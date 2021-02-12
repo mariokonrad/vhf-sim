@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __NMEA__NMEA__HPP__
-#define __NMEA__NMEA__HPP__
+#ifndef NMEA_NMEA_HPP
+#define NMEA_NMEA_HPP
 
 #include <string>
 #include <vector>

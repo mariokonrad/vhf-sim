@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__PEERMODEL__HPP__
-#define __VHFSIM__PEERMODEL__HPP__
+#ifndef VHFSIM_PEERMODEL_HPP
+#define VHFSIM_PEERMODEL_HPP
 
 #include <vector>
 #include <QAbstractItemModel>

@@ -1,8 +1,8 @@
 // Copyright (c) 2016 Mario Konrad
 // All Rights reserved.
 
-#ifndef __VHFSIM__COMMUNICATIONSHUBWINDOW__HPP__
-#define __VHFSIM__COMMUNICATIONSHUBWINDOW__HPP__
+#ifndef VHFSIM_COMMUNICATIONSHUBWINDOW_HPP
+#define VHFSIM_COMMUNICATIONSHUBWINDOW_HPP
 
 #include "ui_communicationshubwindow.h"
 
